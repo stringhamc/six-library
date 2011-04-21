@@ -19,26 +19,27 @@
  * see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef __IMPORT_SIX_SIDD_H__
-#define __IMPORT_SIX_SIDD_H__
+#ifndef __SIX_SICD_ENUMS_H__
+#define __SIX_SICD_ENUMS_H__
 
-#include <import/six.h>
+#include <import/except.h>
+#include <import/str.h>
+#include <import/sys.h>
 
-#include "six/sidd/Annotations.h"
-#include "six/sidd/DerivedData.h"
-#include "six/sidd/DerivedDataBuilder.h"
-#include "six/sidd/DerivedXMLControl.h"
-#include "six/sidd/Display.h"
-#include "six/sidd/DownstreamReprocessing.h"
-#include "six/sidd/Enums.h"
-#include "six/sidd/ExploitationFeatures.h"
-#include "six/sidd/GeographicAndTarget.h"
-#include "six/sidd/GeoTIFFReadControl.h"
-#include "six/sidd/GeoTIFFWriteControl.h"
-#include "six/sidd/Measurement.h"
-#include "six/sidd/ProductCreation.h"
-#include "six/sidd/ProductProcessing.h"
-#include "six/sidd/SFA.h"
-#include "six/sidd/Utilities.h"
+// -----------------------------------------------------------------------------
+// This file is auto-generated - please do NOT edit directly
+// -----------------------------------------------------------------------------
+
+namespace six
+{
+namespace sicd
+{
+
+const int NOT_SET_VALUE = 2147483647; //std::numeric_limits<int>::max()
+
+${CODE}
+
+}
+}
 
 #endif

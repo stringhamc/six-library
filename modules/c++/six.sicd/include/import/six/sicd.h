@@ -29,14 +29,18 @@
 #include "six/sicd/ComplexData.h"
 #include "six/sicd/ComplexDataBuilder.h"
 #include "six/sicd/ComplexXMLControl.h"
+#include "six/sicd/Enums.h"
 #include "six/sicd/GeoData.h"
 #include "six/sicd/Grid.h"
+#include "six/sicd/ImageCreation.h"
 #include "six/sicd/ImageData.h"
 #include "six/sicd/ImageFormation.h"
 #include "six/sicd/MatchInformation.h"
 #include "six/sicd/PFA.h"
 #include "six/sicd/Position.h"
 #include "six/sicd/RadarCollection.h"
+#include "six/sicd/RMA.h"
 #include "six/sicd/SCPCOA.h"
+#include "six/sicd/Timeline.h"
 
 #endif

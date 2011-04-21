@@ -64,17 +64,16 @@
 
     PyObject* readImages(const char* filename)
     {
-        six::XMLControlFactory::getInstance(). addCreator(
-                six::DataType::COMPLEX,
-                new six::XMLControlCreatorT<
-                six::sicd::ComplexXMLControl>());
-
-        six::XMLControlFactory::getInstance(). addCreator(
-                six::DataType::DERIVED,
-                new six::XMLControlCreatorT<
-                six::sidd::DerivedXMLControl>());
-
+        six::XMLControlRegistry xmlRegistry;
+        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
+                               new six::XMLControlCreatorT<
+                                       six::sicd::ComplexXMLControl>());
+        xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
+                               new six::XMLControlCreatorT<
+                                       six::sidd::DerivedXMLControl>());
+    
         six::ReadControl* reader = new six::NITFReadControl();
+        reader->setXMLControlRegistry(&xmlRegistry);
         reader->load(filename);
 
         six::Container *container = reader->getContainer();

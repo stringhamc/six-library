@@ -23,14 +23,14 @@
 
 using namespace six;
 
-XMLControl* XMLControlRegistry::newXMLControl(DataType dataType) const
+XMLControl* XMLControlRegistry::newXMLControl(std::string identifier) const
 {
-    std::map<DataType, XMLControlCreator*>::const_iterator it;
-    it = mRegistry.find(dataType);
+    std::map<std::string, XMLControlCreator*>::const_iterator it;
+    it = mRegistry.find(identifier);
     if (it == mRegistry.end())
     {
-        throw except::NoSuchKeyException(Ctxt(FmtX("No data class creator %d",
-                                                           (int) dataType)));
+        throw except::NoSuchKeyException(Ctxt(FmtX("No data class creator %s",
+                                                   identifier.c_str())));
     }
     return it->second->newXMLControl();
 }
@@ -38,30 +38,13 @@ XMLControl* XMLControlRegistry::newXMLControl(DataType dataType) const
 //!  Destructor
 XMLControlRegistry::~XMLControlRegistry()
 {
-    for (std::map<DataType, XMLControlCreator*>::iterator p = mRegistry.begin(); p
-            != mRegistry.end(); ++p)
+    for (std::map<std::string, XMLControlCreator*>::iterator p = mRegistry.begin();
+            p != mRegistry.end(); ++p)
     {
         if (p->second)
             delete p->second;
     }
     mRegistry.clear();
-
-}
-
-XMLControl* XMLControlRegistry::newXMLControl(std::string identifier) const
-{
-    DataType dataType;
-
-    if (identifier == "SICD_XML")
-    {
-        dataType = DataType::COMPLEX;
-    }
-    else if (identifier == "SIDD_XML")
-    {
-        dataType = DataType::DERIVED;
-    }
-
-    return newXMLControl(dataType);
 }
 
 char* six::toXMLCharArray(Data* data, const six::XMLControlRegistry *xmlRegistry)
@@ -76,7 +59,7 @@ std::string six::toXMLString(Data* data, const six::XMLControlRegistry *xmlRegis
 {
     if (!xmlRegistry)
         xmlRegistry = &XMLControlFactory::getInstance();
-    XMLControl* xmlControl = xmlRegistry->newXMLControl(data->getDataType());
+    XMLControl* xmlControl = xmlRegistry->newXMLControl(data->getVersion());
     xml::lite::Document *doc = xmlControl->toXML(data);
 
     io::ByteStream bs;

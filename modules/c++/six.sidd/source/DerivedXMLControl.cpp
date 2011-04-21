@@ -701,6 +701,7 @@ Data* DerivedXMLControl::fromXML(const xml::lite::Document* doc)
 
     DerivedDataBuilder builder;
     DerivedData *data = builder.steal(); //steal it
+    data->mVersion = six::sidd::SIDD_0_5_0;
 
     // see if PixelType has MONO or RGB
     PixelType

@@ -203,18 +203,15 @@ int main(int argc, char** argv)
 
     try
     {
+        six::XMLControlRegistry xmlRegistry;
+        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
+                               new six::XMLControlCreatorT<
+                                       six::sicd::ComplexXMLControl>());
+        xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
+                               new six::XMLControlCreatorT<
+                                       six::sidd::DerivedXMLControl>());
 
-        six::XMLControlFactory::getInstance().
-            addCreator(
-                six::DataType::COMPLEX,
-                new six::XMLControlCreatorT<six::sicd::ComplexXMLControl>()
-                );
-
-        six::XMLControlFactory::getInstance().
-            addCreator(
-                six::DataType::DERIVED,
-                new six::XMLControlCreatorT<six::sidd::DerivedXMLControl>()
-                );
+        writer->setXMLControlRegistry(&xmlRegistry);
 
         // Get a Complex Data structure from an XML file
         six::StubProfile profile;

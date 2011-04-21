@@ -68,10 +68,10 @@ int main(int argc, char** argv)
         // The reason to do this is to avoid adding XMLControlCreators to the
         // XMLControlFactory singleton - this way has more fine-grained control
         six::XMLControlRegistry xmlRegistry;
-        xmlRegistry.addCreator(six::DataType::COMPLEX,
+        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
                                new six::XMLControlCreatorT<
                                        six::sicd::ComplexXMLControl>());
-        xmlRegistry.addCreator(six::DataType::DERIVED,
+        xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
                                new six::XMLControlCreatorT<
                                        six::sidd::DerivedXMLControl>());
 

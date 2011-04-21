@@ -93,6 +93,7 @@ ComplexData::ComplexData(const ComplexData* cloner) :
             radiometric(NULL), antenna(NULL), errorStatistics(NULL),
             matchInformation(NULL), pfa(NULL), rma(NULL)
 {
+    mVersion = cloner->mVersion;
     if (cloner->collectionInformation)
         collectionInformation = cloner->collectionInformation->clone();
     if (cloner->imageCreation)

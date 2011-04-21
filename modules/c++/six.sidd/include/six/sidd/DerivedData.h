@@ -33,6 +33,7 @@
 #include "six/sidd/DownstreamReprocessing.h"
 #include "six/Radiometric.h"
 #include "six/sidd/Annotations.h"
+#include "six/sidd/Enums.h"
 
 namespace six
 {
@@ -300,6 +301,16 @@ struct DerivedData: public Data
     {
         return std::string(VENDOR_ID);
     }
+
+    virtual std::string getVersion() const
+    {
+        return mVersion.toString();
+    }
+
+protected:
+    friend class DerivedXMLControl;
+    friend class DerivedDataBuilder;
+    Version mVersion;
 
 private:
     static const char VENDOR_ID[];

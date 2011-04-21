@@ -68,6 +68,7 @@ DerivedData::DerivedData() :
 Data* DerivedData::clone() const
 {
     DerivedData *data = new DerivedData();
+    data->mVersion = mVersion;
 
     if (productCreation != NULL)
     {

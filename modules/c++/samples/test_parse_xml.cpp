@@ -54,24 +54,6 @@ void preview(std::string outputFile)
 #endif
 
 /*
- *  Register the XMLControl handler objects for
- *  SICD and SIDD
- */
-void registerHandlers()
-{
-
-    six::XMLControlFactory::getInstance(). addCreator(
-                                                      six::DataType::COMPLEX,
-                                                      new six::XMLControlCreatorT<
-                                                              six::sicd::ComplexXMLControl>());
-
-    six::XMLControlFactory::getInstance(). addCreator(
-                                                      six::DataType::DERIVED,
-                                                      new six::XMLControlCreatorT<
-                                                              six::sidd::DerivedXMLControl>());
-
-}
-/*
  * Dump all files out to the local directory
  *
  */
@@ -120,7 +102,7 @@ std::vector<std::string> extractXML(std::string inputFile,
     return allFiles;
 }
 
-void run(std::string inputFile, std::string dataType)
+void run(std::string inputFile, std::string dataType, six::XMLControlRegistry& registry)
 {
     try
     {
@@ -156,8 +138,7 @@ void run(std::string inputFile, std::string dataType)
         six::DataType dt = (dataType == "sicd") ? six::DataType::COMPLEX
                                                 : six::DataType::DERIVED;
 
-        six::XMLControl *control =
-                six::XMLControlFactory::getInstance().newXMLControl(dt);
+        six::XMLControl *control = registry.newXMLControl(dt);
 
         six::Data *data = control->fromXML(treeBuilder.getDocument());
 
@@ -199,7 +180,7 @@ int main(int argc, char** argv)
 
     if (argc != 3)
     {
-        die_printf("Usage: %s <nitf/xml-file/nitf-dir> <sidd|sicd>\n", argv[0]);
+        die_printf("Usage: %s <nitf/xml-file/nitf-dir> <identifier>\n", argv[0]);
     }
 
     // Is the data type SICD or SIDD
@@ -213,7 +194,13 @@ int main(int argc, char** argv)
         die_printf("Error - data type should be sicd or sidd");
 
     // Do this prior to reading any XML
-    registerHandlers();
+    six::XMLControlRegistry xmlRegistry;
+    xmlRegistry.addCreator(six::COMPLEX,
+                           new six::XMLControlCreatorT<
+                                   six::sicd::ComplexXMLControl>());
+    xmlRegistry.addCreator(six::DERIVED,
+                           new six::XMLControlCreatorT<
+                                   six::sidd::DerivedXMLControl>());
 
     // The input file (an XML or a NITF file)
     sys::Path inputFile(argv[1]);
@@ -239,7 +226,7 @@ int main(int argc, char** argv)
     for (unsigned int i = 0; i < paths.size(); ++i)
     {
         std::cout << "Parsing file: " << paths[i].getPath() << std::endl;
-        run(paths[i].getPath(), dataType);
+        run(paths[i].getPath(), dataType, xmlRegistry);
     }
     return 0;
 }

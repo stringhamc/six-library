@@ -76,38 +76,36 @@ template <typename T> struct XMLControlCreatorT : public XMLControlCreator
  *  \brief Dynamic registry pattern for generating a new XML reader/writer
  *
  *  This class generates the proper reader/writer for the Data content.
- *  There are two methods currently, one that uses the DataType to
- *  identify which reader/writer to create, and one that uses a
- *  string (the same one that identifies the type in the container)
  */
 class XMLControlRegistry
 {
-    std::map<DataType, XMLControlCreator*> mRegistry;
+    std::map<std::string, XMLControlCreator*> mRegistry;
 public:
     //!  Constructor
     XMLControlRegistry()
     {
     }
 
-    inline void addCreator(DataType dataType, XMLControlCreator* creator)
+    inline void addCreator(std::string identifier, XMLControlCreator* creator)
     {
-        mRegistry[ dataType ] = creator;
+        if (mRegistry.find(identifier) != mRegistry.end() &&
+                mRegistry[identifier] != creator)
+            delete mRegistry[identifier];
+        mRegistry[ identifier ] = creator;
     }
 
     //!  Destructor
     virtual ~XMLControlRegistry();
 
-
-    XMLControl* newXMLControl(DataType dataType) const;
-
     /*!
      *  Static method to create a new XMLControl from a string.  
-     *  The only currently valid strings are "SICD_XML" and "SIDD_XML"
      *  The created control must be deleted by the caller.
+     *
+     *  Identifiers can be anything, but ideally it would be something like:
+     *  SICD_XML, SIDD_XML, and any string value of the sicd/sidd Versions
      *
      *  \param identifier what type of XML control to create.
      *  \return XMLControl the produced XML bridge
-     *
      */
     XMLControl* newXMLControl(std::string identifier) const;
 

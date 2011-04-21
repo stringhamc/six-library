@@ -23,6 +23,7 @@
 #define __SIX_DERIVED_DATA_BUILDER_H__
 
 #include "six/sidd/DerivedData.h"
+#include "six/sidd/Enums.h"
 
 namespace six
 {
@@ -43,7 +44,7 @@ class DerivedDataBuilder
 {
 public:
     //!  Construct. Creates and owns a new DerivedData object
-    DerivedDataBuilder();
+    DerivedDataBuilder(six::sidd::Version version = six::sidd::Version());
     
     /*!
      *  Construct, taking in a DerivedData object.  Warning: the builder 

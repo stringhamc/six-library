@@ -1740,7 +1740,8 @@ six::WriteControl* getWriteControl(std::string outputName)
  *  do this for you.
  *
  */
-six::sicd::ComplexData* getComplexData(std::string sicdXMLName)
+six::sicd::ComplexData* getComplexData(std::string sicdXMLName,
+                                       six::XMLControlRegistry& xmlRegistry)
 {
     // Create a file input stream
     io::FileInputStream sicdXMLFile(sicdXMLName);
@@ -1754,10 +1755,8 @@ six::sicd::ComplexData* getComplexData(std::string sicdXMLName)
     // Get the SICD DOM
     xml::lite::Document *doc = xmlParser.getDocument();
 
-    six::XMLControl
-            * xmlControl =
-                    six::XMLControlFactory::getInstance().newXMLControl(
-                                                                        DataType::COMPLEX);
+    six::XMLControl* xmlControl = xmlRegistry.newXMLControl(
+            six::sicd::SICD_0_4_1);
 
     six::Data* data = xmlControl->fromXML(doc);
     delete xmlControl;
@@ -1781,21 +1780,20 @@ int main(int argc, char** argv)
         die_printf("Usage: %s <output-file> (sicd-xml)\n", argv[0]);
     }
 
-    six::XMLControlFactory::getInstance(). addCreator(
-                                                      DataType::COMPLEX,
-                                                      new six::XMLControlCreatorT<
-                                                              six::sicd::ComplexXMLControl>());
-
-    six::XMLControlFactory::getInstance(). addCreator(
-                                                      DataType::DERIVED,
-                                                      new six::XMLControlCreatorT<
-                                                              six::sidd::DerivedXMLControl>());
+    six::XMLControlRegistry xmlRegistry;
+    xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
+                           new six::XMLControlCreatorT<
+                                   six::sicd::ComplexXMLControl>());
+    xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
+                           new six::XMLControlCreatorT<
+                                   six::sidd::DerivedXMLControl>());
 
     // Output file name
     std::string outputName(argv[1]);
 
     //  Get a NITF or GeoTIFF writer
     six::WriteControl* writer = getWriteControl(outputName);
+    writer->setXMLControlRegistry(&xmlRegistry);
 
     // Is the SIO in big-endian?
     bool needsByteSwap;
@@ -1820,6 +1818,7 @@ int main(int argc, char** argv)
         {
             // Get a Complex Data structure from an XML file
             six::StubProfile profile;
+            profile.setXMLControlRegistry(&xmlRegistry);
             six::Options options;
 
             // Set up the sicd
@@ -1833,7 +1832,6 @@ int main(int argc, char** argv)
             // case you will need the derived class
             //------------------------------------------------------
             sicdData = (six::sicd::ComplexData*) profile.newData(options);
-
         }
 
         // Create a file container
@@ -1846,7 +1844,7 @@ int main(int argc, char** argv)
         // Make the object.  You could do this directly, but this way
         // is less error prone, and more flexible
         //-----------------------------------------------------------
-        six::sidd::DerivedDataBuilder siddBuilder;
+        six::sidd::DerivedDataBuilder siddBuilder(six::sidd::SIDD_0_5_0);
 
         //-----------------------------------------------------------
         // You can cascade these operators, or call them one after

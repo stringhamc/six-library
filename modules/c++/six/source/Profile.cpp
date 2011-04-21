@@ -65,17 +65,11 @@ Data* StubProfile::newData(const Options& options)
     DataType dataType = DataType::NOT_SET;
     xml::lite::Element* element = doc->getRootElement();
 
-    if (element->getLocalName() == "SICD")
-        dataType = DataType::COMPLEX;
-    else if (element->getLocalName() == "SIDD")
-        dataType = DataType::DERIVED;
+    std::string identifier = element->getUri();
+    if (str::startsWith(identifier, "urn:"))
+        identifier = identifier.substr(4);
 
-    if (dataType == DataType::NOT_SET)
-        throw except::Exception(Ctxt(FmtX("Unknown file with root: <%s>",
-                                          element->getLocalName().c_str())));
-
-    XMLControl* control =
-            XMLControlFactory::getInstance(). newXMLControl(dataType);
+    XMLControl* control = mXMLRegistry->newXMLControl(identifier);
     Data* data = control->fromXML(doc);
     delete control;
     return data;

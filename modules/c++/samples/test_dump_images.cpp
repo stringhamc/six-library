@@ -79,11 +79,13 @@ int main(int argc, char** argv)
         // create an XML registry
         // The reason to do this is to avoid adding XMLControlCreators to the
         // XMLControlFactory singleton - this way has more fine-grained control
-        XMLControlRegistry xmlRegistry;
-        xmlRegistry.addCreator(DataType::COMPLEX, new XMLControlCreatorT<
-                six::sicd::ComplexXMLControl> ());
-        xmlRegistry.addCreator(DataType::DERIVED, new XMLControlCreatorT<
-                six::sidd::DerivedXMLControl> ());
+        six::XMLControlRegistry xmlRegistry;
+        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
+                               new six::XMLControlCreatorT<
+                                       six::sicd::ComplexXMLControl>());
+        xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
+                               new six::XMLControlCreatorT<
+                                       six::sidd::DerivedXMLControl>());
 
         // create a Reader registry (now, only NITF and TIFF)
         ReadControlRegistry readerRegistry;

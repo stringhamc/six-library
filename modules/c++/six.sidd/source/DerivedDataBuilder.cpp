@@ -24,9 +24,10 @@
 using namespace six;
 using namespace six::sidd;
 
-DerivedDataBuilder::DerivedDataBuilder() :
+DerivedDataBuilder::DerivedDataBuilder(six::sidd::Version version) :
     mData(new DerivedData()), mAdopt(true)
 {
+    mData->mVersion = version;
 }
 
 DerivedDataBuilder::DerivedDataBuilder(DerivedData *data) :

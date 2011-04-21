@@ -48,6 +48,7 @@ Data* ComplexXMLControl::fromXML(const xml::lite::Document* doc)
 {
     ComplexDataBuilder builder;
     ComplexData *sicd = builder.steal();
+    sicd->mVersion = six::sicd::SICD_0_4_1;
 
     XMLElem root = doc->getRootElement();
 

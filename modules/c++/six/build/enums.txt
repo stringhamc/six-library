@@ -16,6 +16,7 @@ NOT_SET=six::NOT_SET_VALUE
 COMPLEX=1
 DERIVED=2
 __default__=six::NOT_SET_VALUE
+__const_shortcuts__=True
 
 [PixelType]
 NOT_SET=six::NOT_SET_VALUE

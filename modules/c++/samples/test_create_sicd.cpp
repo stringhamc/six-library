@@ -97,15 +97,10 @@ int main(int argc, char** argv)
         std::string classLevel(options->get<std::string> ("classLevel"));
 
         // create an XML registry
-        // The reason to do this is to avoid adding XMLControlCreators to the
-        // XMLControlFactory singleton - this way has more fine-grained control
-        //        XMLControlRegistry xmlRegistry;
-        //        xmlRegistry.addCreator(DataType::COMPLEX, new XMLControlCreatorT<
-        //                six::sicd::ComplexXMLControl> ());
-
-        six::XMLControlFactory::getInstance().addCreator(
-                six::DataType::COMPLEX,
-                new six::XMLControlCreatorT<six::sicd::ComplexXMLControl>());
+        six::XMLControlRegistry xmlRegistry;
+        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
+                               new six::XMLControlCreatorT<
+                                       six::sicd::ComplexXMLControl>());
 
         // Open a file with inputName
         io::FileInputStream inputFile(inputName);
@@ -201,6 +196,7 @@ int main(int argc, char** argv)
         six::Container* container = new six::Container(six::DataType::COMPLEX);
         container->addData(data);
         six::WriteControl* writer = new six::NITFWriteControl();
+        writer->setXMLControlRegistry(&xmlRegistry);
 
         /*
          *  Under normal circumstances, the library uses the

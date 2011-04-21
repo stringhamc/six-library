@@ -39,6 +39,7 @@
 #include "six/sicd/PFA.h"
 #include "six/sicd/RMA.h"
 #include "six/sicd/MatchInformation.h"
+#include "six/sicd/Enums.h"
 
 namespace six
 {
@@ -300,9 +301,19 @@ struct ComplexData: public Data
         return std::string(VENDOR_ID);
     }
 
-    static const char VENDOR_ID[];
+    virtual std::string getVersion() const
+    {
+        return mVersion.toString();
+    }
+
+protected:
+    friend class ComplexXMLControl;
+    friend class ComplexDataBuilder;
+    Version mVersion;
 
 private:
+    static const char VENDOR_ID[];
+
     ComplexData(const ComplexData* cloner);
 };
 

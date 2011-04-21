@@ -128,9 +128,12 @@ struct AppliedType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct AutofocusType 
@@ -231,9 +234,12 @@ struct AutofocusType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 4; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct BooleanType 
@@ -326,9 +332,12 @@ struct BooleanType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct ByteSwapping 
@@ -429,9 +438,12 @@ struct ByteSwapping
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 4; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct CollectType 
@@ -524,9 +536,12 @@ struct CollectType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct ComplexImageGridType 
@@ -643,9 +658,12 @@ struct ComplexImageGridType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 6; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct ComplexImagePlaneType 
@@ -746,9 +764,12 @@ struct ComplexImagePlaneType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 4; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct CornerIndex 
@@ -857,9 +878,12 @@ struct CornerIndex
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 5; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct DataType 
@@ -952,9 +976,16 @@ struct DataType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
+const DataType COMPLEX(DataType::COMPLEX);
+const DataType DERIVED(DataType::DERIVED);
+const DataType NOT_SET(DataType::NOT_SET);
+
 
 /*!
  *  \struct DecimationMethod 
@@ -1063,9 +1094,12 @@ struct DecimationMethod
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 5; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct DemodType 
@@ -1158,9 +1192,12 @@ struct DemodType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct DisplayType 
@@ -1253,9 +1290,12 @@ struct DisplayType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct DualPolarizationType 
@@ -1404,9 +1444,12 @@ struct DualPolarizationType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 10; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct EarthModelType 
@@ -1491,9 +1534,12 @@ struct EarthModelType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 2; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct FFTSign 
@@ -1586,9 +1632,12 @@ struct FFTSign
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct FrameType 
@@ -1689,9 +1738,12 @@ struct FrameType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 4; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct ImageBeamCompensationType 
@@ -1784,9 +1836,12 @@ struct ImageBeamCompensationType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct ImageFormationType 
@@ -1895,9 +1950,12 @@ struct ImageFormationType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 5; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct MagnificationMethod 
@@ -1990,9 +2048,12 @@ struct MagnificationMethod
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct OrientationType 
@@ -2109,9 +2170,12 @@ struct OrientationType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 6; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct PixelType 
@@ -2252,9 +2316,12 @@ struct PixelType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 9; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct PolarizationType 
@@ -2371,9 +2438,12 @@ struct PolarizationType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 6; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct ProjectionType 
@@ -2482,9 +2552,12 @@ struct ProjectionType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 5; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct RMAlgoType 
@@ -2585,9 +2658,12 @@ struct RMAlgoType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 4; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct RadarModeType 
@@ -2696,9 +2772,12 @@ struct RadarModeType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 5; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct RegionType 
@@ -2791,9 +2870,12 @@ struct RegionType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct RowColEnum 
@@ -2886,9 +2968,12 @@ struct RowColEnum
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct SCPType 
@@ -2981,9 +3066,12 @@ struct SCPType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct SideOfTrackType 
@@ -3076,9 +3164,12 @@ struct SideOfTrackType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 3; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct SlowTimeBeamCompensationType 
@@ -3179,9 +3270,12 @@ struct SlowTimeBeamCompensationType
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 4; }
+
     int value;
 
 };
+
 
 /*!
  *  \struct XYZEnum 
@@ -3282,11 +3376,14 @@ struct XYZEnum
     operator int() const { return value; }
     operator std::string() const { return toString(); }
 
+    static size_t size() { return 4; }
+
     int value;
 
 };
 
-// code auto-generated 2010-08-31 15:10:30.479133
+
+// code auto-generated 2011-04-21 13:21:17.928220
 
 }
 
