@@ -25,6 +25,7 @@
 #include <import/six.h>
 #include <import/six/sicd.h>
 #include <import/six/sidd.h>
+#include "SIXUtils.h"
 
 typedef std::complex<float> ComplexFloat;
 
@@ -65,15 +66,7 @@ int main(int argc, char** argv)
         logging::LogLevel logLevel(level);
 
         // create an XML registry
-        // The reason to do this is to avoid adding XMLControlCreators to the
-        // XMLControlFactory singleton - this way has more fine-grained control
-        six::XMLControlRegistry xmlRegistry;
-        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
-                               new six::XMLControlCreatorT<
-                                       six::sicd::ComplexXMLControl>());
-        xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
-                               new six::XMLControlCreatorT<
-                                       six::sidd::DerivedXMLControl>());
+        six::XMLControlRegistry *xmlRegistry = newXMLControlRegistry();
 
         logging::Logger log;
         if (logFile == "console")
@@ -83,7 +76,7 @@ int main(int argc, char** argv)
 
         six::NITFReadControl reader;
         reader.setLogger(&log);
-        reader.setXMLControlRegistry(&xmlRegistry);
+        reader.setXMLControlRegistry(xmlRegistry);
 
         reader.load(inputFile);
         six::Container* container = reader.getContainer();
@@ -128,7 +121,7 @@ int main(int argc, char** argv)
         six::WriteControl *writer = new six::NITFWriteControl;
         writer->setLogger(&log);
         writer->initialize(container);
-        writer->setXMLControlRegistry(&xmlRegistry);
+        writer->setXMLControlRegistry(xmlRegistry);
         writer->save(images, outputFile);
 
         for (six::BufferList::iterator it = images.begin(); it != images.end(); ++it)
@@ -136,6 +129,7 @@ int main(int argc, char** argv)
 
         delete container;
         delete writer;
+        delete xmlRegistry;
     }
     catch (except::Exception& ex)
     {

@@ -22,6 +22,7 @@
 #include <import/nitf.hpp>
 #include <import/xml/lite.h>
 #include <import/io.h>
+#include "SIXUtils.h"
 
 /*!
  *  This extracts raw XML from each NITF DES, just using nitf,

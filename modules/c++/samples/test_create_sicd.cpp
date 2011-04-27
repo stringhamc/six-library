@@ -25,7 +25,7 @@
 #include <import/six.h>
 #include <import/sio/lite.h>
 #include <import/io.h>
-#include "utils.h"
+#include "SIXUtils.h"
 
 // For SICD implementation
 #include <import/six/sicd.h>
@@ -97,10 +97,7 @@ int main(int argc, char** argv)
         std::string classLevel(options->get<std::string> ("classLevel"));
 
         // create an XML registry
-        six::XMLControlRegistry xmlRegistry;
-        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
-                               new six::XMLControlCreatorT<
-                                       six::sicd::ComplexXMLControl>());
+        six::XMLControlRegistry *xmlRegistry = newXMLControlRegistry();
 
         // Open a file with inputName
         io::FileInputStream inputFile(inputName);
@@ -196,7 +193,7 @@ int main(int argc, char** argv)
         six::Container* container = new six::Container(six::DataType::COMPLEX);
         container->addData(data);
         six::WriteControl* writer = new six::NITFWriteControl();
-        writer->setXMLControlRegistry(&xmlRegistry);
+        writer->setXMLControlRegistry(xmlRegistry);
 
         /*
          *  Under normal circumstances, the library uses the
@@ -242,6 +239,7 @@ int main(int argc, char** argv)
         delete container;
         delete sioReader;
         delete writer;
+        delete xmlRegistry;
     }
     catch (except::Exception& ex)
     {

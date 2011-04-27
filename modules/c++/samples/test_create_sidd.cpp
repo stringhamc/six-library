@@ -27,7 +27,7 @@
 #include <import/sio/lite.h>
 #include <import/io.h>
 #include <import/xml/lite.h>
-#include "utils.h"
+#include "SIXUtils.h"
 
 /*!
  *  This file takes in an SIO and turns it in to a SICD.
@@ -160,7 +160,8 @@ six::sicd::ComplexData* getComplexData(std::string sicdXMLName)
     // Get the SICD DOM
     xml::lite::Document *doc = xmlParser.getDocument();
 
-    six::sicd::ComplexXMLControl xmlControl;
+    // make a version 0.4.1 SICD
+    six::sicd::ComplexXMLControl_0_4_1 xmlControl;
     return (six::sicd::ComplexData*) xmlControl.fromXML(doc);
 }
 
@@ -203,15 +204,9 @@ int main(int argc, char** argv)
 
     try
     {
-        six::XMLControlRegistry xmlRegistry;
-        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
-                               new six::XMLControlCreatorT<
-                                       six::sicd::ComplexXMLControl>());
-        xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
-                               new six::XMLControlCreatorT<
-                                       six::sidd::DerivedXMLControl>());
+        six::XMLControlRegistry *xmlRegistry = newXMLControlRegistry();
 
-        writer->setXMLControlRegistry(&xmlRegistry);
+        writer->setXMLControlRegistry(xmlRegistry);
 
         // Get a Complex Data structure from an XML file
         six::StubProfile profile;
@@ -354,7 +349,7 @@ int main(int argc, char** argv)
 
         // Delete the container (and Data)
         delete container;
-
+        delete xmlRegistry;
     }
     catch (except::Exception& ex)
     {

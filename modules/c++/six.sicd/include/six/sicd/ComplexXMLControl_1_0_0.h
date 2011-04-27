@@ -19,29 +19,53 @@
  * see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef __IMPORT_SIX_SICD_H__
-#define __IMPORT_SIX_SICD_H__
+#ifndef __SIX_COMPLEX_XML_CONTROL_1_0_0_H__
+#define __SIX_COMPLEX_XML_CONTROL_1_0_0_H__
 
-#include <import/six.h>
-
-#include "six/sicd/Antenna.h"
-#include "six/sicd/CollectionInformation.h"
-#include "six/sicd/ComplexData.h"
-#include "six/sicd/ComplexDataBuilder.h"
 #include "six/sicd/ComplexXMLControl_0_4_1.h"
-#include "six/sicd/ComplexXMLControl_1_0_0.h"
-#include "six/sicd/Enums.h"
-#include "six/sicd/GeoData.h"
-#include "six/sicd/Grid.h"
-#include "six/sicd/ImageCreation.h"
-#include "six/sicd/ImageData.h"
-#include "six/sicd/ImageFormation.h"
-#include "six/sicd/MatchInformation.h"
-#include "six/sicd/PFA.h"
-#include "six/sicd/Position.h"
-#include "six/sicd/RadarCollection.h"
-#include "six/sicd/RMA.h"
-#include "six/sicd/SCPCOA.h"
-#include "six/sicd/Timeline.h"
 
+namespace six
+{
+namespace sicd
+{
+/*!
+ *  \class ComplexXMLControl_1_0_0
+ *  \brief Turn a ComplexData object into XML or vice-versa
+ *
+ *  This class covers version 1.0.0. Other classes can derive this one as
+ *  updates are made to the specification.
+ */
+class ComplexXMLControl_1_0_0 : public ComplexXMLControl_0_4_1
+{
+
+public:
+    //!  Constructor
+    ComplexXMLControl_1_0_0(logging::Logger* log = NULL) :
+        ComplexXMLControl_0_4_1(log)
+    {
+    }
+
+    //!  Destructor
+    virtual ~ComplexXMLControl_1_0_0()
+    {
+    }
+
+    virtual Data* fromXML(const xml::lite::Document* doc);
+
+protected:
+
+    typedef xml::lite::Element* XMLElem;
+
+    static const char SICD_URI_1_0_0[];
+
+    //! Returns the default URI
+    virtual std::string getDefaultURI() const;
+
+    //! Returns the URI to use with SI Common types
+    virtual std::string getSICommonURI() const;
+
+};
+
+}
+}
 #endif

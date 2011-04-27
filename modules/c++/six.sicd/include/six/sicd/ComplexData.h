@@ -307,7 +307,8 @@ struct ComplexData: public Data
     }
 
 protected:
-    friend class ComplexXMLControl;
+    friend class ComplexXMLControl_0_4_1;
+    friend class ComplexXMLControl_1_0_0;
     friend class ComplexDataBuilder;
     Version mVersion;
 

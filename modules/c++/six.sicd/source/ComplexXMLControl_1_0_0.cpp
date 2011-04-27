@@ -19,29 +19,34 @@
  * see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef __IMPORT_SIX_SICD_H__
-#define __IMPORT_SIX_SICD_H__
-
-#include <import/six.h>
-
-#include "six/sicd/Antenna.h"
-#include "six/sicd/CollectionInformation.h"
-#include "six/sicd/ComplexData.h"
-#include "six/sicd/ComplexDataBuilder.h"
-#include "six/sicd/ComplexXMLControl_0_4_1.h"
 #include "six/sicd/ComplexXMLControl_1_0_0.h"
-#include "six/sicd/Enums.h"
-#include "six/sicd/GeoData.h"
-#include "six/sicd/Grid.h"
-#include "six/sicd/ImageCreation.h"
-#include "six/sicd/ImageData.h"
-#include "six/sicd/ImageFormation.h"
-#include "six/sicd/MatchInformation.h"
-#include "six/sicd/PFA.h"
-#include "six/sicd/Position.h"
-#include "six/sicd/RadarCollection.h"
-#include "six/sicd/RMA.h"
-#include "six/sicd/SCPCOA.h"
-#include "six/sicd/Timeline.h"
+#include "six/sicd/ComplexData.h"
+#include "six/Types.h"
+#include "six/Utilities.h"
+#include <import/str.h>
+#include <iostream>
 
-#endif
+using namespace six;
+using namespace six::sicd;
+
+typedef xml::lite::Element* XMLElem;
+
+const char ComplexXMLControl_1_0_0::SICD_URI_1_0_0[] = "urn:SICD:1.0.0";
+
+std::string ComplexXMLControl_1_0_0::getDefaultURI() const
+{
+    return SICD_URI_1_0_0;
+}
+
+std::string ComplexXMLControl_1_0_0::getSICommonURI() const
+{
+    return SICD_URI_1_0_0;
+}
+
+Data* ComplexXMLControl_1_0_0::fromXML(const xml::lite::Document* doc)
+{
+    // for now, just change the version of the returned data
+    ComplexData *sicd = (ComplexData*)ComplexXMLControl_1_0_0::fromXML(doc);
+    sicd->mVersion = six::sicd::SICD_1_0_0;
+    return sicd;
+}

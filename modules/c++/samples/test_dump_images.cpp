@@ -23,8 +23,8 @@
 #include <import/six.h>
 #include <import/six/sicd.h>
 #include <import/six/sidd.h>
-
-#  include <import/sio/lite.h>
+#include "SIXUtils.h"
+#include <import/sio/lite.h>
 
 using namespace six;
 
@@ -77,15 +77,7 @@ int main(int argc, char** argv)
         std::string outputDir(options->get<std::string> ("dir"));
 
         // create an XML registry
-        // The reason to do this is to avoid adding XMLControlCreators to the
-        // XMLControlFactory singleton - this way has more fine-grained control
-        six::XMLControlRegistry xmlRegistry;
-        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
-                               new six::XMLControlCreatorT<
-                                       six::sicd::ComplexXMLControl>());
-        xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
-                               new six::XMLControlCreatorT<
-                                       six::sidd::DerivedXMLControl>());
+        six::XMLControlRegistry *xmlRegistry = newXMLControlRegistry();
 
         // create a Reader registry (now, only NITF and TIFF)
         ReadControlRegistry readerRegistry;
@@ -95,7 +87,7 @@ int main(int argc, char** argv)
         // get the correct ReadControl for the given file
         ReadControl *reader = readerRegistry.newReadControl(inputFile);
         // set the optional registry, since we have one
-        reader->setXMLControlRegistry(&xmlRegistry);
+        reader->setXMLControlRegistry(xmlRegistry);
 
         // load the file
         reader->load(inputFile);
@@ -131,7 +123,7 @@ int main(int argc, char** argv)
             std::string xmlFile = sys::Path::joinPaths(outputDir, filename);
             io::FileOutputStream xmlStream(xmlFile);
 
-            std::string xmlData = six::toXMLString(data, &xmlRegistry);
+            std::string xmlData = six::toXMLString(data, xmlRegistry);
             xmlStream.write(xmlData.c_str(), xmlData.length());
             xmlStream.close();
         }
@@ -202,6 +194,10 @@ int main(int argc, char** argv)
             std::cout << "Wrote file: " << outputFile << std::endl;
         }
 
+        // cleanup
+        delete container;
+        delete reader;
+        delete xmlRegistry;
     }
     catch (const except::Exception& e)
     {

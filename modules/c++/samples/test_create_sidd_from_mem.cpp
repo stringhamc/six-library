@@ -47,7 +47,7 @@
 #include <import/nitf.h>
 #include <import/six.h>
 #include <import/io.h>
-#include "utils.h"
+#include "SIXUtils.h"
 
 using namespace six;
 
@@ -1741,7 +1741,7 @@ six::WriteControl* getWriteControl(std::string outputName)
  *
  */
 six::sicd::ComplexData* getComplexData(std::string sicdXMLName,
-                                       six::XMLControlRegistry& xmlRegistry)
+                                       six::XMLControlRegistry* xmlRegistry)
 {
     // Create a file input stream
     io::FileInputStream sicdXMLFile(sicdXMLName);
@@ -1755,7 +1755,8 @@ six::sicd::ComplexData* getComplexData(std::string sicdXMLName,
     // Get the SICD DOM
     xml::lite::Document *doc = xmlParser.getDocument();
 
-    six::XMLControl* xmlControl = xmlRegistry.newXMLControl(
+    // TODO change this - no more hard coding of version
+    six::XMLControl* xmlControl = xmlRegistry->newXMLControl(
             six::sicd::SICD_0_4_1);
 
     six::Data* data = xmlControl->fromXML(doc);
@@ -1780,20 +1781,14 @@ int main(int argc, char** argv)
         die_printf("Usage: %s <output-file> (sicd-xml)\n", argv[0]);
     }
 
-    six::XMLControlRegistry xmlRegistry;
-    xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
-                           new six::XMLControlCreatorT<
-                                   six::sicd::ComplexXMLControl>());
-    xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
-                           new six::XMLControlCreatorT<
-                                   six::sidd::DerivedXMLControl>());
+    six::XMLControlRegistry *xmlRegistry = newXMLControlRegistry();
 
     // Output file name
     std::string outputName(argv[1]);
 
     //  Get a NITF or GeoTIFF writer
     six::WriteControl* writer = getWriteControl(outputName);
-    writer->setXMLControlRegistry(&xmlRegistry);
+    writer->setXMLControlRegistry(xmlRegistry);
 
     // Is the SIO in big-endian?
     bool needsByteSwap;
@@ -1818,7 +1813,7 @@ int main(int argc, char** argv)
         {
             // Get a Complex Data structure from an XML file
             six::StubProfile profile;
-            profile.setXMLControlRegistry(&xmlRegistry);
+            profile.setXMLControlRegistry(xmlRegistry);
             six::Options options;
 
             // Set up the sicd
@@ -1980,5 +1975,6 @@ int main(int argc, char** argv)
         std::cout << e.getMessage() << std::endl;
     }
 
+    delete xmlRegistry;
 }
 

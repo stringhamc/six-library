@@ -24,6 +24,7 @@
 #include <import/six/sicd.h>
 #include <import/xml/lite.h>
 #include <import/io.h>
+#include "SIXUtils.h"
 
 /*
  *  Generate a KML file for a SICD XML to help with
@@ -102,7 +103,7 @@ std::vector<std::string> extractXML(std::string inputFile,
     return allFiles;
 }
 
-void run(std::string inputFile, std::string dataType, six::XMLControlRegistry& registry)
+void run(std::string inputFile, std::string dataType, six::XMLControlRegistry* registry)
 {
     try
     {
@@ -135,10 +136,15 @@ void run(std::string inputFile, std::string dataType, six::XMLControlRegistry& r
         treeBuilder.parse(xmlFileStream);
         xmlFileStream.close();
 
-        six::DataType dt = (dataType == "sicd") ? six::DataType::COMPLEX
-                                                : six::DataType::DERIVED;
+        std::string lowerDt = dataType;
+        str::lower(lowerDt);
 
-        six::XMLControl *control = registry.newXMLControl(dt);
+        if (lowerDt == "sicd")
+            dataType = six::sicd::SICD_0_4_1.toString();
+        else if (lowerDt == "sidd")
+            dataType = six::sidd::SIDD_0_5_0.toString();
+
+        six::XMLControl *control = registry->newXMLControl(dataType);
 
         six::Data *data = control->fromXML(treeBuilder.getDocument());
 
@@ -186,21 +192,8 @@ int main(int argc, char** argv)
     // Is the data type SICD or SIDD
     std::string dataType = argv[2];
 
-    // Ignore case to be safe
-    str::lower(dataType);
-
-    // And check that everything is ok
-    if (dataType != "sicd" && dataType != "sidd")
-        die_printf("Error - data type should be sicd or sidd");
-
     // Do this prior to reading any XML
-    six::XMLControlRegistry xmlRegistry;
-    xmlRegistry.addCreator(six::COMPLEX,
-                           new six::XMLControlCreatorT<
-                                   six::sicd::ComplexXMLControl>());
-    xmlRegistry.addCreator(six::DERIVED,
-                           new six::XMLControlCreatorT<
-                                   six::sidd::DerivedXMLControl>());
+    six::XMLControlRegistry *xmlRegistry = newXMLControlRegistry();
 
     // The input file (an XML or a NITF file)
     sys::Path inputFile(argv[1]);
@@ -228,6 +221,10 @@ int main(int argc, char** argv)
         std::cout << "Parsing file: " << paths[i].getPath() << std::endl;
         run(paths[i].getPath(), dataType, xmlRegistry);
     }
+
+    // cleanup
+    delete xmlRegistry;
+
     return 0;
 }
 

@@ -19,7 +19,7 @@
  * see <http://www.gnu.org/licenses/>.
  *
  */
-#include "six/sicd/ComplexXMLControl.h"
+#include "six/sicd/ComplexXMLControl_0_4_1.h"
 #include "six/sicd/ComplexData.h"
 #include "six/sicd/ComplexDataBuilder.h"
 #include "six/Types.h"
@@ -32,19 +32,19 @@ using namespace six::sicd;
 
 typedef xml::lite::Element* XMLElem;
 
-const char ComplexXMLControl::SICD_URI[] = "urn:SICD:0.4.1";
+const char ComplexXMLControl_0_4_1::SICD_0_4_1_URI[] = "urn:SICD:0.4.1";
 
-std::string ComplexXMLControl::getDefaultURI() const
+std::string ComplexXMLControl_0_4_1::getDefaultURI() const
 {
-    return SICD_URI;
+    return SICD_0_4_1_URI;
 }
 
-std::string ComplexXMLControl::getSICommonURI() const
+std::string ComplexXMLControl_0_4_1::getSICommonURI() const
 {
-    return SICD_URI;
+    return SICD_0_4_1_URI;
 }
 
-Data* ComplexXMLControl::fromXML(const xml::lite::Document* doc)
+Data* ComplexXMLControl_0_4_1::fromXML(const xml::lite::Document* doc)
 {
     ComplexDataBuilder builder;
     ComplexData *sicd = builder.steal();
@@ -133,7 +133,7 @@ Data* ComplexXMLControl::fromXML(const xml::lite::Document* doc)
     return sicd;
 }
 
-xml::lite::Document* ComplexXMLControl::toXML(const Data *data)
+xml::lite::Document* ComplexXMLControl_0_4_1::toXML(const Data *data)
 {
     if (data->getDataType() != DataType::COMPLEX)
     {
@@ -185,8 +185,9 @@ xml::lite::Document* ComplexXMLControl::toXML(const Data *data)
     return doc;
 }
 
-XMLElem ComplexXMLControl::createFFTSign(std::string name, six::FFTSign sign,
-                                         XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createFFTSign(std::string name,
+                                               six::FFTSign sign,
+                                               XMLElem parent)
 {
     std::string charData = (sign == FFTSign::NEG) ? ("-1") : ("+1");
     XMLElem e = newElement(name, getDefaultURI(), charData, parent);
@@ -198,8 +199,8 @@ XMLElem ComplexXMLControl::createFFTSign(std::string name, six::FFTSign sign,
     return e;
 }
 
-XMLElem ComplexXMLControl::toXML(const CollectionInformation *collInfo,
-                                 XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const CollectionInformation *collInfo,
+                                       XMLElem parent)
 {
     XMLElem collInfoXML = newElement("CollectionInfo", parent);
 
@@ -234,8 +235,8 @@ XMLElem ComplexXMLControl::toXML(const CollectionInformation *collInfo,
     return collInfoXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const ImageCreation *imageCreation,
-                                 XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const ImageCreation *imageCreation,
+                                       XMLElem parent)
 {
     XMLElem imageCreationXML = newElement("ImageCreation", parent);
 
@@ -254,7 +255,8 @@ XMLElem ComplexXMLControl::toXML(const ImageCreation *imageCreation,
     return imageCreationXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const ImageData *imageData, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const ImageData *imageData,
+                                       XMLElem parent)
 {
     XMLElem imageDataXML = newElement("ImageData", parent);
 
@@ -297,7 +299,7 @@ XMLElem ComplexXMLControl::toXML(const ImageData *imageData, XMLElem parent)
     return imageDataXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const GeoData *geoData, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const GeoData *geoData, XMLElem parent)
 {
     XMLElem geoDataXML = newElement("GeoData", parent);
 
@@ -334,7 +336,7 @@ XMLElem ComplexXMLControl::toXML(const GeoData *geoData, XMLElem parent)
     return geoDataXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const GeoInfo *geoInfo, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const GeoInfo *geoInfo, XMLElem parent)
 {
     XMLElem geoInfoXML = newElement("GeoInfo", parent);
     if (!geoInfo->name.empty())
@@ -367,7 +369,7 @@ XMLElem ComplexXMLControl::toXML(const GeoInfo *geoInfo, XMLElem parent)
     return geoInfoXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const Grid *grid, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const Grid *grid, XMLElem parent)
 {
     XMLElem gridXML = newElement("Grid", parent);
 
@@ -448,7 +450,7 @@ XMLElem ComplexXMLControl::toXML(const Grid *grid, XMLElem parent)
     return gridXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const Timeline *timeline, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const Timeline *timeline, XMLElem parent)
 {
     XMLElem timelineXML = newElement("Timeline", parent);
 
@@ -478,7 +480,7 @@ XMLElem ComplexXMLControl::toXML(const Timeline *timeline, XMLElem parent)
     return timelineXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const Position *position, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const Position *position, XMLElem parent)
 {
     XMLElem positionXML = newElement("Position", parent);
 
@@ -503,7 +505,8 @@ XMLElem ComplexXMLControl::toXML(const Position *position, XMLElem parent)
     return positionXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const RadarCollection *radar, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const RadarCollection *radar,
+                                       XMLElem parent)
 {
     XMLElem radarXML = newElement("RadarCollection", parent);
 
@@ -679,10 +682,10 @@ XMLElem ComplexXMLControl::toXML(const RadarCollection *radar, XMLElem parent)
     return radarXML;
 }
 
-XMLElem ComplexXMLControl::areaLineDirectionParametersToXML(
-                                                            std::string name,
-                                                            const AreaDirectionParameters *adp,
-                                                            XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::areaLineDirectionParametersToXML(
+                                                                  std::string name,
+                                                                  const AreaDirectionParameters *adp,
+                                                                  XMLElem parent)
 {
     XMLElem adpXML = newElement(name, parent);
     createVector3D("UVectECF", adp->unitVector, adpXML);
@@ -692,10 +695,10 @@ XMLElem ComplexXMLControl::areaLineDirectionParametersToXML(
     return adpXML;
 }
 
-XMLElem ComplexXMLControl::areaSampleDirectionParametersToXML(
-                                                              std::string name,
-                                                              const AreaDirectionParameters *adp,
-                                                              XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::areaSampleDirectionParametersToXML(
+                                                                    std::string name,
+                                                                    const AreaDirectionParameters *adp,
+                                                                    XMLElem parent)
 {
     XMLElem adpXML = newElement(name, parent);
     createVector3D("UVectECF", adp->unitVector, adpXML);
@@ -705,8 +708,8 @@ XMLElem ComplexXMLControl::areaSampleDirectionParametersToXML(
     return adpXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const ImageFormation *imageFormation,
-                                 XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const ImageFormation *imageFormation,
+                                       XMLElem parent)
 {
     XMLElem imageFormationXML = newElement("ImageFormation", parent);
 
@@ -830,7 +833,7 @@ XMLElem ComplexXMLControl::toXML(const ImageFormation *imageFormation,
     return imageFormationXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const SCPCOA *scpcoa, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const SCPCOA *scpcoa, XMLElem parent)
 {
     XMLElem scpcoaXML = newElement("SCPCOA", parent);
     createDouble("SCPTime", scpcoa->scpTime, scpcoaXML);
@@ -848,7 +851,7 @@ XMLElem ComplexXMLControl::toXML(const SCPCOA *scpcoa, XMLElem parent)
     return scpcoaXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const Antenna *antenna, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const Antenna *antenna, XMLElem parent)
 {
     XMLElem antennaXML = newElement("Antenna", parent);
 
@@ -862,8 +865,9 @@ XMLElem ComplexXMLControl::toXML(const Antenna *antenna, XMLElem parent)
     return antennaXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const std::string name,
-                                 AntennaParameters *params, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const std::string name,
+                                       AntennaParameters *params,
+                                       XMLElem parent)
 {
     XMLElem apXML = newElement(name, parent);
 
@@ -908,8 +912,8 @@ XMLElem ComplexXMLControl::toXML(const std::string name,
     return apXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const MatchInformation *matchInfo,
-                                 XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const MatchInformation *matchInfo,
+                                       XMLElem parent)
 {
     XMLElem matchInfoXML = newElement("MatchInfo", parent);
 
@@ -936,7 +940,7 @@ XMLElem ComplexXMLControl::toXML(const MatchInformation *matchInfo,
     return matchInfoXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const PFA *pfa, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const PFA *pfa, XMLElem parent)
 {
     XMLElem pfaXML = newElement("PFA", parent);
 
@@ -963,7 +967,7 @@ XMLElem ComplexXMLControl::toXML(const PFA *pfa, XMLElem parent)
     return pfaXML;
 }
 
-XMLElem ComplexXMLControl::toXML(const RMA *rma, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::toXML(const RMA *rma, XMLElem parent)
 {
     XMLElem rmaXML = newElement("RMA", parent);
 
@@ -1017,8 +1021,8 @@ XMLElem ComplexXMLControl::toXML(const RMA *rma, XMLElem parent)
     return rmaXML;
 }
 
-void ComplexXMLControl::fromXML(const XMLElem collectionInfoXML,
-                                CollectionInformation *collInfo)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem collectionInfoXML,
+                                      CollectionInformation *collInfo)
 {
     parseString(getFirstAndOnly(collectionInfoXML, "CollectorName"),
                 collInfo->collectorName);
@@ -1067,8 +1071,8 @@ void ComplexXMLControl::fromXML(const XMLElem collectionInfoXML,
     parseParameters(collectionInfoXML, "Parameter", collInfo->parameters);
 }
 
-void ComplexXMLControl::fromXML(const XMLElem imageCreationXML,
-                                ImageCreation *imageCreation)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem imageCreationXML,
+                                      ImageCreation *imageCreation)
 {
     // Optional
     XMLElem element = getOptional(imageCreationXML, "Application");
@@ -1088,8 +1092,8 @@ void ComplexXMLControl::fromXML(const XMLElem imageCreationXML,
         parseString(element, imageCreation->profile);
 }
 
-void ComplexXMLControl::fromXML(const XMLElem imageDataXML,
-                                ImageData *imageData)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem imageDataXML,
+                                      ImageData *imageData)
 {
     imageData->pixelType
             = six::toType<PixelType>(
@@ -1165,7 +1169,8 @@ void ComplexXMLControl::fromXML(const XMLElem imageDataXML,
 
 }
 
-void ComplexXMLControl::fromXML(const XMLElem geoDataXML, GeoData *geoData)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem geoDataXML,
+                                      GeoData *geoData)
 {
     parseEarthModelType(getFirstAndOnly(geoDataXML, "EarthModel"),
                         geoData->earthModel);
@@ -1197,7 +1202,8 @@ void ComplexXMLControl::fromXML(const XMLElem geoDataXML, GeoData *geoData)
 
 }
 
-void ComplexXMLControl::fromXML(const XMLElem geoInfoXML, GeoInfo* geoInfo)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem geoInfoXML,
+                                      GeoInfo* geoInfo)
 {
     std::vector < XMLElem > geoInfosXML;
     geoInfoXML->getElementsByTagName("GeoInfo", geoInfosXML);
@@ -1239,7 +1245,7 @@ void ComplexXMLControl::fromXML(const XMLElem geoInfoXML, GeoInfo* geoInfo)
     }
 }
 
-void ComplexXMLControl::fromXML(const XMLElem gridXML, Grid *grid)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem gridXML, Grid *grid)
 {
     grid->imagePlane
             = six::toType<ComplexImagePlaneType>(
@@ -1342,7 +1348,8 @@ void ComplexXMLControl::fromXML(const XMLElem gridXML, Grid *grid)
     }
 }
 
-void ComplexXMLControl::fromXML(const XMLElem timelineXML, Timeline *timeline)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem timelineXML,
+                                      Timeline *timeline)
 {
     parseDateTime(getFirstAndOnly(timelineXML, "CollectStart"),
                   timeline->collectStart);
@@ -1377,7 +1384,8 @@ void ComplexXMLControl::fromXML(const XMLElem timelineXML, Timeline *timeline)
     }
 }
 
-void ComplexXMLControl::fromXML(const XMLElem positionXML, Position *position)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem positionXML,
+                                      Position *position)
 {
     XMLElem tmpElem = getFirstAndOnly(positionXML, "ARPPoly");
     parsePolyXYZ(tmpElem, position->arpPoly);
@@ -1415,8 +1423,8 @@ void ComplexXMLControl::fromXML(const XMLElem positionXML, Position *position)
     }
 }
 
-void ComplexXMLControl::fromXML(const XMLElem radarCollectionXML,
-                                RadarCollection *radarCollection)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem radarCollectionXML,
+                                      RadarCollection *radarCollection)
 {
     XMLElem tmpElem = NULL;
     XMLElem optElem = NULL;
@@ -1688,8 +1696,8 @@ void ComplexXMLControl::fromXML(const XMLElem radarCollectionXML,
                     radarCollection->parameters);
 }
 
-void ComplexXMLControl::fromXML(const XMLElem imageFormationXML,
-                                ImageFormation *imageFormation)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem imageFormationXML,
+                                      ImageFormation *imageFormation)
 {
     XMLElem tmpElem = getOptional(imageFormationXML, "SegmentIdentifier");
     if (tmpElem)
@@ -1871,7 +1879,7 @@ void ComplexXMLControl::fromXML(const XMLElem imageFormationXML,
     }
 }
 
-void ComplexXMLControl::fromXML(const XMLElem scpcoaXML, SCPCOA *scpcoa)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem scpcoaXML, SCPCOA *scpcoa)
 {
     parseDouble(getFirstAndOnly(scpcoaXML, "SCPTime"), scpcoa->scpTime);
 
@@ -1892,8 +1900,8 @@ void ComplexXMLControl::fromXML(const XMLElem scpcoaXML, SCPCOA *scpcoa)
     parseDouble(getFirstAndOnly(scpcoaXML, "SlopeAng"), scpcoa->slopeAngle);
 }
 
-void ComplexXMLControl::fromXML(const XMLElem antennaParamsXML,
-                                AntennaParameters* params)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem antennaParamsXML,
+                                      AntennaParameters* params)
 {
     parsePolyXYZ(getFirstAndOnly(antennaParamsXML, "XAxisPoly"),
                  params->xAxisPoly);
@@ -1964,7 +1972,8 @@ void ComplexXMLControl::fromXML(const XMLElem antennaParamsXML,
     }
 }
 
-void ComplexXMLControl::fromXML(const XMLElem antennaXML, Antenna *antenna)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem antennaXML,
+                                      Antenna *antenna)
 {
     XMLElem antennaParamsXML = getOptional(antennaXML, "Tx");
     if (antennaParamsXML)
@@ -1988,8 +1997,8 @@ void ComplexXMLControl::fromXML(const XMLElem antennaXML, Antenna *antenna)
     }
 }
 
-void ComplexXMLControl::fromXML(const XMLElem matchInfoXML,
-                                MatchInformation *matchInfo)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem matchInfoXML,
+                                      MatchInformation *matchInfo)
 {
     XMLElem optElem = NULL;
 
@@ -2046,7 +2055,7 @@ void ComplexXMLControl::fromXML(const XMLElem matchInfoXML,
     }
 }
 
-void ComplexXMLControl::fromXML(const XMLElem pfaXML, PFA *pfa)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem pfaXML, PFA *pfa)
 {
     parseVector3D(getFirstAndOnly(pfaXML, "FPN"), pfa->focusPlaneNormal);
     parseVector3D(getFirstAndOnly(pfaXML, "IPN"), pfa->imagePlaneNormal);
@@ -2072,7 +2081,7 @@ void ComplexXMLControl::fromXML(const XMLElem pfaXML, PFA *pfa)
     }
 }
 
-void ComplexXMLControl::fromXML(const XMLElem rmaXML, RMA* rma)
+void ComplexXMLControl_0_4_1::fromXML(const XMLElem rmaXML, RMA* rma)
 {
     rma->algoType
             = six::toType<RMAlgoType>(
@@ -2152,10 +2161,11 @@ void ComplexXMLControl::fromXML(const XMLElem rmaXML, RMA* rma)
     }
 }
 
-XMLElem ComplexXMLControl::createFootprint(std::string name,
-                                           std::string cornerName,
-                                           const std::vector<LatLon>& corners,
-                                           XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createFootprint(
+                                                 std::string name,
+                                                 std::string cornerName,
+                                                 const std::vector<LatLon>& corners,
+                                                 XMLElem parent)
 {
     XMLElem footprint = newElement(name, parent);
 
@@ -2174,11 +2184,11 @@ XMLElem ComplexXMLControl::createFootprint(std::string name,
     return footprint;
 }
 
-XMLElem ComplexXMLControl::createFootprint(
-                                           std::string name,
-                                           std::string cornerName,
-                                           const std::vector<LatLonAlt>& corners,
-                                           XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createFootprint(
+                                                 std::string name,
+                                                 std::string cornerName,
+                                                 const std::vector<LatLonAlt>& corners,
+                                                 XMLElem parent)
 {
     XMLElem footprint = newElement(name, parent);
 
@@ -2197,8 +2207,9 @@ XMLElem ComplexXMLControl::createFootprint(
     return footprint;
 }
 
-XMLElem ComplexXMLControl::createString(std::string name, std::string uri,
-                                        std::string p, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createString(std::string name,
+                                              std::string uri, std::string p,
+                                              XMLElem parent)
 {
     XMLElem e = XMLControl::createString(name, uri, p, parent);
     if (e)
@@ -2213,8 +2224,8 @@ XMLElem ComplexXMLControl::createString(std::string name, std::string uri,
     return e;
 }
 
-XMLElem ComplexXMLControl::createInt(std::string name, std::string uri, int p,
-                                     XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createInt(std::string name, std::string uri,
+                                           int p, XMLElem parent)
 {
     XMLElem e = XMLControl::createInt(name, uri, p, parent);
     if (e)
@@ -2229,8 +2240,9 @@ XMLElem ComplexXMLControl::createInt(std::string name, std::string uri, int p,
     return e;
 }
 
-XMLElem ComplexXMLControl::createDouble(std::string name, std::string uri,
-                                        double p, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createDouble(std::string name,
+                                              std::string uri, double p,
+                                              XMLElem parent)
 {
     XMLElem e = XMLControl::createDouble(name, uri, p, parent);
     if (e)
@@ -2245,8 +2257,10 @@ XMLElem ComplexXMLControl::createDouble(std::string name, std::string uri,
     return e;
 }
 
-XMLElem ComplexXMLControl::createBooleanType(std::string name, std::string uri,
-                                             BooleanType p, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createBooleanType(std::string name,
+                                                   std::string uri,
+                                                   BooleanType p,
+                                                   XMLElem parent)
 {
     XMLElem e = XMLControl::createBooleanType(name, uri, p, parent);
     if (e)
@@ -2261,8 +2275,9 @@ XMLElem ComplexXMLControl::createBooleanType(std::string name, std::string uri,
     return e;
 }
 
-XMLElem ComplexXMLControl::createDateTime(std::string name, std::string uri,
-                                          std::string s, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createDateTime(std::string name,
+                                                std::string uri, std::string s,
+                                                XMLElem parent)
 {
     XMLElem e = XMLControl::createDateTime(name, uri, s, parent);
     if (e)
@@ -2277,15 +2292,16 @@ XMLElem ComplexXMLControl::createDateTime(std::string name, std::string uri,
     return e;
 }
 
-XMLElem ComplexXMLControl::createDateTime(std::string name, std::string uri,
-                                          DateTime p, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createDateTime(std::string name,
+                                                std::string uri, DateTime p,
+                                                XMLElem parent)
 {
     std::string s = six::toString<DateTime>(p);
     return createDateTime(name, uri, s, parent);
 }
 
-XMLElem ComplexXMLControl::createDate(std::string name, std::string uri,
-                                      DateTime p, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createDate(std::string name, std::string uri,
+                                            DateTime p, XMLElem parent)
 {
     XMLElem e = XMLControl::createDate(name, uri, p, parent);
     if (e)
@@ -2300,69 +2316,73 @@ XMLElem ComplexXMLControl::createDate(std::string name, std::string uri,
     return e;
 }
 
-XMLElem ComplexXMLControl::createString(std::string name, std::string p,
-                                        XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createString(std::string name, std::string p,
+                                              XMLElem parent)
 {
     return createString(name, getDefaultURI(), p, parent);
 }
 
-XMLElem ComplexXMLControl::createInt(std::string name, int p, XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createInt(std::string name, int p,
+                                           XMLElem parent)
 {
     return createInt(name, getDefaultURI(), p, parent);
 }
 
-XMLElem ComplexXMLControl::createDouble(std::string name, double p,
-                                        XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createDouble(std::string name, double p,
+                                              XMLElem parent)
 {
     return createDouble(name, getDefaultURI(), p, parent);
 }
 
-XMLElem ComplexXMLControl::createBooleanType(std::string name, BooleanType p,
-                                             XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createBooleanType(std::string name,
+                                                   BooleanType p,
+                                                   XMLElem parent)
 {
     return createBooleanType(name, getDefaultURI(), p, parent);
 }
 
-XMLElem ComplexXMLControl::createDateTime(std::string name, std::string s,
-                                          XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createDateTime(std::string name,
+                                                std::string s, XMLElem parent)
 {
     return createDateTime(name, getDefaultURI(), s, parent);
 }
 
-XMLElem ComplexXMLControl::createDateTime(std::string name, DateTime p,
-                                          XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createDateTime(std::string name, DateTime p,
+                                                XMLElem parent)
 {
     return createDateTime(name, getDefaultURI(), p, parent);
 }
 
-XMLElem ComplexXMLControl::createDate(std::string name, DateTime p,
-                                      XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createDate(std::string name, DateTime p,
+                                            XMLElem parent)
 {
     return createDate(name, getDefaultURI(), p, parent);
 }
 
-XMLElem ComplexXMLControl::createEarthModelType(std::string name,
-                                                const EarthModelType& value,
-                                                XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createEarthModelType(
+                                                      std::string name,
+                                                      const EarthModelType& value,
+                                                      XMLElem parent)
 {
     return createString(name, six::toString(value), parent);
 }
 
-XMLElem ComplexXMLControl::createSideOfTrackType(std::string name,
-                                                 const SideOfTrackType& value,
-                                                 XMLElem parent)
+XMLElem ComplexXMLControl_0_4_1::createSideOfTrackType(
+                                                       std::string name,
+                                                       const SideOfTrackType& value,
+                                                       XMLElem parent)
 {
     return createString(name, six::toString(value), parent);
 }
 
-void ComplexXMLControl::parseEarthModelType(XMLElem element,
-                                            EarthModelType& value)
+void ComplexXMLControl_0_4_1::parseEarthModelType(XMLElem element,
+                                                  EarthModelType& value)
 {
     value = six::toType<EarthModelType>(element->getCharacterData());
 }
 
-void ComplexXMLControl::parseSideOfTrackType(XMLElem element,
-                                             SideOfTrackType& value)
+void ComplexXMLControl_0_4_1::parseSideOfTrackType(XMLElem element,
+                                                   SideOfTrackType& value)
 {
     value = six::toType<SideOfTrackType>(element->getCharacterData());
 }
