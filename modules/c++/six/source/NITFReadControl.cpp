@@ -124,7 +124,17 @@ void NITFReadControl::load(std::string fromFile)
             xmlParser.parse(ioAdapter);
             xml::lite::Document* doc = xmlParser.getDocument();
 
+            // construct the XMLControl ID (the version) from the URI
+            // It just so happens that these are equal
+            std::string uri = doc->getRootElement()->getUri();
+            if (!str::startsWith(uri, "urn:"))
+                throw except::Exception(Ctxt(FmtX("Unable to transform XML DES: Invalid XML namespace URI: %s",
+                                                  uri.c_str())));
+            desid = uri.substr(4); // remove urn: from beginning
+
             XMLControl *xmlControl = mXMLRegistry->newXMLControl(desid);
+            if (!xmlControl)
+                throw except::Exception(Ctxt("Unable to transform XML DES"));
 
             Data* data = xmlControl->fromXML(doc);
 

@@ -203,17 +203,47 @@ void NITFWriteControl::initialize(Container* container)
             }
         }
     }
+
     for (unsigned int i = 0; i < mContainer->getNumData(); ++i)
     {
+        six::Data *data = mContainer->getData(i);
+
+        // Unfortunately, this requires some knowledge of the SICD/SIDD
+        // versions.. this is not ideal, but required for now
+
+        std::vector<std::string> versionParts =
+                str::split(data->getVersion(), ":");
+
+        if (versionParts.size() != 2)
+            throw except::Exception(Ctxt(FmtX("Invalid version string: %s",
+                                              data->getVersion().c_str())));
+
+        std::string dataType = versionParts[0];
+        versionParts = str::split(versionParts[1], ".");
+
+        if (versionParts.size() < 2)
+            throw except::Exception(Ctxt(FmtX("Invalid version string: %s",
+                                              data->getVersion().c_str())));
+
         // Write out a DES
         nitf::DESegment seg = mRecord.newDataExtensionSegment();
         nitf::DESubheader subheader = seg.getSubheader();
-        std::string desid =
-                six::toString(mContainer->getData(i)->getDataType()) + "_XML";
-        subheader.getTypeID().set(desid);
-        // BUG? Is DESVER BCS A or N?
-        subheader.getVersion().set("01");
 
+        if ((dataType == "SICD" && versionParts[0] == "0") ||
+                (dataType == "SIDD" && versionParts[0] == "0"))
+        {
+            subheader.getTypeID().set(dataType + "_XML");
+        }
+        else
+        {
+            subheader.getTypeID().set("XML_DATA_CONTENT");
+
+            // add the XML_DATA_CONTENT TRE
+            nitf::TRE tre("XML_DATA_CONTENT", "XML_DATA_CONTENT_773");
+            subheader.setSubheaderFields(tre);
+        }
+
+        subheader.getVersion().set("01");
         setDESecurity(mContainer->getData(i)->getClassification(), subheader);
     }
 

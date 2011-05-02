@@ -31,22 +31,20 @@ using namespace six::sicd;
 
 typedef xml::lite::Element* XMLElem;
 
-const char ComplexXMLControl_1_0_0::SICD_URI_1_0_0[] = "urn:SICD:1.0.0";
-
 std::string ComplexXMLControl_1_0_0::getDefaultURI() const
 {
-    return SICD_URI_1_0_0;
+    return "urn:" + six::sicd::SICD_1_0_0.toString();
 }
 
 std::string ComplexXMLControl_1_0_0::getSICommonURI() const
 {
-    return SICD_URI_1_0_0;
+    return getDefaultURI();
 }
 
 Data* ComplexXMLControl_1_0_0::fromXML(const xml::lite::Document* doc)
 {
     // for now, just change the version of the returned data
-    ComplexData *sicd = (ComplexData*)ComplexXMLControl_1_0_0::fromXML(doc);
+    ComplexData *sicd = (ComplexData*)ComplexXMLControl_0_4_1::fromXML(doc);
     sicd->mVersion = six::sicd::SICD_1_0_0;
     return sicd;
 }

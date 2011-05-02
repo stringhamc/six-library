@@ -61,7 +61,7 @@ void preview(std::string outputFile)
 std::vector<std::string> extractXML(std::string inputFile,
                                     const sys::Path& outputDir)
 {
-    std::vector<std::string> allFiles;
+    std::vector < std::string > allFiles;
     std::string prefix = sys::Path::basename(inputFile, true);
 
     nitf::Reader reader;
@@ -103,7 +103,7 @@ std::vector<std::string> extractXML(std::string inputFile,
     return allFiles;
 }
 
-void run(std::string inputFile, std::string dataType, six::XMLControlRegistry* registry)
+void run(std::string inputFile, six::XMLControlRegistry* registry)
 {
     try
     {
@@ -117,8 +117,8 @@ void run(std::string inputFile, std::string dataType, six::XMLControlRegistry* r
         // Check if the file is a NITF - if so, extract all the parts into our outputDir
         if (nitf::Reader::getNITFVersion(inputFile) != NITF_VER_UNKNOWN)
         {
-            std::vector<std::string> allFiles =
-                    extractXML(inputFile, outputDir);
+            std::vector < std::string > allFiles = extractXML(inputFile,
+                                                              outputDir);
             if (!allFiles.size())
                 throw except::Exception(
                                         Ctxt(
@@ -136,17 +136,23 @@ void run(std::string inputFile, std::string dataType, six::XMLControlRegistry* r
         treeBuilder.parse(xmlFileStream);
         xmlFileStream.close();
 
-        std::string lowerDt = dataType;
-        str::lower(lowerDt);
+        xml::lite::Document *doc = treeBuilder.getDocument();
+        std::string uri = doc->getRootElement()->getUri();
 
-        if (lowerDt == "sicd")
-            dataType = six::sicd::SICD_0_4_1.toString();
-        else if (lowerDt == "sidd")
-            dataType = six::sidd::SIDD_0_5_0.toString();
+        if (!str::startsWith(uri, "urn:"))
+            throw except::Exception(
+                                    Ctxt(
+                                         FmtX(
+                                              "Unable to transform XML DES: Invalid XML namespace URI: %s",
+                                              uri.c_str())));
 
-        six::XMLControl *control = registry->newXMLControl(dataType);
+        std::string typeId = uri.substr(4); // strip off the urn:
 
-        six::Data *data = control->fromXML(treeBuilder.getDocument());
+        six::XMLControl *control = registry->newXMLControl(typeId);
+        if (!control)
+            throw except::Exception(Ctxt("Unable to transform XML DES"));
+
+        six::Data *data = control->fromXML(doc);
 
         // Dump some core info
         std::cout << "Data Class: " << six::toString(data->getDataType())
@@ -184,24 +190,21 @@ void run(std::string inputFile, std::string dataType, six::XMLControlRegistry* r
 int main(int argc, char** argv)
 {
 
-    if (argc != 3)
+    if (argc != 2)
     {
-        die_printf("Usage: %s <nitf/xml-file/nitf-dir> <identifier>\n", argv[0]);
+        die_printf("Usage: %s <nitf/xml-file/nitf-dir>\n", argv[0]);
     }
-
-    // Is the data type SICD or SIDD
-    std::string dataType = argv[2];
 
     // Do this prior to reading any XML
     six::XMLControlRegistry *xmlRegistry = newXMLControlRegistry();
 
     // The input file (an XML or a NITF file)
     sys::Path inputFile(argv[1]);
-    std::vector<sys::Path> paths;
+    std::vector < sys::Path > paths;
 
     if (inputFile.isDirectory())
     {
-        std::vector<std::string> listing = inputFile.list();
+        std::vector < std::string > listing = inputFile.list();
         for (unsigned int i = 0; i < listing.size(); ++i)
         {
             if (str::endsWith(listing[i], "ntf") || str::endsWith(listing[i],
@@ -219,7 +222,7 @@ int main(int argc, char** argv)
     for (unsigned int i = 0; i < paths.size(); ++i)
     {
         std::cout << "Parsing file: " << paths[i].getPath() << std::endl;
-        run(paths[i].getPath(), dataType, xmlRegistry);
+        run(paths[i].getPath(), xmlRegistry);
     }
 
     // cleanup
@@ -332,7 +335,7 @@ void generateKMLForSICD(xml::lite::Element* docXML,
                         six::sicd::ComplexData* data)
 {
 
-    std::vector<six::LatLonAlt> v;
+    std::vector < six::LatLonAlt > v;
     // Lets go ahead and try to add the ARP poly
 
     v.push_back(data->geoData->scp.llh);
@@ -394,7 +397,7 @@ std::string generateKML(six::Data* data, const sys::Path& outputDir)
     docXML->addChild(createLineStyle("arpPoly", "ff00007f", 2));
 
     // Create footprint
-    std::vector<six::LatLon> corners = data->getImageCorners();
+    std::vector < six::LatLon > corners = data->getImageCorners();
     docXML->addChild(createPath(corners, "footprint", "LinearRing"));
 
     // Specifics to SICD

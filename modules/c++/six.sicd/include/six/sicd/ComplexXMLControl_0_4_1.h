@@ -88,8 +88,6 @@ protected:
 
     typedef xml::lite::Element* XMLElem;
 
-    static const char SICD_0_4_1_URI[];
-
     //! Returns the default URI
     virtual std::string getDefaultURI() const;
 

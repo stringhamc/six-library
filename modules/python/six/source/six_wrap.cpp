@@ -2639,7 +2639,7 @@ namespace swig {
         six::XMLControlRegistry xmlRegistry;
         xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
                                new six::XMLControlCreatorT<
-                                       six::sicd::ComplexXMLControl>());
+                                       six::sicd::ComplexXMLControl_0_4_1>());
         xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
                                new six::XMLControlCreatorT<
                                        six::sidd::DerivedXMLControl>());
