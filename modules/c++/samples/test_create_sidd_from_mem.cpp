@@ -1754,10 +1754,9 @@ six::sicd::ComplexData* getComplexData(std::string sicdXMLName,
 
     // Get the SICD DOM
     xml::lite::Document *doc = xmlParser.getDocument();
+    std::string typeId = doc->getRootElement()->getUri().substr(4); // strip urn:
 
-    // TODO change this - no more hard coding of version
-    six::XMLControl* xmlControl = xmlRegistry->newXMLControl(
-            six::sicd::SICD_0_4_1);
+    six::XMLControl* xmlControl = xmlRegistry->newXMLControl(typeId);
 
     six::Data* data = xmlControl->fromXML(doc);
     delete xmlControl;
@@ -1839,7 +1838,7 @@ int main(int argc, char** argv)
         // Make the object.  You could do this directly, but this way
         // is less error prone, and more flexible
         //-----------------------------------------------------------
-        six::sidd::DerivedDataBuilder siddBuilder(six::sidd::SIDD_0_5_0);
+        six::sidd::DerivedDataBuilder siddBuilder(six::sidd::SIDD_1_0_0);
 
         //-----------------------------------------------------------
         // You can cascade these operators, or call them one after

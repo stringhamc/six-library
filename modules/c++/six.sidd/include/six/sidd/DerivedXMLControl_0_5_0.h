@@ -19,8 +19,8 @@
  * see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef __SIX_DERIVED_XML_CONTROL_H__
-#define __SIX_DERIVED_XML_CONTROL_H__
+#ifndef __SIX_DERIVED_XML_CONTROL_0_5_0_H__
+#define __SIX_DERIVED_XML_CONTROL_0_5_0_H__
 
 #include "six/XMLControl.h"
 #include "six/sidd/DerivedData.h"
@@ -32,7 +32,7 @@ namespace six
 namespace sidd
 {
 /*!
- *  \class DerivedXMLControl
+ *  \class DerivedXMLControl_0_5_0
  *  \brief Turns an DerivedData object into XML and vice versa
  *
  *  Derived XMLControl object for reading and writing DerivedData*
@@ -40,17 +40,17 @@ namespace sidd
  *  if necessary.  A best practice is to use the six::toXMLCharArray
  *  and six::toXMLString functions to turn Data* objects into XML
  */
-class DerivedXMLControl : public XMLControl
+class DerivedXMLControl_0_5_0 : public XMLControl
 {
 
 public:
 
-    DerivedXMLControl(logging::Logger* log = NULL, bool ownLog = false) :
+    DerivedXMLControl_0_5_0(logging::Logger* log = NULL, bool ownLog = false) :
         XMLControl(log, ownLog)
     {
     }
 
-    virtual ~DerivedXMLControl()
+    virtual ~DerivedXMLControl_0_5_0()
     {
     }
 
@@ -67,46 +67,45 @@ public:
 protected:
     typedef xml::lite::Element* XMLElem;
 
-    static const char SIDD_URI[];
     static const char SI_COMMON_URI[];
     static const char SFA_URI[];
 
     //! Returns the default URI
-    std::string getDefaultURI() const;
+    virtual std::string getDefaultURI() const;
 
     //! Returns the URI to use with SI Common types
-    std::string getSICommonURI() const;
+    virtual std::string getSICommonURI() const;
 
-    std::string getSFAURI() const;
+    virtual std::string getSFAURI() const;
 
     virtual XMLElem createLUT(std::string name, const LUT *l, XMLElem parent =
             NULL);
-    XMLElem
+    virtual XMLElem
             toXML(const ProductCreation* productCreation, XMLElem parent = NULL);
-    XMLElem toXML(const ProductProcessing* productProcessing, XMLElem parent =
+    virtual XMLElem toXML(const ProductProcessing* productProcessing, XMLElem parent =
             NULL);
-    void fromXML(const XMLElem elem, ProductProcessing* productProcessing);
-    XMLElem toXML(const ProcessingModule* procMod, XMLElem parent = NULL);
-    void fromXML(const XMLElem elem, ProcessingModule* procMod);
-    XMLElem toXML(const DownstreamReprocessing* d, XMLElem parent = NULL);
-    void fromXML(const XMLElem elem, DownstreamReprocessing* downstreamReproc);
-    XMLElem toXML(const Display* display, XMLElem parent = NULL);
-    XMLElem toXML(const GeographicAndTarget* g, XMLElem parent = NULL);
-    XMLElem toXML(const GeographicCoverage* g, XMLElem parent = NULL);
-    XMLElem toXML(const Measurement* measurement, XMLElem parent = NULL);
-    XMLElem
+    virtual void fromXML(const XMLElem elem, ProductProcessing* productProcessing);
+    virtual XMLElem toXML(const ProcessingModule* procMod, XMLElem parent = NULL);
+    virtual void fromXML(const XMLElem elem, ProcessingModule* procMod);
+    virtual XMLElem toXML(const DownstreamReprocessing* d, XMLElem parent = NULL);
+    virtual void fromXML(const XMLElem elem, DownstreamReprocessing* downstreamReproc);
+    virtual XMLElem toXML(const Display* display, XMLElem parent = NULL);
+    virtual XMLElem toXML(const GeographicAndTarget* g, XMLElem parent = NULL);
+    virtual XMLElem toXML(const GeographicCoverage* g, XMLElem parent = NULL);
+    virtual XMLElem toXML(const Measurement* measurement, XMLElem parent = NULL);
+    virtual XMLElem
             toXML(const ExploitationFeatures* exFeatures, XMLElem parent = NULL);
-    XMLElem toXML(const Annotation *a, XMLElem parent = NULL);
-    void fromXML(const XMLElem productCreationXML,
+    virtual XMLElem toXML(const Annotation *a, XMLElem parent = NULL);
+    virtual void fromXML(const XMLElem productCreationXML,
             ProductCreation* productCreation);
-    void fromXML(const XMLElem displayXML, Display* display);
-    void fromXML(const XMLElem measurementXML, Measurement* measurement);
-    void fromXML(const XMLElem elem, GeographicAndTarget* geographicAndTarget);
-    void fromXML(const XMLElem elem, GeographicCoverage* geoCoverage);
-    void fromXML(const XMLElem elem, ExploitationFeatures* exFeatures);
-    void fromXML(const XMLElem annotationXML, Annotation *a);
-    void fromXML(const XMLElem elem, SFAGeometry *g);
-    XMLElem toXML(const SFAGeometry *g, std::string useName, XMLElem parent =
+    virtual void fromXML(const XMLElem displayXML, Display* display);
+    virtual void fromXML(const XMLElem measurementXML, Measurement* measurement);
+    virtual void fromXML(const XMLElem elem, GeographicAndTarget* geographicAndTarget);
+    virtual void fromXML(const XMLElem elem, GeographicCoverage* geoCoverage);
+    virtual void fromXML(const XMLElem elem, ExploitationFeatures* exFeatures);
+    virtual void fromXML(const XMLElem annotationXML, Annotation *a);
+    virtual void fromXML(const XMLElem elem, SFAGeometry *g);
+    virtual XMLElem toXML(const SFAGeometry *g, std::string useName, XMLElem parent =
             NULL);
 };
 

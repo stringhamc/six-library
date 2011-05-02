@@ -19,27 +19,27 @@
  * see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef __IMPORT_SIX_SIDD_H__
-#define __IMPORT_SIX_SIDD_H__
+#include "six/Types.h"
+#include "six/Utilities.h"
+#include <import/str.h>
 
-#include <import/six.h>
-
-#include "six/sidd/Annotations.h"
-#include "six/sidd/DerivedData.h"
-#include "six/sidd/DerivedDataBuilder.h"
-#include "six/sidd/DerivedXMLControl_0_5_0.h"
 #include "six/sidd/DerivedXMLControl_1_0_0.h"
-#include "six/sidd/Display.h"
-#include "six/sidd/DownstreamReprocessing.h"
-#include "six/sidd/Enums.h"
-#include "six/sidd/ExploitationFeatures.h"
-#include "six/sidd/GeographicAndTarget.h"
-#include "six/sidd/GeoTIFFReadControl.h"
-#include "six/sidd/GeoTIFFWriteControl.h"
-#include "six/sidd/Measurement.h"
-#include "six/sidd/ProductCreation.h"
-#include "six/sidd/ProductProcessing.h"
-#include "six/sidd/SFA.h"
-#include "six/sidd/Utilities.h"
+#include "six/sidd/DerivedData.h"
 
-#endif
+using namespace six;
+using namespace six::sidd;
+
+typedef xml::lite::Element* XMLElem;
+
+std::string DerivedXMLControl_1_0_0::getDefaultURI() const
+{
+    return "urn:" + six::sidd::SIDD_0_5_0.toString();
+}
+
+Data* DerivedXMLControl_1_0_0::fromXML(const xml::lite::Document* doc)
+{
+    // for now, just change the version of the returned data
+    DerivedData *data = (DerivedData*)DerivedXMLControl_0_5_0::fromXML(doc);
+    data->mVersion = six::sidd::SIDD_1_0_0;
+    return data;
+}

@@ -308,7 +308,8 @@ struct DerivedData: public Data
     }
 
 protected:
-    friend class DerivedXMLControl;
+    friend class DerivedXMLControl_0_5_0;
+    friend class DerivedXMLControl_1_0_0;
     friend class DerivedDataBuilder;
     Version mVersion;
 

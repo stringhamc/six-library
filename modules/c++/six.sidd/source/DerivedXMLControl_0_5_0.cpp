@@ -23,7 +23,7 @@
 #include "six/Utilities.h"
 #include <import/str.h>
 
-#include "six/sidd/DerivedXMLControl.h"
+#include "six/sidd/DerivedXMLControl_0_5_0.h"
 #include "six/sidd/DerivedData.h"
 #include "six/sidd/DerivedDataBuilder.h"
 
@@ -32,26 +32,25 @@ using namespace six::sidd;
 
 typedef xml::lite::Element* XMLElem;
 
-const char DerivedXMLControl::SIDD_URI[] = "urn:SIDD:1.0.0";
-const char DerivedXMLControl::SI_COMMON_URI[] = "urn:SICommon:0.1";
-const char DerivedXMLControl::SFA_URI[] = "urn:SFA:1.2.0";
+const char DerivedXMLControl_0_5_0::SI_COMMON_URI[] = "urn:SICommon:0.1";
+const char DerivedXMLControl_0_5_0::SFA_URI[] = "urn:SFA:1.2.0";
 
-std::string DerivedXMLControl::getDefaultURI() const
+std::string DerivedXMLControl_0_5_0::getDefaultURI() const
 {
-    return SIDD_URI;
+    return "urn:" + six::sidd::SIDD_0_5_0.toString();
 }
 
-std::string DerivedXMLControl::getSICommonURI() const
+std::string DerivedXMLControl_0_5_0::getSICommonURI() const
 {
     return SI_COMMON_URI;
 }
 
-std::string DerivedXMLControl::getSFAURI() const
+std::string DerivedXMLControl_0_5_0::getSFAURI() const
 {
     return SFA_URI;
 }
 
-void DerivedXMLControl::fromXML(const XMLElem productCreationXML,
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem productCreationXML,
         ProductCreation* productCreation)
 {
     XMLElem informationXML = getFirstAndOnly(productCreationXML,
@@ -120,7 +119,7 @@ void DerivedXMLControl::fromXML(const XMLElem productCreationXML,
     }
 }
 
-void DerivedXMLControl::fromXML(const XMLElem displayXML, Display* display)
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem displayXML, Display* display)
 {
     display->pixelType
             = six::toType<PixelType>(
@@ -260,7 +259,7 @@ void DerivedXMLControl::fromXML(const XMLElem displayXML, Display* display)
 
 }
 
-void DerivedXMLControl::fromXML(const XMLElem geographicAndTargetXML,
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem geographicAndTargetXML,
         GeographicAndTarget* geographicAndTarget)
 {
     XMLElem geographicCoverageXML = getFirstAndOnly(geographicAndTargetXML,
@@ -304,7 +303,7 @@ void DerivedXMLControl::fromXML(const XMLElem geographicAndTargetXML,
     }
 }
 
-void DerivedXMLControl::fromXML(const XMLElem geographicCoverageXML,
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem geographicCoverageXML,
         GeographicCoverage* geographicCoverage)
 {
     std::vector<XMLElem> georegionIdsXML;
@@ -377,7 +376,7 @@ void DerivedXMLControl::fromXML(const XMLElem geographicCoverageXML,
 }
 
 // This function ASSUMES that the measurement projection has already been set!
-void DerivedXMLControl::fromXML(const XMLElem measurementXML,
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem measurementXML,
         Measurement* measurement)
 {
     parseRowColInt(getFirstAndOnly(measurementXML, "PixelFootprint"),
@@ -491,7 +490,7 @@ void DerivedXMLControl::fromXML(const XMLElem measurementXML,
 
 }
 
-void DerivedXMLControl::fromXML(const XMLElem exploitationFeaturesXML,
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem exploitationFeaturesXML,
         ExploitationFeatures* exploitationFeatures)
 {
     XMLElem tmpElem;
@@ -687,7 +686,7 @@ void DerivedXMLControl::fromXML(const XMLElem exploitationFeaturesXML,
         parseDouble(tmpElem, prod.north);
 }
 
-Data* DerivedXMLControl::fromXML(const xml::lite::Document* doc)
+Data* DerivedXMLControl_0_5_0::fromXML(const xml::lite::Document* doc)
 {
     XMLElem root = doc->getRootElement();
 
@@ -795,7 +794,7 @@ Data* DerivedXMLControl::fromXML(const xml::lite::Document* doc)
     return data;
 }
 
-XMLElem DerivedXMLControl::toXML(const ProductCreation* productCreation,
+XMLElem DerivedXMLControl_0_5_0::toXML(const ProductCreation* productCreation,
         XMLElem parent)
 {
     // Make the XML node
@@ -870,7 +869,7 @@ XMLElem DerivedXMLControl::toXML(const ProductCreation* productCreation,
     return productCreationXML;
 }
 
-XMLElem DerivedXMLControl::toXML(const Display* display, XMLElem parent)
+XMLElem DerivedXMLControl_0_5_0::toXML(const Display* display, XMLElem parent)
 {
     XMLElem displayXML = newElement("Display", parent);
 
@@ -937,7 +936,7 @@ XMLElem DerivedXMLControl::toXML(const Display* display, XMLElem parent)
     return displayXML;
 }
 
-XMLElem DerivedXMLControl::toXML(
+XMLElem DerivedXMLControl_0_5_0::toXML(
         const GeographicAndTarget* geographicAndTarget, XMLElem parent)
 {
     XMLElem geographicAndTargetXML = newElement("GeographicAndTarget", parent);
@@ -963,7 +962,7 @@ XMLElem DerivedXMLControl::toXML(
     return geographicAndTargetXML;
 }
 
-XMLElem DerivedXMLControl::toXML(const GeographicCoverage* geoCoverage,
+XMLElem DerivedXMLControl_0_5_0::toXML(const GeographicCoverage* geoCoverage,
         XMLElem parent)
 {
     //GeographicAndTarget
@@ -1021,7 +1020,7 @@ XMLElem DerivedXMLControl::toXML(const GeographicCoverage* geoCoverage,
     return geoCoverageXML;
 }
 
-XMLElem DerivedXMLControl::toXML(const Measurement* measurement, XMLElem parent)
+XMLElem DerivedXMLControl_0_5_0::toXML(const Measurement* measurement, XMLElem parent)
 {
     XMLElem measurementXML = newElement("Measurement", parent);
 
@@ -1136,7 +1135,7 @@ XMLElem DerivedXMLControl::toXML(const Measurement* measurement, XMLElem parent)
     return measurementXML;
 }
 
-XMLElem DerivedXMLControl::toXML(
+XMLElem DerivedXMLControl_0_5_0::toXML(
         const ExploitationFeatures* exploitationFeatures, XMLElem parent)
 {
 
@@ -1307,7 +1306,7 @@ XMLElem DerivedXMLControl::toXML(
     return exploitationFeaturesXML;
 }
 
-xml::lite::Document* DerivedXMLControl::toXML(const Data* data)
+xml::lite::Document* DerivedXMLControl_0_5_0::toXML(const Data* data)
 {
     if (data->getDataType() != DataType::DERIVED)
     {
@@ -1355,7 +1354,7 @@ xml::lite::Document* DerivedXMLControl::toXML(const Data* data)
     return doc;
 }
 
-XMLElem DerivedXMLControl::createLUT(std::string name, const LUT *lut,
+XMLElem DerivedXMLControl_0_5_0::createLUT(std::string name, const LUT *lut,
         XMLElem parent)
 {
     //     unsigned char* table;
@@ -1392,7 +1391,7 @@ XMLElem DerivedXMLControl::createLUT(std::string name, const LUT *lut,
     return lutElement;
 }
 
-XMLElem DerivedXMLControl::toXML(const ProductProcessing* productProcessing,
+XMLElem DerivedXMLControl_0_5_0::toXML(const ProductProcessing* productProcessing,
         XMLElem parent)
 {
     XMLElem productProcessingXML = newElement("ProductProcessing", parent);
@@ -1406,7 +1405,7 @@ XMLElem DerivedXMLControl::toXML(const ProductProcessing* productProcessing,
     return productProcessingXML;
 }
 
-XMLElem DerivedXMLControl::toXML(const ProcessingModule* procMod,
+XMLElem DerivedXMLControl_0_5_0::toXML(const ProcessingModule* procMod,
         XMLElem parent)
 {
     XMLElem procModXML = newElement("ProcessingModule", parent);
@@ -1431,7 +1430,7 @@ XMLElem DerivedXMLControl::toXML(const ProcessingModule* procMod,
 
 }
 
-XMLElem DerivedXMLControl::toXML(
+XMLElem DerivedXMLControl_0_5_0::toXML(
         const DownstreamReprocessing* downstreamReproc, XMLElem parent)
 {
     XMLElem epXML = newElement("DownstreamReprocessing", parent);
@@ -1474,7 +1473,7 @@ XMLElem DerivedXMLControl::toXML(
     return epXML;
 }
 
-void DerivedXMLControl::fromXML(const XMLElem procXML,
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem procXML,
         ProcessingModule* procMod)
 {
     XMLElem moduleName = getFirstAndOnly(procXML, "ModuleName");
@@ -1494,7 +1493,7 @@ void DerivedXMLControl::fromXML(const XMLElem procXML,
     }
 }
 
-void DerivedXMLControl::fromXML(const XMLElem elem,
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem elem,
         ProductProcessing* productProcessing)
 {
     std::vector<XMLElem> procModuleXML;
@@ -1508,7 +1507,7 @@ void DerivedXMLControl::fromXML(const XMLElem elem,
     }
 }
 
-void DerivedXMLControl::fromXML(const XMLElem elem,
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem elem,
         DownstreamReprocessing* downstreamReproc)
 {
     XMLElem geometricChipXML = getOptional(elem, "GeometricChip");
@@ -1561,7 +1560,7 @@ void DerivedXMLControl::fromXML(const XMLElem elem,
     }
 }
 
-void DerivedXMLControl::fromXML(const XMLElem elem, Annotation *a)
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem elem, Annotation *a)
 {
     a->identifier = getFirstAndOnly(elem, "Identifier")->getCharacterData();
     XMLElem spatialXML = getOptional(elem, "SpatialReferenceSystem");
@@ -1624,7 +1623,7 @@ void DerivedXMLControl::fromXML(const XMLElem elem, Annotation *a)
     }
 }
 
-XMLElem DerivedXMLControl::toXML(const Annotation *a, XMLElem parent)
+XMLElem DerivedXMLControl_0_5_0::toXML(const Annotation *a, XMLElem parent)
 {
     XMLElem annXML = newElement("Annotation", parent);
     createString("Identifier", a->identifier, annXML);
@@ -1639,7 +1638,7 @@ XMLElem DerivedXMLControl::toXML(const Annotation *a, XMLElem parent)
     return annXML;
 }
 
-void DerivedXMLControl::fromXML(const XMLElem elem, SFAGeometry *g)
+void DerivedXMLControl_0_5_0::fromXML(const XMLElem elem, SFAGeometry *g)
 {
     std::string geoType = g->getType();
     if (geoType == SFAPoint::TYPE_NAME)
@@ -1737,7 +1736,7 @@ void DerivedXMLControl::fromXML(const XMLElem elem, SFAGeometry *g)
     }
 }
 
-XMLElem DerivedXMLControl::toXML(const SFAGeometry *g, std::string useName,
+XMLElem DerivedXMLControl_0_5_0::toXML(const SFAGeometry *g, std::string useName,
         XMLElem parent)
 {
     XMLElem geoXML = NULL;

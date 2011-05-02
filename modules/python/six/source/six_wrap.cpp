@@ -2637,12 +2637,14 @@ namespace swig {
     PyObject* readImages(const char* filename)
     {
         six::XMLControlRegistry xmlRegistry;
-        xmlRegistry.addCreator(six::sicd::SICD_0_4_1,
-                               new six::XMLControlCreatorT<
-                                       six::sicd::ComplexXMLControl_0_4_1>());
-        xmlRegistry.addCreator(six::sidd::SIDD_0_5_0,
-                               new six::XMLControlCreatorT<
-                                       six::sidd::DerivedXMLControl>());
+        xmlRegistry.addCreator(six::sicd::SICD_0_4_1, new six::XMLControlCreatorT<
+            six::sicd::ComplexXMLControl_0_4_1>());
+        xmlRegistry.addCreator(six::sicd::SICD_1_0_0, new six::XMLControlCreatorT<
+                six::sicd::ComplexXMLControl_1_0_0>());
+        xmlRegistry.addCreator(six::sidd::SIDD_0_5_0, new six::XMLControlCreatorT<
+                six::sidd::DerivedXMLControl_0_5_0>());
+        xmlRegistry.addCreator(six::sidd::SIDD_1_0_0, new six::XMLControlCreatorT<
+                six::sidd::DerivedXMLControl_1_0_0>());
     
         six::ReadControl* reader = new six::NITFReadControl();
         reader->setXMLControlRegistry(&xmlRegistry);

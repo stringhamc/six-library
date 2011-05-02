@@ -44,7 +44,7 @@ class DerivedDataBuilder
 {
 public:
     //!  Construct. Creates and owns a new DerivedData object
-    DerivedDataBuilder(six::sidd::Version version = six::sidd::Version());
+    DerivedDataBuilder(six::sidd::Version version = six::sidd::SIDD_1_0_0);
     
     /*!
      *  Construct, taking in a DerivedData object.  Warning: the builder 

@@ -79,7 +79,9 @@ six::XMLControlRegistry* newXMLControlRegistry()
     xmlRegistry->addCreator(six::sicd::SICD_1_0_0, new six::XMLControlCreatorT<
             six::sicd::ComplexXMLControl_1_0_0>());
     xmlRegistry->addCreator(six::sidd::SIDD_0_5_0, new six::XMLControlCreatorT<
-            six::sidd::DerivedXMLControl>());
+            six::sidd::DerivedXMLControl_0_5_0>());
+    xmlRegistry->addCreator(six::sidd::SIDD_1_0_0, new six::XMLControlCreatorT<
+            six::sidd::DerivedXMLControl_1_0_0>());
     return xmlRegistry;
 }
 

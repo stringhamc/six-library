@@ -19,27 +19,39 @@
  * see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef __IMPORT_SIX_SIDD_H__
-#define __IMPORT_SIX_SIDD_H__
+#ifndef __SIX_DERIVED_XML_CONTROL_1_0_0_H__
+#define __SIX_DERIVED_XML_CONTROL_1_0_0_H__
 
-#include <import/six.h>
-
-#include "six/sidd/Annotations.h"
-#include "six/sidd/DerivedData.h"
-#include "six/sidd/DerivedDataBuilder.h"
 #include "six/sidd/DerivedXMLControl_0_5_0.h"
-#include "six/sidd/DerivedXMLControl_1_0_0.h"
-#include "six/sidd/Display.h"
-#include "six/sidd/DownstreamReprocessing.h"
-#include "six/sidd/Enums.h"
-#include "six/sidd/ExploitationFeatures.h"
-#include "six/sidd/GeographicAndTarget.h"
-#include "six/sidd/GeoTIFFReadControl.h"
-#include "six/sidd/GeoTIFFWriteControl.h"
-#include "six/sidd/Measurement.h"
-#include "six/sidd/ProductCreation.h"
-#include "six/sidd/ProductProcessing.h"
-#include "six/sidd/SFA.h"
-#include "six/sidd/Utilities.h"
 
+namespace six
+{
+namespace sidd
+{
+
+class DerivedXMLControl_1_0_0 : public DerivedXMLControl_0_5_0
+{
+
+public:
+
+    DerivedXMLControl_1_0_0(logging::Logger* log = NULL, bool ownLog = false) :
+        DerivedXMLControl_0_5_0(log, ownLog)
+    {
+    }
+
+    virtual ~DerivedXMLControl_1_0_0()
+    {
+    }
+
+    virtual Data* fromXML(const xml::lite::Document* doc);
+
+protected:
+
+    //! Returns the default URI
+    virtual std::string getDefaultURI() const;
+
+};
+
+}
+}
 #endif
