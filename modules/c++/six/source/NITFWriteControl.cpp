@@ -219,7 +219,8 @@ void NITFWriteControl::initialize(Container* container)
                                               data->getVersion().c_str())));
 
         std::string dataType = versionParts[0];
-        versionParts = str::split(versionParts[1], ".");
+        std::string versionStr = versionParts[1];
+        versionParts = str::split(versionStr, ".");
 
         if (versionParts.size() < 2)
             throw except::Exception(Ctxt(FmtX("Invalid version string: %s",
@@ -241,6 +242,20 @@ void NITFWriteControl::initialize(Container* container)
             // add the XML_DATA_CONTENT TRE
             nitf::TRE tre("XML_DATA_CONTENT", "XML_DATA_CONTENT_773");
             subheader.setSubheaderFields(tre);
+
+            // default the CRC to 99999
+            tre.setField("DESCRC", "99999");
+            tre.setField("DESSHFT", "XML");
+
+            six::DateTime datetime = data->getCreationTime();
+            char buf[255];
+            datetime.format("%Y-%m-%dT%H:%M:%SZ", buf, 255);
+            tre.setField("DESSHDT", buf);
+
+            tre.setField("DESSHSI", dataType);
+            tre.setField("DESSHSV", versionStr);
+
+            tre.setField("DESSHTN", "urn:" + data->getVersion());
         }
 
         subheader.getVersion().set("01");
