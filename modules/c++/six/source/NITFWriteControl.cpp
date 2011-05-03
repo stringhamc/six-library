@@ -253,6 +253,19 @@ void NITFWriteControl::initialize(Container* container)
                 tre.setField("DESSHSV", data->getVersion());
 
                 tre.setField("DESSHTN", "urn:" + data->getIdentifier());
+
+                std::vector<LatLon> corners = data->getImageCorners();
+                if (corners.size() == 4)
+                {
+                    std::ostringstream oss;
+                    // DESSHLPG can be blank, so only fill if we have it all
+                    for (size_t c = 0, nCorners = corners.size(); c <= nCorners; ++c)
+                    {
+                        oss << FmtX("%+012.8f", corners[c % nCorners].getLat());
+                        oss << FmtX("%+013.8f", corners[c % nCorners].getLon());
+                    }
+                    tre.setField("DESSHLPG", oss.str());
+                }
             }
             catch(nitf::NITFException& ex)
             {
