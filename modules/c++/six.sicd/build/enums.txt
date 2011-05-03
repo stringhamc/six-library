@@ -6,4 +6,13 @@ __default__=six::sicd::NOT_SET_VALUE
 __enum_prefix__=SICD:
 __string_noprefix__=True
 __const_shortcuts__=True
-;__tostring_noprefix__=True
+__tostring_noprefix__=True
+
+[Identifier]
+0_4_1,0.4.1=0,SICD:0.4.1
+1_0_0,1.0.0=1,SICD:1.0.0
+__default__=1
+__enum_prefix__=SICD_ID_
+__string_noprefix__=True
+__const_shortcuts__=True
+__tostring_noprefix__=True

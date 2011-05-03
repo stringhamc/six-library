@@ -37,7 +37,7 @@ const char DerivedXMLControl_0_5_0::SFA_URI[] = "urn:SFA:1.2.0";
 
 std::string DerivedXMLControl_0_5_0::getDefaultURI() const
 {
-    return "urn:" + six::sidd::SIDD_0_5_0.toString();
+    return "urn:" + six::sidd::SIDD_ID_0_5_0.toString();
 }
 
 std::string DerivedXMLControl_0_5_0::getSICommonURI() const

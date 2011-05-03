@@ -74,13 +74,13 @@ six::XMLControlRegistry* newXMLControlRegistry()
 {
     six::XMLControlRegistry *xmlRegistry = new six::XMLControlRegistry;
 
-    xmlRegistry->addCreator(six::sicd::SICD_0_4_1, new six::XMLControlCreatorT<
+    xmlRegistry->addCreator(six::sicd::SICD_ID_0_4_1, new six::XMLControlCreatorT<
             six::sicd::ComplexXMLControl_0_4_1>());
-    xmlRegistry->addCreator(six::sicd::SICD_1_0_0, new six::XMLControlCreatorT<
+    xmlRegistry->addCreator(six::sicd::SICD_ID_1_0_0, new six::XMLControlCreatorT<
             six::sicd::ComplexXMLControl_1_0_0>());
-    xmlRegistry->addCreator(six::sidd::SIDD_0_5_0, new six::XMLControlCreatorT<
+    xmlRegistry->addCreator(six::sidd::SIDD_ID_0_5_0, new six::XMLControlCreatorT<
             six::sidd::DerivedXMLControl_0_5_0>());
-    xmlRegistry->addCreator(six::sidd::SIDD_1_0_0, new six::XMLControlCreatorT<
+    xmlRegistry->addCreator(six::sidd::SIDD_ID_1_0_0, new six::XMLControlCreatorT<
             six::sidd::DerivedXMLControl_1_0_0>());
     return xmlRegistry;
 }

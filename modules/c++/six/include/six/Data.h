@@ -186,6 +186,17 @@ struct Data
      */
     virtual std::string getVersion() const = 0;
 
+    /**
+     * Returns the identifier for this Data - which consists of:
+     * DATATYPE:VERSION
+     */
+    virtual std::string getIdentifier() const
+    {
+        // by default, returns the dataType concatenated with the version
+        // NOTE: Identifiers should also be defined as consts for registration
+        return getDataType().toString() + ":" + getVersion();
+    }
+
 };
 
 }

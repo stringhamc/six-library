@@ -212,50 +212,53 @@ void NITFWriteControl::initialize(Container* container)
         // versions.. this is not ideal, but required for now
 
         std::vector<std::string> versionParts =
-                str::split(data->getVersion(), ":");
-
-        if (versionParts.size() != 2)
-            throw except::Exception(Ctxt(FmtX("Invalid version string: %s",
-                                              data->getVersion().c_str())));
-
-        std::string dataType = versionParts[0];
-        std::string versionStr = versionParts[1];
-        versionParts = str::split(versionStr, ".");
+                str::split(data->getVersion(), ".");
 
         if (versionParts.size() < 2)
             throw except::Exception(Ctxt(FmtX("Invalid version string: %s",
                                               data->getVersion().c_str())));
 
+        six::DataType dataType = data->getDataType();
+        std::string majorVersion = versionParts[0];
+
         // Write out a DES
         nitf::DESegment seg = mRecord.newDataExtensionSegment();
         nitf::DESubheader subheader = seg.getSubheader();
 
-        if ((dataType == "SICD" && versionParts[0] == "0") ||
-                (dataType == "SIDD" && versionParts[0] == "0"))
+        // for SICD and SIDD < version 1 we don't use the TRE
+        if (majorVersion == "0")
         {
-            subheader.getTypeID().set(dataType + "_XML");
+            subheader.getTypeID().set(dataType.toString() + "_XML");
         }
         else
         {
             subheader.getTypeID().set("XML_DATA_CONTENT");
 
-            // add the XML_DATA_CONTENT TRE
-            nitf::TRE tre("XML_DATA_CONTENT", "XML_DATA_CONTENT_773");
-            subheader.setSubheaderFields(tre);
+            try
+            {
+                // add the XML_DATA_CONTENT TRE
+                nitf::TRE tre("XML_DATA_CONTENT", "XML_DATA_CONTENT_773");
+                subheader.setSubheaderFields(tre);
 
-            // default the CRC to 99999
-            tre.setField("DESCRC", "99999");
-            tre.setField("DESSHFT", "XML");
+                // default the CRC to 99999
+                tre.setField("DESCRC", "99999");
+                tre.setField("DESSHFT", "XML");
 
-            six::DateTime datetime = data->getCreationTime();
-            char buf[255];
-            datetime.format("%Y-%m-%dT%H:%M:%SZ", buf, 255);
-            tre.setField("DESSHDT", buf);
+                six::DateTime datetime = data->getCreationTime();
+                char buf[255];
+                datetime.format("%Y-%m-%dT%H:%M:%SZ", buf, 255);
+                tre.setField("DESSHDT", buf);
 
-            tre.setField("DESSHSI", dataType);
-            tre.setField("DESSHSV", versionStr);
+                tre.setField("DESSHSI", dataType.toString());
+                tre.setField("DESSHSV", data->getVersion());
 
-            tre.setField("DESSHTN", "urn:" + data->getVersion());
+                tre.setField("DESSHTN", "urn:" + data->getIdentifier());
+            }
+            catch(nitf::NITFException& ex)
+            {
+                throw except::Exception(ex, Ctxt(
+                        "Unable to add the XML_DATA_CONTENT TRE - make sure the plug-in is in your NITF_PLUGIN_PATH"));
+            }
         }
 
         subheader.getVersion().set("01");
@@ -635,7 +638,7 @@ void NITFWriteControl::saveIO(BufferList& imageData,
     bool doByteSwap = !sys::isBigEndianSystem();
 
     if (mInfos.size() != imageData.size())
-        throw except::Exception(Ctxt(FmtX("Require %d images, received %s",
+        throw except::Exception(Ctxt(FmtX("Require %d images, received %d",
                                           mInfos.size(), imageData.size())));
 
     // check to see if J2K compression is enabled

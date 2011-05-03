@@ -33,7 +33,7 @@ typedef xml::lite::Element* XMLElem;
 
 std::string ComplexXMLControl_1_0_0::getDefaultURI() const
 {
-    return "urn:" + six::sicd::SICD_1_0_0.toString();
+    return "urn:" + six::sicd::SICD_ID_1_0_0.toString();
 }
 
 std::string ComplexXMLControl_1_0_0::getSICommonURI() const

@@ -39,6 +39,111 @@ const int NOT_SET_VALUE = 2147483647; //std::numeric_limits<int>::max()
 
 
 /*!
+ *  \struct Identifier 
+ *
+ *  Enumeration used to represent Identifiers
+ */
+struct Identifier
+{
+    //! The enumerations allowed
+    enum
+    {
+        SICD_ID_0_4_1 = 0,
+        SICD_ID_1_0_0 = 1
+    };
+
+    //! Default constructor
+    Identifier(){ value = SICD_ID_1_0_0; }
+
+    //! string constructor
+    Identifier(std::string s)
+    {
+        if (s == "SICD_ID_0_4_1")
+            value = SICD_ID_0_4_1;
+        else if (s == "0_4_1")
+            value = SICD_ID_0_4_1;
+        else if (s == "SICD_ID_0.4.1")
+            value = SICD_ID_0_4_1;
+        else if (s == "0.4.1")
+            value = SICD_ID_0_4_1;
+        else if (s == "SICD_ID_1_0_0")
+            value = SICD_ID_1_0_0;
+        else if (s == "1_0_0")
+            value = SICD_ID_1_0_0;
+        else if (s == "SICD_ID_1.0.0")
+            value = SICD_ID_1_0_0;
+        else if (s == "1.0.0")
+            value = SICD_ID_1_0_0;
+        else
+            throw except::InvalidFormatException(Ctxt(FmtX("Invalid enum value: %s", s.c_str())));
+    }
+
+    //! int constructor
+    Identifier(int i)
+    {
+        switch(i)
+        {
+        case 0:
+            value = SICD_ID_0_4_1;
+            break;
+        case 1:
+            value = SICD_ID_1_0_0;
+            break;
+        default:
+            throw except::InvalidFormatException(Ctxt(FmtX("Invalid enum value: %d", i)));
+        }
+    }
+
+    //! destructor
+    ~Identifier(){}
+
+    //! Returns string representation of the value
+    std::string toString() const
+    {
+        switch(value)
+        {
+        case 0:
+            return std::string("SICD:0.4.1");
+        case 1:
+            return std::string("SICD:1.0.0");
+        default:
+            throw except::InvalidFormatException(Ctxt(FmtX("Invalid enum value: %d", value)));
+        }
+    }
+
+    //! assignment operator
+    Identifier& operator=(const Identifier& o)
+    {
+        if (&o != this)
+        {
+            value = o.value;
+        }
+        return *this;
+    }
+
+    bool operator==(const Identifier& o) const { return value == o.value; }
+    bool operator!=(const Identifier& o) const { return value != o.value; }
+    bool operator==(const int& o) const { return value == o; }
+    bool operator!=(const int& o) const { return value != o; }
+    Identifier& operator=(const int& o) { value = o; return *this; }
+    bool operator<(const Identifier& o) const { return value < o.value; }
+    bool operator>(const Identifier& o) const { return value > o.value; }
+    bool operator<=(const Identifier& o) const { return value <= o.value; }
+    bool operator>=(const Identifier& o) const { return value >= o.value; }
+    operator int() const { return value; }
+    operator std::string() const { return toString(); }
+
+    static size_t size() { return 2; }
+
+    int value;
+
+};
+
+const Identifier SICD_ID_0_4_1(Identifier::SICD_ID_0_4_1);
+const Identifier SICD_ID_1_0_0(Identifier::SICD_ID_1_0_0);
+
+
+/*!
  *  \struct Version 
  *
  *  Enumeration used to represent Versions
@@ -121,11 +226,11 @@ struct Version
         switch(value)
         {
         case 0:
-            return std::string("SICD:0.4.1");
+            return std::string("0.4.1");
         case 1:
-            return std::string("SICD:1.0.0");
+            return std::string("1.0.0");
         case six::sicd::NOT_SET_VALUE:
-            return std::string("SICD:NOT_SET");
+            return std::string("NOT_SET");
         default:
             throw except::InvalidFormatException(Ctxt(FmtX("Invalid enum value: %d", value)));
         }
@@ -164,7 +269,7 @@ const Version SICD_1_0_0(Version::SICD_1_0_0);
 const Version SICD_NOT_SET(Version::SICD_NOT_SET);
 
 
-// code auto-generated 2011-04-21 14:48:21.150093
+// code auto-generated 2011-05-03 10:15:41.098328
 
 }
 }

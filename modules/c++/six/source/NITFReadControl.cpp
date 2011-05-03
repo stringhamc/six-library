@@ -115,8 +115,27 @@ void NITFReadControl::load(std::string fromFile)
         std::string desid = subheader.getTypeID().toString();
         str::trim(desid);
 
-        if (desid == "SICD_XML" || desid == "SIDD_XML")
+        // check one of the 3 valid DES IDs for SICD/SIDD
+        if (desid == "XML_DATA_CONTENT" || desid == "SICD_XML" ||
+                desid == "SIDD_XML")
         {
+            if (desid == "XML_DATA_CONTENT")
+            {
+                // ensure that it is an XML instance
+                nitf::TRE tre = subheader.getSubheaderFields();
+                if (!tre.isValid())
+                {
+                    throw except::Exception(Ctxt("Invalid XML_DATA_CONTENT DES - no subheader fields found"));
+                }
+                std::string xmlFileType = tre.getField("DESSHFT").toString();
+                str::trim(xmlFileType);
+                if (xmlFileType != "XML")
+                {
+                    // skip this DES - it must be something else (XSD, DTD, XSL, etc.)
+                    continue;
+                }
+            }
+
             nitf::SegmentReader deReader = mReader.newDEReader(i);
             SegmentInputStreamAdapter ioAdapter(deReader);
             xml::lite::MinidomParser xmlParser;
@@ -124,8 +143,9 @@ void NITFReadControl::load(std::string fromFile)
             xmlParser.parse(ioAdapter);
             xml::lite::Document* doc = xmlParser.getDocument();
 
-            // construct the XMLControl ID (the version) from the URI
-            // It just so happens that these are equal
+            // construct the XMLControl ID from the URI
+            // It is assumed that the XMLControls were registered with these
+            // same IDs
             std::string uri = doc->getRootElement()->getUri();
             if (!str::startsWith(uri, "urn:"))
                 throw except::Exception(Ctxt(FmtX("Unable to transform XML DES: Invalid XML namespace URI: %s",

@@ -908,7 +908,11 @@ struct DataType
     {
         if (s == "COMPLEX")
             value = COMPLEX;
+        else if (s == "SICD")
+            value = COMPLEX;
         else if (s == "DERIVED")
+            value = DERIVED;
+        else if (s == "SIDD")
             value = DERIVED;
         else if (s == "NOT_SET")
             value = NOT_SET;
@@ -944,9 +948,9 @@ struct DataType
         switch(value)
         {
         case 1:
-            return std::string("COMPLEX");
+            return std::string("SICD");
         case 2:
-            return std::string("DERIVED");
+            return std::string("SIDD");
         case six::NOT_SET_VALUE:
             return std::string("NOT_SET");
         default:
@@ -3383,7 +3387,7 @@ struct XYZEnum
 };
 
 
-// code auto-generated 2011-04-21 13:21:17.928220
+// code auto-generated 2011-05-03 10:48:12.413810
 
 }
 

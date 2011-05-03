@@ -13,8 +13,8 @@ __default__=six::NOT_SET_VALUE
 
 [DataType]
 NOT_SET=six::NOT_SET_VALUE
-COMPLEX=1
-DERIVED=2
+COMPLEX,SICD=1,SICD
+DERIVED,SIDD=2,SIDD
 __default__=six::NOT_SET_VALUE
 __const_shortcuts__=True
 

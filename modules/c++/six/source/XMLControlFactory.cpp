@@ -59,7 +59,7 @@ std::string six::toXMLString(Data* data, const six::XMLControlRegistry *xmlRegis
 {
     if (!xmlRegistry)
         xmlRegistry = &XMLControlFactory::getInstance();
-    XMLControl* xmlControl = xmlRegistry->newXMLControl(data->getVersion());
+    XMLControl* xmlControl = xmlRegistry->newXMLControl(data->getIdentifier());
     xml::lite::Document *doc = xmlControl->toXML(data);
 
     io::ByteStream bs;

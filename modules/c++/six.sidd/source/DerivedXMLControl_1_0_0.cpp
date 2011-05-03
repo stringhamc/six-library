@@ -33,7 +33,7 @@ typedef xml::lite::Element* XMLElem;
 
 std::string DerivedXMLControl_1_0_0::getDefaultURI() const
 {
-    return "urn:" + six::sidd::SIDD_0_5_0.toString();
+    return "urn:" + six::sidd::SIDD_ID_1_0_0.toString();
 }
 
 Data* DerivedXMLControl_1_0_0::fromXML(const xml::lite::Document* doc)
