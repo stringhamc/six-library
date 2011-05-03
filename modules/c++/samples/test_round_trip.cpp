@@ -86,6 +86,11 @@ int main(int argc, char** argv)
         {
             six::Data *data = container->getData(i);
 
+            // skip SICDS inside a SIDD
+            if (container->getDataType() == six::DERIVED && data->getDataType()
+                    == six::COMPLEX)
+                continue;
+
             // read the entire image into memory
             six::Region region;
             sys::ubyte *imageBuffer = reader.interleaved(region, 0);
