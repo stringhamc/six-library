@@ -23,6 +23,7 @@
 #define __SIX_COMPLEX_DATA_BUILDER_H__
 
 #include "six/sicd/ComplexData.h"
+#include "six/sicd/Enums.h"
 
 namespace six
 {
@@ -52,7 +53,7 @@ class ComplexDataBuilder
 {
 public:
     //! Constructor
-    ComplexDataBuilder();
+    ComplexDataBuilder(six::sicd::Version version = six::sicd::SICD_1_0_0);
 
     //! Advanced constructor. Start with the shell of an object and continue
     ComplexDataBuilder(ComplexData *data);

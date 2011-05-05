@@ -698,9 +698,8 @@ Data* DerivedXMLControl_0_5_0::fromXML(const xml::lite::Document* doc)
     XMLElem geographicAndTargetXML = getFirstAndOnly(root,
                                                      "GeographicAndTarget");
 
-    DerivedDataBuilder builder;
+    DerivedDataBuilder builder(six::sidd::SIDD_0_5_0);
     DerivedData *data = builder.steal(); //steal it
-    data->mVersion = six::sidd::SIDD_0_5_0;
 
     // see if PixelType has MONO or RGB
     PixelType

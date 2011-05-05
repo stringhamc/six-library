@@ -39,7 +39,8 @@ std::string DerivedXMLControl_1_0_0::getDefaultURI() const
 Data* DerivedXMLControl_1_0_0::fromXML(const xml::lite::Document* doc)
 {
     // for now, just change the version of the returned data
+    // we may want to override any/all of this depending on what the spec says
     DerivedData *data = (DerivedData*)DerivedXMLControl_0_5_0::fromXML(doc);
-    data->mVersion = six::sidd::SIDD_1_0_0;
+    data->setVersion(six::sidd::SIDD_1_0_0);
     return data;
 }

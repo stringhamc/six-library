@@ -45,6 +45,6 @@ Data* ComplexXMLControl_1_0_0::fromXML(const xml::lite::Document* doc)
 {
     // for now, just change the version of the returned data
     ComplexData *sicd = (ComplexData*)ComplexXMLControl_0_4_1::fromXML(doc);
-    sicd->mVersion = six::sicd::SICD_1_0_0;
+    sicd->setVersion(six::sicd::SICD_1_0_0);
     return sicd;
 }

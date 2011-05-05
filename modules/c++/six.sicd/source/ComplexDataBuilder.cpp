@@ -24,9 +24,10 @@
 using namespace six;
 using namespace six::sicd;
 
-ComplexDataBuilder::ComplexDataBuilder() :
+ComplexDataBuilder::ComplexDataBuilder(six::sicd::Version version) :
     mData(new ComplexData()), mAdopt(true)
 {
+    mData->setVersion(version);
 }
 
 ComplexDataBuilder::ComplexDataBuilder(ComplexData *data) :

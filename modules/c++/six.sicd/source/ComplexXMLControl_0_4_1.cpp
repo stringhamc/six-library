@@ -44,9 +44,8 @@ std::string ComplexXMLControl_0_4_1::getSICommonURI() const
 
 Data* ComplexXMLControl_0_4_1::fromXML(const xml::lite::Document* doc)
 {
-    ComplexDataBuilder builder;
+    ComplexDataBuilder builder(six::sicd::SICD_0_4_1);
     ComplexData *sicd = builder.steal();
-    sicd->mVersion = six::sicd::SICD_0_4_1;
 
     XMLElem root = doc->getRootElement();
 

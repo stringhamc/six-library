@@ -306,10 +306,13 @@ struct ComplexData: public Data
         return mVersion.toString();
     }
 
+    //! allow a public setter
+    virtual void setVersion(const std::string& version)
+    {
+        mVersion = version;
+    }
+
 protected:
-    friend class ComplexXMLControl_0_4_1;
-    friend class ComplexXMLControl_1_0_0;
-    friend class ComplexDataBuilder;
     Version mVersion;
 
 private:

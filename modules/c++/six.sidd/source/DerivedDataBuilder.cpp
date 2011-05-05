@@ -27,7 +27,7 @@ using namespace six::sidd;
 DerivedDataBuilder::DerivedDataBuilder(six::sidd::Version version) :
     mData(new DerivedData()), mAdopt(true)
 {
-    mData->mVersion = version;
+    mData->setVersion(version);
 }
 
 DerivedDataBuilder::DerivedDataBuilder(DerivedData *data) :

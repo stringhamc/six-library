@@ -307,10 +307,13 @@ struct DerivedData: public Data
         return mVersion.toString();
     }
 
+    //! allow a public setter
+    virtual void setVersion(const std::string& version)
+    {
+        mVersion = version;
+    }
+
 protected:
-    friend class DerivedXMLControl_0_5_0;
-    friend class DerivedXMLControl_1_0_0;
-    friend class DerivedDataBuilder;
     Version mVersion;
 
 private:
