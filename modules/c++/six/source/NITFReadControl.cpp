@@ -119,23 +119,6 @@ void NITFReadControl::load(std::string fromFile)
         if (desid == "XML_DATA_CONTENT" || desid == "SICD_XML" ||
                 desid == "SIDD_XML")
         {
-            if (desid == "XML_DATA_CONTENT")
-            {
-                // ensure that it is an XML instance
-                nitf::TRE tre = subheader.getSubheaderFields();
-                if (!tre.isValid())
-                {
-                    throw except::Exception(Ctxt("Invalid XML_DATA_CONTENT DES - no subheader fields found"));
-                }
-                std::string xmlFileType = tre.getField("DESSHFT").toString();
-                str::trim(xmlFileType);
-                if (xmlFileType != "XML")
-                {
-                    // skip this DES - it must be something else (XSD, DTD, XSL, etc.)
-                    continue;
-                }
-            }
-
             nitf::SegmentReader deReader = mReader.newDEReader(i);
             SegmentInputStreamAdapter ioAdapter(deReader);
             xml::lite::MinidomParser xmlParser;
