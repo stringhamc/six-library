@@ -225,54 +225,11 @@ void NITFWriteControl::initialize(Container* container)
         nitf::DESegment seg = mRecord.newDataExtensionSegment();
         nitf::DESubheader subheader = seg.getSubheader();
 
-        // for SICD and SIDD < version 1 we don't use the TRE
-        if (majorVersion == "0")
-        {
-            subheader.getTypeID().set(dataType.toString() + "_XML");
-        }
-        else
-        {
-            subheader.getTypeID().set("XML_DATA_CONTENT");
+        // Name of DES changed for version 1.0+
+        std::string const desTypeID = (majorVersion == "0") ?
+            dataType.toString() + "_XML" : "XML_DATA_CONTENT";
 
-            try
-            {
-                // add the XML_DATA_CONTENT TRE
-                nitf::TRE tre("XML_DATA_CONTENT", "XML_DATA_CONTENT_773");
-                subheader.setSubheaderFields(tre);
-
-                // default the CRC to 99999
-                tre.setField("DESCRC", "99999");
-                tre.setField("DESSHFT", "XML");
-
-                six::DateTime datetime = data->getCreationTime();
-                char buf[255];
-                datetime.format("%Y-%m-%dT%H:%M:%SZ", buf, 255);
-                tre.setField("DESSHDT", buf);
-
-                tre.setField("DESSHSI", dataType.toString());
-                tre.setField("DESSHSV", data->getVersion());
-
-                tre.setField("DESSHTN", "urn:" + data->getIdentifier());
-
-                std::vector<LatLon> corners = data->getImageCorners();
-                if (corners.size() == 4)
-                {
-                    std::ostringstream oss;
-                    // DESSHLPG can be blank, so only fill if we have it all
-                    for (size_t c = 0, nCorners = corners.size(); c <= nCorners; ++c)
-                    {
-                        oss << FmtX("%+012.8f", corners[c % nCorners].getLat());
-                        oss << FmtX("%+013.8f", corners[c % nCorners].getLon());
-                    }
-                    tre.setField("DESSHLPG", oss.str());
-                }
-            }
-            catch(nitf::NITFException& ex)
-            {
-                throw except::Exception(ex, Ctxt(
-                        "Unable to add the XML_DATA_CONTENT TRE - make sure the plug-in is in your NITF_PLUGIN_PATH"));
-            }
-        }
+        subheader.getTypeID().set(desTypeID);
 
         subheader.getVersion().set("01");
         setDESecurity(mContainer->getData(i)->getClassification(), subheader);
