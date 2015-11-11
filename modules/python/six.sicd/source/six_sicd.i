@@ -168,14 +168,14 @@ SCOPED_COPYABLE(six::sicd, InterPulsePeriod)
 %template(VectorTimelineSet)                       std::vector<six::sicd::TimelineSet>;
 
 %{
-    void getWidebandData(const std::string& sicdPathname, const std::vector<std::string>& schemaPaths, six::sicd::ComplexData* complexData, long arrayBuffer)
+    void getWidebandData(const std::string& sicdPathname, const std::vector<std::string>& schemaPaths, six::sicd::ComplexData* complexData, ptrdiff_t arrayBuffer)
     {
         std::complex<float>* realBuffer = reinterpret_cast< std::complex<float>* >(arrayBuffer);
         Utilities::getWidebandData(sicdPathname, schemaPaths, *complexData, realBuffer);
     }
 %}
 
-void getWidebandData(std::string sicdPathname, const std::vector<std::string>& schemaPaths, six::sicd::ComplexData* complexData, long arrayBuffer);
+void getWidebandData(std::string sicdPathname, const std::vector<std::string>& schemaPaths, six::sicd::ComplexData* complexData, ptrdiff_t arrayBuffer);
 
 %pythoncode %{
 import numpy as np
