@@ -118,6 +118,7 @@ void SICDSensorModel::initializeFromFile(const std::string& pathname)
 
 void SICDSensorModel::initializeFromISD(const csm::Nitf21Isd& isd)
 {
+    throw except::Exception(Ctxt("start"));
     try
     {
         // Check for the first SICD DES and parse it
@@ -134,7 +135,7 @@ void SICDSensorModel::initializeFromISD(const csm::Nitf21Isd& isd)
             }
 
             const std::string& desData(desList[ii].data());
-
+            std::cerr << "ii: " << ii << std::endl;
             if (!desData.empty())
             {
                 try
@@ -322,14 +323,14 @@ SICDSensorModel::toPixel(const types::RowCol<double>& pos) const
     const six::sicd::ImageData& imageData(*mData->imageData);
     const types::RowCol<double> aoiOffset(imageData.firstRow,
                                           imageData.firstCol);
-
+    throw except::Exception(Ctxt("!!"));
     const types::RowCol<double> offset(
             imageData.scpPixel.row - aoiOffset.row,
             imageData.scpPixel.col - aoiOffset.col);
 
     return types::RowCol<double>(
-            (pos.row / mData->grid->row->sampleSpacing) + offset.row,
-            (pos.col / mData->grid->col->sampleSpacing) + offset.col);
+            (pos.row / mData->grid->row->sampleSpacing) + offset.row + .5,
+            (pos.col / mData->grid->col->sampleSpacing) + offset.col + .5);
 }
 
 types::RowCol<double>
@@ -340,8 +341,8 @@ SICDSensorModel::fromPixel(const csm::ImageCoord& pos) const
                                           imageData.firstCol);
 
     const types::RowCol<double> adjustedPos(
-            pos.line - (imageData.scpPixel.row - aoiOffset.row),
-            pos.samp - (imageData.scpPixel.col - aoiOffset.col));
+            pos.line - (imageData.scpPixel.row - aoiOffset.row) - .5,
+            pos.samp - (imageData.scpPixel.col - aoiOffset.col) - .5);
 
     return types::RowCol<double>(
             adjustedPos.row * mData->grid->row->sampleSpacing,

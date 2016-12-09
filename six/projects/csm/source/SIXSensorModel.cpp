@@ -645,6 +645,7 @@ csm::ImageCoord SIXSensorModel::groundToImage(
         double* achievedPrecision,
         csm::WarningList* ) const
 {
+    throw except::Exception(Ctxt("GroundToImage"));
     try
     {
         return groundToImageImpl(groundPt,
