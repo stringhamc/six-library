@@ -28,6 +28,7 @@
 #include <six/sicd/ComplexXMLControl.h>
 #include <six/sicd/Utilities.h>
 #include <six/sidd/DerivedXMLControl.h>
+#include <io/TempFile.h>
 #include <mem/SharedPtr.h>
 
 namespace
@@ -249,22 +250,20 @@ namespace
         std::string pathname() const;
         bool operator==(const ResultFile& rhs) const;
     private:
-        std::string mName;
+        io::TempFile mFile;
     };
 
-    ResultFile::ResultFile() :
-        mName(std::tmpnam(NULL))
+    ResultFile::ResultFile()
     {
     }
 
     ResultFile::~ResultFile()
     {
-        std::remove(mName.c_str());
     }
 
     std::string ResultFile::pathname() const
     {
-        return mName;
+        return mFile.pathname();
     }
 
     bool ResultFile::operator==(const ResultFile& rhs) const
@@ -314,10 +313,9 @@ int main(int argc, char** argv)
         const std::string testName =
                 (getDataType(inputPathname) == six::DataType::COMPLEX) ?
                 "test_script_sicd" : "test_script_sidd";
-        const std::string testFile = sys::Path::joinPaths("six",
-            sys::Path::joinPaths("projects",
-                sys::Path::joinPaths("csm",
-                    sys::Path::joinPaths("tests", testName))));
+        const std::string testFile = sys::Path("six").join("projects").
+                join("csm").join("tests").join(testName);
+
         TestScript testScript(testFile);
         testScript.setSource(inputPathname);
 
