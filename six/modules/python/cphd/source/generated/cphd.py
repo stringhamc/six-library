@@ -2038,12 +2038,13 @@ def toBuffer(self, channel = 0):
 
 VBM.toBuffer = toBuffer
 
-def write(self, pathname, data, dims, vbm):
+def write(self, pathname, data, vbm):
     imagePointer, _ = data.__array_interface__['data']
+    imageDimensions = RowColSizeT(data.shape[0], data.shape[1])
     vbmPointer, _ = vbm.__array_interface__['data']
     if data.dtype != numpy.dtype('complex64'):
         raise TypeError('Python CPHDWriter only supports complex float data')
-    self.addImageImpl(imagePointer, dims, vbmPointer)
+    self.addImageImpl(imagePointer, imageDimensions, vbmPointer)
     self.write(pathname)
 
 def __del__(self):

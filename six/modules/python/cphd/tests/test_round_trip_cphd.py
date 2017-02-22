@@ -38,7 +38,7 @@ if __name__ == '__main__':
     writer = CPHDWriter(reader.getMetadata())
     wideband = reader.getWideband()
     dims = wideband.getBufferDims(0, 0, Wideband.ALL, 0, Wideband.ALL)
-    writer.writeCPHD(outputPathname, wideband.read(), dims,
+    writer.writeCPHD(outputPathname, wideband.read(),
             reader.getVBM().toBuffer(0))
 
     roundTrippedReader = CPHDReader(outputPathname, multiprocessing.cpu_count())
