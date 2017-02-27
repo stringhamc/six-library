@@ -34,6 +34,10 @@ def gitMove(srcPathname, destPathname):
     cmd = 'git mv ' + srcPathname + ' ' + destPathname
     subprocess.check_call(cmd.split())
 
+def gitRm(pathname):
+    cmd = 'git rm -r ' + pathname
+    subprocess.check_call(cmd.split())
+
 # SIX-specific
 def addSIXRemotes():
     addRemotesIfNeeded({'coda-oss_remote' : 'https://github.com/mdaus/coda-oss.git',
@@ -57,26 +61,26 @@ def moveSIXDirs():
                    join('modules', 'python')] + \
                    cppModules + \
                    drivers
-    codaOssDirs = [join('temp_externals', 'coda-oss', dir) for dir in codaOssDirs]
+    codaOssDirs = [join('coda-oss', dir) for dir in codaOssDirs]
 
     # NITRO
     cModules = 'nitf nrt wscript'
     cModules = [join('c', dir) for dir in cModules.split()]
 
     nitroDirs = ['c++', 'wscript'] + cModules
-    nitroDirs = [join('temp_externals', 'nitro', 'modules', dir) for dir in nitroDirs]
+    nitroDirs = [join('nitro', 'modules', dir) for dir in nitroDirs]
     
-    dirs = [codaOssDirs, nitroDirs]
+    dirs = codaOssDirs + nitroDirs
     
-    # TODO: 1. Do 'git mv' to move these into place
-    #       2. Move some of this into a common file in coda-oss
-    #       3. There needs to be some repeated code in here for first adding these repos?
-
-    #gitMove(join('temp_externals', 'coda-oss', 'build'),
-    #        join('final_externals', 'coda-oss', 'build'))
+    #for dir in dirs:
+    #    gitMove(join('temp_externals', dir), join('externals', dir))
     
-    #gitMove(join('temp_externals', 'coda-oss', 'modules'),
-    #        join('final_externals', 'coda-oss', 'modules'))
+    gitRm('temp_externals')
+    
+    # TODO:
+    # - Move some of this into a common file in coda-oss
+    # - There needs to be some repeated code in here for first adding these repos?
+    # - Need to do a 'git rm -r externals' right up front
 
 if __name__ == '__main__':
     #addSIXRemotes()
