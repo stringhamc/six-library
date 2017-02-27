@@ -39,6 +39,14 @@ def gitRm(pathname):
         cmd = 'git rm -r ' + pathname
         subprocess.check_call(cmd.split())
 
+def gitAdd(pathname):
+    cmd = 'git add ' + pathname
+    subprocess.check_call(cmd.split())
+
+def gitCommit(message)
+    cmd = 'git commit -m ' + message
+    subprocess.check_call(cmd.split())
+
 # SIX-specific
 def addSIXRemotes():
     addRemotesIfNeeded({'coda-oss_remote' : 'https://github.com/mdaus/coda-oss.git',
@@ -50,7 +58,8 @@ def addSIXRepos():
             shutil.rmtree(dir)
     else:
         os.mkdir('temp_externals')
-        os.mkdir(join('temp_externals', 'coda-oss'))
+    gitAdd('temp_externals')
+    gitCommit('Temporarily adding in all externals')
 
     addSubtree('coda-oss_remote', join('temp_externals', 'coda-oss'))
     addSubtree('nitro_remote', join('temp_externals', 'nitro'))
