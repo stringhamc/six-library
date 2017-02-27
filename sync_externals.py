@@ -35,8 +35,9 @@ def gitMove(srcPathname, destPathname):
     subprocess.check_call(cmd.split())
 
 def gitRm(pathname):
-    cmd = 'git rm -r ' + pathname
-    subprocess.check_call(cmd.split())
+    if os.path.exists(pathname):
+        cmd = 'git rm -r ' + pathname
+        subprocess.check_call(cmd.split())
 
 # SIX-specific
 def addSIXRemotes():
@@ -44,10 +45,13 @@ def addSIXRemotes():
                         'nitro_remote': 'https://github.com/mdaus/nitro.git'})
 
 def addSIXRepos():
+    gitRm('temp_externals')
     addSubtree('coda-oss_remote', join('temp_externals', 'coda-oss'))
     addSubtree('nitro_remote', join('temp_externals', 'nitro'))
 
 def moveSIXDirs():
+    gitRm('externals')
+
     # CODA-OSS
     cppModules = 'cli except include io logging math math.linear math.poly ' \
                  'mem mt numpyutils sio.lite str sys tiff types xml.lite wscript'
@@ -81,8 +85,12 @@ def moveSIXDirs():
     # - Move some of this into a common file in coda-oss
     # - There needs to be some repeated code in here for first adding these repos?
     # - Need to do a 'git rm -r externals' right up front
+    # - Need a way that you can reliably call this several times in a row...
+    # - Would be slick if didn't have to do the subtree add at all if the
+    #   commit didn't change... if this happens, does the diff show just a
+    #   couple files??
 
 if __name__ == '__main__':
-    #addSIXRemotes()
-    #addSIXRepos()
+    addSIXRemotes()
+    addSIXRepos()
     moveSIXDirs()
