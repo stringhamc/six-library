@@ -46,8 +46,10 @@ def addSIXRemotes():
 
 def addSIXRepos():
     if os.path.exists('temp_externals'):
-        shutil.rmtree('temp_externals')
-    os.mkdir('temp_externals')
+        for dir in os.listdir('temp_externals'):
+            shutil.rmtree(dir)
+    else:
+        os.mkdir('temp_externals')
 
     addSubtree('coda-oss_remote', join('temp_externals', 'coda-oss'))
     addSubtree('nitro_remote', join('temp_externals', 'nitro'))
