@@ -43,9 +43,8 @@ def gitAdd(pathname):
     cmd = 'git add ' + pathname
     subprocess.check_call(cmd.split())
 
-def gitCommit(message)
-    cmd = 'git commit -m ' + message
-    subprocess.check_call(cmd.split())
+def gitCommit(message):
+    subprocess.check_call('git commit -m'.split() + ['"' + message + '"'])
 
 # SIX-specific
 def addSIXRemotes():
@@ -58,6 +57,8 @@ def addSIXRepos():
             shutil.rmtree(dir)
     else:
         os.mkdir('temp_externals')
+    writer = open(join('temp_externals', 'empty_file'), 'w')
+    writer.close()
     gitAdd('temp_externals')
     gitCommit('Temporarily adding in all externals')
 
@@ -91,8 +92,8 @@ def moveSIXDirs():
     
     dirs = codaOssDirs + nitroDirs
     
-    #for dir in dirs:
-    #    gitMove(join('temp_externals', dir), join('externals', dir))
+    for dir in dirs:
+        gitMove(join('temp_externals', dir), join('externals', dir))
     
     gitRm('temp_externals')
     
