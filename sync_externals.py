@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import pdb
+import shutil
 import subprocess
 import os
 from os.path import join, split, exists
@@ -45,7 +45,10 @@ def addSIXRemotes():
                         'nitro_remote': 'https://github.com/mdaus/nitro.git'})
 
 def addSIXRepos():
-    gitRm('temp_externals')
+    if os.path.exists('temp_externals'):
+        shutil.rmtree('temp_externals')
+    os.mkdir('temp_externals')
+
     addSubtree('coda-oss_remote', join('temp_externals', 'coda-oss'))
     addSubtree('nitro_remote', join('temp_externals', 'nitro'))
 
