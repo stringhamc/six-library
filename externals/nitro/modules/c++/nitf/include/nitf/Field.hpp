@@ -32,6 +32,7 @@
 #include "nitf/DateTime.hpp"
 #include <import/str.h>
 #include <string>
+#include <limits>
 
 /*!
  *  \file Field.hpp
@@ -49,6 +50,36 @@ namespace nitf
  */
 class Field : public nitf::Object<nitf_Field>
 {
+private:
+    template <bool IsIntegerT, bool IsSignedT>
+    struct GetConvType
+    {
+    };
+
+    template <>
+    struct GetConvType<true, true>
+    {
+        static const nitf_ConvType CONV_TYPE = NITF_CONV_INT;
+    };
+
+    template <>
+    struct GetConvType<true, false>
+    {
+        static const nitf_ConvType CONV_TYPE = NITF_CONV_UINT;
+    };
+
+    template <bool IsSignedT>
+    struct GetConvType<false, IsSignedT>
+    {
+        static const nitf_ConvType CONV_TYPE = NITF_CONV_REAL;
+    };
+
+    template <typename T>
+    nitf_ConvType getConvType() const
+    {
+        return GetConvType<std::numeric_limits<T>::is_integer,
+                           std::numeric_limits<T>::is_signed>::CONV_TYPE;
+    }
 
 public:
 enum FieldType
@@ -318,6 +349,15 @@ enum FieldType
         field->resizable = resizable;
     }
 
+    template <typename T>
+    operator T() const
+    {
+        T data;
+        get(&data, getConvType<T>(), sizeof(T));
+        return data;
+    }
+
+    /*
     operator nitf::Uint8() const
     {
         nitf::Uint8 data;
@@ -387,6 +427,7 @@ enum FieldType
         get(&data, NITF_CONV_REAL, sizeof(double));
         return data;
     }
+    */
 
     operator std::string() const
     {
