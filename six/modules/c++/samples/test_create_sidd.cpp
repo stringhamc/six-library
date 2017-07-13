@@ -30,7 +30,7 @@
 #include "utils.h"
 
 /*!
- *  This file takes in an SIO and turns it in to a SICD.
+ *  This file takes in an SIO and turns it in to a SIDD.
  *  It uses the WriteControl::save() function to stream
  *  it from file.  SIO's are native endian, NITF's are big endian
  *
@@ -226,9 +226,6 @@ int main(int argc, char** argv)
                 six::DataType::DERIVED,
                 new six::XMLControlCreatorT<six::sidd::DerivedXMLControl>()
                 );
-
-        // Get a Complex Data structure from an XML file
-        six::Options options;
 
         // Set up the sicd
         io::FileInputStream fis(argv[1]);
