@@ -3148,21 +3148,22 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_std__mapT_std__string_six__Parameter_t__const_iterator swig_types[138]
 #define SWIGTYPE_p_std__ostream swig_types[139]
 #define SWIGTYPE_p_std__string swig_types[140]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[141]
-#define SWIGTYPE_p_types__RgAzT_double_t swig_types[142]
-#define SWIGTYPE_p_types__RowColT_double_t swig_types[143]
-#define SWIGTYPE_p_types__RowColT_math__poly__TwoDT_double_t_t swig_types[144]
-#define SWIGTYPE_p_types__RowColT_scene__LatLon_t swig_types[145]
-#define SWIGTYPE_p_types__RowColT_ssize_t_t swig_types[146]
-#define SWIGTYPE_p_uint16_t swig_types[147]
-#define SWIGTYPE_p_uint32_t swig_types[148]
-#define SWIGTYPE_p_uint64_t swig_types[149]
-#define SWIGTYPE_p_uint8_t swig_types[150]
-#define SWIGTYPE_p_unsigned_char swig_types[151]
-#define SWIGTYPE_p_value_type swig_types[152]
-#define SWIGTYPE_p_xml__lite__Document swig_types[153]
-static swig_type_info *swig_types[155];
-static swig_module_info swig_module = {swig_types, 154, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[141]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[142]
+#define SWIGTYPE_p_types__RgAzT_double_t swig_types[143]
+#define SWIGTYPE_p_types__RowColT_double_t swig_types[144]
+#define SWIGTYPE_p_types__RowColT_math__poly__TwoDT_double_t_t swig_types[145]
+#define SWIGTYPE_p_types__RowColT_scene__LatLon_t swig_types[146]
+#define SWIGTYPE_p_types__RowColT_ssize_t_t swig_types[147]
+#define SWIGTYPE_p_uint16_t swig_types[148]
+#define SWIGTYPE_p_uint32_t swig_types[149]
+#define SWIGTYPE_p_uint64_t swig_types[150]
+#define SWIGTYPE_p_uint8_t swig_types[151]
+#define SWIGTYPE_p_unsigned_char swig_types[152]
+#define SWIGTYPE_p_value_type swig_types[153]
+#define SWIGTYPE_p_xml__lite__Document swig_types[154]
+static swig_type_info *swig_types[156];
+static swig_module_info swig_module = {swig_types, 155, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -58471,6 +58472,76 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_XMLControl_splitVersion(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg2 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:XMLControl_splitVersion",&obj0,&obj1)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "XMLControl_splitVersion" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "XMLControl_splitVersion" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "XMLControl_splitVersion" "', argument " "2"" of type '" "std::vector< std::string,std::allocator< std::string > > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "XMLControl_splitVersion" "', argument " "2"" of type '" "std::vector< std::string,std::allocator< std::string > > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< std::string,std::allocator< std::string > > * >(argp2);
+  {
+    try
+    {
+      six::XMLControl::splitVersion((std::string const &)*arg1,*arg2);
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *XMLControl_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char *)"O:swigregister", &obj)) return NULL;
@@ -63538,6 +63609,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ScopedCopyableRadiometric___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  mem::ScopedCopyablePtr< six::Radiometric > *arg1 = (mem::ScopedCopyablePtr< six::Radiometric > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ScopedCopyableRadiometric___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_mem__ScopedCopyablePtrT_six__Radiometric_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScopedCopyableRadiometric___nonzero__" "', argument " "1"" of type '" "mem::ScopedCopyablePtr< six::Radiometric > const *""'"); 
+  }
+  arg1 = reinterpret_cast< mem::ScopedCopyablePtr< six::Radiometric > * >(argp1);
+  {
+    try
+    {
+      result = (bool)((mem::ScopedCopyablePtr< six::Radiometric > const *)arg1)->operator bool();
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ScopedCopyableRadiometric_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   mem::ScopedCopyablePtr< six::Radiometric > *arg1 = (mem::ScopedCopyablePtr< six::Radiometric > *) 0 ;
@@ -65261,6 +65384,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ScopedCopyableErrorStatistics___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  mem::ScopedCopyablePtr< six::ErrorStatistics > *arg1 = (mem::ScopedCopyablePtr< six::ErrorStatistics > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ScopedCopyableErrorStatistics___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_mem__ScopedCopyablePtrT_six__ErrorStatistics_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScopedCopyableErrorStatistics___nonzero__" "', argument " "1"" of type '" "mem::ScopedCopyablePtr< six::ErrorStatistics > const *""'"); 
+  }
+  arg1 = reinterpret_cast< mem::ScopedCopyablePtr< six::ErrorStatistics > * >(argp1);
+  {
+    try
+    {
+      result = (bool)((mem::ScopedCopyablePtr< six::ErrorStatistics > const *)arg1)->operator bool();
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ScopedCopyableErrorStatistics_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   mem::ScopedCopyablePtr< six::ErrorStatistics > *arg1 = (mem::ScopedCopyablePtr< six::ErrorStatistics > *) 0 ;
@@ -66429,6 +66604,58 @@ fail:
     "    mem::ScopedCopyablePtr< six::CorrCoefs >::ScopedCopyablePtr()\n"
     "    mem::ScopedCopyablePtr< six::CorrCoefs >::ScopedCopyablePtr(mem::ScopedCopyablePtr< six::CorrCoefs > const &)\n");
   return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_ScopedCopyableCorrCoefs___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  mem::ScopedCopyablePtr< six::CorrCoefs > *arg1 = (mem::ScopedCopyablePtr< six::CorrCoefs > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ScopedCopyableCorrCoefs___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_mem__ScopedCopyablePtrT_six__CorrCoefs_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScopedCopyableCorrCoefs___nonzero__" "', argument " "1"" of type '" "mem::ScopedCopyablePtr< six::CorrCoefs > const *""'"); 
+  }
+  arg1 = reinterpret_cast< mem::ScopedCopyablePtr< six::CorrCoefs > * >(argp1);
+  {
+    try
+    {
+      result = (bool)((mem::ScopedCopyablePtr< six::CorrCoefs > const *)arg1)->operator bool();
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
 }
 
 
@@ -68947,6 +69174,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ScopedCopyablePosVelError___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  mem::ScopedCopyablePtr< six::PosVelError > *arg1 = (mem::ScopedCopyablePtr< six::PosVelError > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ScopedCopyablePosVelError___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_mem__ScopedCopyablePtrT_six__PosVelError_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScopedCopyablePosVelError___nonzero__" "', argument " "1"" of type '" "mem::ScopedCopyablePtr< six::PosVelError > const *""'"); 
+  }
+  arg1 = reinterpret_cast< mem::ScopedCopyablePtr< six::PosVelError > * >(argp1);
+  {
+    try
+    {
+      result = (bool)((mem::ScopedCopyablePtr< six::PosVelError > const *)arg1)->operator bool();
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ScopedCopyablePosVelError_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   mem::ScopedCopyablePtr< six::PosVelError > *arg1 = (mem::ScopedCopyablePtr< six::PosVelError > *) 0 ;
@@ -70790,6 +71069,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ScopedCopyableRadarSensor___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  mem::ScopedCopyablePtr< six::RadarSensor > *arg1 = (mem::ScopedCopyablePtr< six::RadarSensor > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ScopedCopyableRadarSensor___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_mem__ScopedCopyablePtrT_six__RadarSensor_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScopedCopyableRadarSensor___nonzero__" "', argument " "1"" of type '" "mem::ScopedCopyablePtr< six::RadarSensor > const *""'"); 
+  }
+  arg1 = reinterpret_cast< mem::ScopedCopyablePtr< six::RadarSensor > * >(argp1);
+  {
+    try
+    {
+      result = (bool)((mem::ScopedCopyablePtr< six::RadarSensor > const *)arg1)->operator bool();
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ScopedCopyableRadarSensor_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   mem::ScopedCopyablePtr< six::RadarSensor > *arg1 = (mem::ScopedCopyablePtr< six::RadarSensor > *) 0 ;
@@ -72073,6 +72404,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ScopedCopyableTropoError___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  mem::ScopedCopyablePtr< six::TropoError > *arg1 = (mem::ScopedCopyablePtr< six::TropoError > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ScopedCopyableTropoError___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_mem__ScopedCopyablePtrT_six__TropoError_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScopedCopyableTropoError___nonzero__" "', argument " "1"" of type '" "mem::ScopedCopyablePtr< six::TropoError > const *""'"); 
+  }
+  arg1 = reinterpret_cast< mem::ScopedCopyablePtr< six::TropoError > * >(argp1);
+  {
+    try
+    {
+      result = (bool)((mem::ScopedCopyablePtr< six::TropoError > const *)arg1)->operator bool();
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ScopedCopyableTropoError_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   mem::ScopedCopyablePtr< six::TropoError > *arg1 = (mem::ScopedCopyablePtr< six::TropoError > *) 0 ;
@@ -73241,6 +73624,58 @@ fail:
     "    mem::ScopedCopyablePtr< six::IonoError >::ScopedCopyablePtr()\n"
     "    mem::ScopedCopyablePtr< six::IonoError >::ScopedCopyablePtr(mem::ScopedCopyablePtr< six::IonoError > const &)\n");
   return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_ScopedCopyableIonoError___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  mem::ScopedCopyablePtr< six::IonoError > *arg1 = (mem::ScopedCopyablePtr< six::IonoError > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ScopedCopyableIonoError___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_mem__ScopedCopyablePtrT_six__IonoError_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScopedCopyableIonoError___nonzero__" "', argument " "1"" of type '" "mem::ScopedCopyablePtr< six::IonoError > const *""'"); 
+  }
+  arg1 = reinterpret_cast< mem::ScopedCopyablePtr< six::IonoError > * >(argp1);
+  {
+    try
+    {
+      result = (bool)((mem::ScopedCopyablePtr< six::IonoError > const *)arg1)->operator bool();
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
 }
 
 
@@ -74527,6 +74962,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ScopedCopyableCompositeSCP___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  mem::ScopedCopyablePtr< six::CompositeSCP > *arg1 = (mem::ScopedCopyablePtr< six::CompositeSCP > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ScopedCopyableCompositeSCP___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_mem__ScopedCopyablePtrT_six__CompositeSCP_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScopedCopyableCompositeSCP___nonzero__" "', argument " "1"" of type '" "mem::ScopedCopyablePtr< six::CompositeSCP > const *""'"); 
+  }
+  arg1 = reinterpret_cast< mem::ScopedCopyablePtr< six::CompositeSCP > * >(argp1);
+  {
+    try
+    {
+      result = (bool)((mem::ScopedCopyablePtr< six::CompositeSCP > const *)arg1)->operator bool();
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ScopedCopyableCompositeSCP_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   mem::ScopedCopyablePtr< six::CompositeSCP > *arg1 = (mem::ScopedCopyablePtr< six::CompositeSCP > *) 0 ;
@@ -75807,6 +76294,58 @@ fail:
     "    mem::ScopedCopyablePtr< six::Components >::ScopedCopyablePtr()\n"
     "    mem::ScopedCopyablePtr< six::Components >::ScopedCopyablePtr(mem::ScopedCopyablePtr< six::Components > const &)\n");
   return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_ScopedCopyableComponents___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  mem::ScopedCopyablePtr< six::Components > *arg1 = (mem::ScopedCopyablePtr< six::Components > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ScopedCopyableComponents___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_mem__ScopedCopyablePtrT_six__Components_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScopedCopyableComponents___nonzero__" "', argument " "1"" of type '" "mem::ScopedCopyablePtr< six::Components > const *""'"); 
+  }
+  arg1 = reinterpret_cast< mem::ScopedCopyablePtr< six::Components > * >(argp1);
+  {
+    try
+    {
+      result = (bool)((mem::ScopedCopyablePtr< six::Components > const *)arg1)->operator bool();
+    } 
+    catch (const std::exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.what());
+      }
+    }
+    catch (const except::Exception& e)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, e.getMessage().c_str());
+      }
+    }
+    catch (...)
+    {
+      if (!PyErr_Occurred())
+      {
+        PyErr_SetString(PyExc_RuntimeError, "Unknown error");
+      }
+    }
+    if (PyErr_Occurred())
+    {
+      SWIG_fail;
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
 }
 
 
@@ -79281,6 +79820,7 @@ static PyMethodDef SwigMethods[] = {
 		"dataTypeToString(DataType dataType, bool appendXML=True) -> std::string\n"
 		"XMLControl_dataTypeToString(DataType dataType) -> std::string\n"
 		""},
+	 { (char *)"XMLControl_splitVersion", _wrap_XMLControl_splitVersion, METH_VARARGS, (char *)"XMLControl_splitVersion(std::string const & versionStr, VectorString version)"},
 	 { (char *)"XMLControl_swigregister", XMLControl_swigregister, METH_VARARGS, NULL},
 	 { (char *)"remapZeroTo360", _wrap_remapZeroTo360, METH_VARARGS, (char *)"remapZeroTo360(double degree) -> double"},
 	 { (char *)"loadPluginDir", _wrap_loadPluginDir, METH_VARARGS, (char *)"loadPluginDir(std::string const & pluginDir)"},
@@ -79378,6 +79918,7 @@ static PyMethodDef SwigMethods[] = {
 		"ScopedCopyableRadiometric()\n"
 		"new_ScopedCopyableRadiometric(ScopedCopyableRadiometric rhs) -> ScopedCopyableRadiometric\n"
 		""},
+	 { (char *)"ScopedCopyableRadiometric___nonzero__", _wrap_ScopedCopyableRadiometric___nonzero__, METH_VARARGS, (char *)"ScopedCopyableRadiometric___nonzero__(ScopedCopyableRadiometric self) -> bool"},
 	 { (char *)"ScopedCopyableRadiometric_get", _wrap_ScopedCopyableRadiometric_get, METH_VARARGS, (char *)"ScopedCopyableRadiometric_get(ScopedCopyableRadiometric self) -> Radiometric"},
 	 { (char *)"ScopedCopyableRadiometric___ref__", _wrap_ScopedCopyableRadiometric___ref__, METH_VARARGS, (char *)"ScopedCopyableRadiometric___ref__(ScopedCopyableRadiometric self) -> Radiometric"},
 	 { (char *)"ScopedCopyableRadiometric___deref__", _wrap_ScopedCopyableRadiometric___deref__, METH_VARARGS, (char *)"ScopedCopyableRadiometric___deref__(ScopedCopyableRadiometric self) -> Radiometric"},
@@ -79414,6 +79955,7 @@ static PyMethodDef SwigMethods[] = {
 		"ScopedCopyableErrorStatistics()\n"
 		"new_ScopedCopyableErrorStatistics(ScopedCopyableErrorStatistics rhs) -> ScopedCopyableErrorStatistics\n"
 		""},
+	 { (char *)"ScopedCopyableErrorStatistics___nonzero__", _wrap_ScopedCopyableErrorStatistics___nonzero__, METH_VARARGS, (char *)"ScopedCopyableErrorStatistics___nonzero__(ScopedCopyableErrorStatistics self) -> bool"},
 	 { (char *)"ScopedCopyableErrorStatistics_get", _wrap_ScopedCopyableErrorStatistics_get, METH_VARARGS, (char *)"ScopedCopyableErrorStatistics_get(ScopedCopyableErrorStatistics self) -> ErrorStatistics"},
 	 { (char *)"ScopedCopyableErrorStatistics___ref__", _wrap_ScopedCopyableErrorStatistics___ref__, METH_VARARGS, (char *)"ScopedCopyableErrorStatistics___ref__(ScopedCopyableErrorStatistics self) -> ErrorStatistics"},
 	 { (char *)"ScopedCopyableErrorStatistics___deref__", _wrap_ScopedCopyableErrorStatistics___deref__, METH_VARARGS, (char *)"ScopedCopyableErrorStatistics___deref__(ScopedCopyableErrorStatistics self) -> ErrorStatistics"},
@@ -79440,6 +79982,7 @@ static PyMethodDef SwigMethods[] = {
 		"ScopedCopyableCorrCoefs()\n"
 		"new_ScopedCopyableCorrCoefs(ScopedCopyableCorrCoefs rhs) -> ScopedCopyableCorrCoefs\n"
 		""},
+	 { (char *)"ScopedCopyableCorrCoefs___nonzero__", _wrap_ScopedCopyableCorrCoefs___nonzero__, METH_VARARGS, (char *)"ScopedCopyableCorrCoefs___nonzero__(ScopedCopyableCorrCoefs self) -> bool"},
 	 { (char *)"ScopedCopyableCorrCoefs_get", _wrap_ScopedCopyableCorrCoefs_get, METH_VARARGS, (char *)"ScopedCopyableCorrCoefs_get(ScopedCopyableCorrCoefs self) -> CorrCoefs"},
 	 { (char *)"ScopedCopyableCorrCoefs___ref__", _wrap_ScopedCopyableCorrCoefs___ref__, METH_VARARGS, (char *)"ScopedCopyableCorrCoefs___ref__(ScopedCopyableCorrCoefs self) -> CorrCoefs"},
 	 { (char *)"ScopedCopyableCorrCoefs___deref__", _wrap_ScopedCopyableCorrCoefs___deref__, METH_VARARGS, (char *)"ScopedCopyableCorrCoefs___deref__(ScopedCopyableCorrCoefs self) -> CorrCoefs"},
@@ -79490,6 +80033,7 @@ static PyMethodDef SwigMethods[] = {
 		"ScopedCopyablePosVelError()\n"
 		"new_ScopedCopyablePosVelError(ScopedCopyablePosVelError rhs) -> ScopedCopyablePosVelError\n"
 		""},
+	 { (char *)"ScopedCopyablePosVelError___nonzero__", _wrap_ScopedCopyablePosVelError___nonzero__, METH_VARARGS, (char *)"ScopedCopyablePosVelError___nonzero__(ScopedCopyablePosVelError self) -> bool"},
 	 { (char *)"ScopedCopyablePosVelError_get", _wrap_ScopedCopyablePosVelError_get, METH_VARARGS, (char *)"ScopedCopyablePosVelError_get(ScopedCopyablePosVelError self) -> PosVelError"},
 	 { (char *)"ScopedCopyablePosVelError___ref__", _wrap_ScopedCopyablePosVelError___ref__, METH_VARARGS, (char *)"ScopedCopyablePosVelError___ref__(ScopedCopyablePosVelError self) -> PosVelError"},
 	 { (char *)"ScopedCopyablePosVelError___deref__", _wrap_ScopedCopyablePosVelError___deref__, METH_VARARGS, (char *)"ScopedCopyablePosVelError___deref__(ScopedCopyablePosVelError self) -> PosVelError"},
@@ -79528,6 +80072,7 @@ static PyMethodDef SwigMethods[] = {
 		"ScopedCopyableRadarSensor()\n"
 		"new_ScopedCopyableRadarSensor(ScopedCopyableRadarSensor rhs) -> ScopedCopyableRadarSensor\n"
 		""},
+	 { (char *)"ScopedCopyableRadarSensor___nonzero__", _wrap_ScopedCopyableRadarSensor___nonzero__, METH_VARARGS, (char *)"ScopedCopyableRadarSensor___nonzero__(ScopedCopyableRadarSensor self) -> bool"},
 	 { (char *)"ScopedCopyableRadarSensor_get", _wrap_ScopedCopyableRadarSensor_get, METH_VARARGS, (char *)"ScopedCopyableRadarSensor_get(ScopedCopyableRadarSensor self) -> RadarSensor"},
 	 { (char *)"ScopedCopyableRadarSensor___ref__", _wrap_ScopedCopyableRadarSensor___ref__, METH_VARARGS, (char *)"ScopedCopyableRadarSensor___ref__(ScopedCopyableRadarSensor self) -> RadarSensor"},
 	 { (char *)"ScopedCopyableRadarSensor___deref__", _wrap_ScopedCopyableRadarSensor___deref__, METH_VARARGS, (char *)"ScopedCopyableRadarSensor___deref__(ScopedCopyableRadarSensor self) -> RadarSensor"},
@@ -79556,6 +80101,7 @@ static PyMethodDef SwigMethods[] = {
 		"ScopedCopyableTropoError()\n"
 		"new_ScopedCopyableTropoError(ScopedCopyableTropoError rhs) -> ScopedCopyableTropoError\n"
 		""},
+	 { (char *)"ScopedCopyableTropoError___nonzero__", _wrap_ScopedCopyableTropoError___nonzero__, METH_VARARGS, (char *)"ScopedCopyableTropoError___nonzero__(ScopedCopyableTropoError self) -> bool"},
 	 { (char *)"ScopedCopyableTropoError_get", _wrap_ScopedCopyableTropoError_get, METH_VARARGS, (char *)"ScopedCopyableTropoError_get(ScopedCopyableTropoError self) -> TropoError"},
 	 { (char *)"ScopedCopyableTropoError___ref__", _wrap_ScopedCopyableTropoError___ref__, METH_VARARGS, (char *)"ScopedCopyableTropoError___ref__(ScopedCopyableTropoError self) -> TropoError"},
 	 { (char *)"ScopedCopyableTropoError___deref__", _wrap_ScopedCopyableTropoError___deref__, METH_VARARGS, (char *)"ScopedCopyableTropoError___deref__(ScopedCopyableTropoError self) -> TropoError"},
@@ -79582,6 +80128,7 @@ static PyMethodDef SwigMethods[] = {
 		"ScopedCopyableIonoError()\n"
 		"new_ScopedCopyableIonoError(ScopedCopyableIonoError rhs) -> ScopedCopyableIonoError\n"
 		""},
+	 { (char *)"ScopedCopyableIonoError___nonzero__", _wrap_ScopedCopyableIonoError___nonzero__, METH_VARARGS, (char *)"ScopedCopyableIonoError___nonzero__(ScopedCopyableIonoError self) -> bool"},
 	 { (char *)"ScopedCopyableIonoError_get", _wrap_ScopedCopyableIonoError_get, METH_VARARGS, (char *)"ScopedCopyableIonoError_get(ScopedCopyableIonoError self) -> IonoError"},
 	 { (char *)"ScopedCopyableIonoError___ref__", _wrap_ScopedCopyableIonoError___ref__, METH_VARARGS, (char *)"ScopedCopyableIonoError___ref__(ScopedCopyableIonoError self) -> IonoError"},
 	 { (char *)"ScopedCopyableIonoError___deref__", _wrap_ScopedCopyableIonoError___deref__, METH_VARARGS, (char *)"ScopedCopyableIonoError___deref__(ScopedCopyableIonoError self) -> IonoError"},
@@ -79610,6 +80157,7 @@ static PyMethodDef SwigMethods[] = {
 		"ScopedCopyableCompositeSCP()\n"
 		"new_ScopedCopyableCompositeSCP(ScopedCopyableCompositeSCP rhs) -> ScopedCopyableCompositeSCP\n"
 		""},
+	 { (char *)"ScopedCopyableCompositeSCP___nonzero__", _wrap_ScopedCopyableCompositeSCP___nonzero__, METH_VARARGS, (char *)"ScopedCopyableCompositeSCP___nonzero__(ScopedCopyableCompositeSCP self) -> bool"},
 	 { (char *)"ScopedCopyableCompositeSCP_get", _wrap_ScopedCopyableCompositeSCP_get, METH_VARARGS, (char *)"ScopedCopyableCompositeSCP_get(ScopedCopyableCompositeSCP self) -> CompositeSCP"},
 	 { (char *)"ScopedCopyableCompositeSCP___ref__", _wrap_ScopedCopyableCompositeSCP___ref__, METH_VARARGS, (char *)"ScopedCopyableCompositeSCP___ref__(ScopedCopyableCompositeSCP self) -> CompositeSCP"},
 	 { (char *)"ScopedCopyableCompositeSCP___deref__", _wrap_ScopedCopyableCompositeSCP___deref__, METH_VARARGS, (char *)"ScopedCopyableCompositeSCP___deref__(ScopedCopyableCompositeSCP self) -> CompositeSCP"},
@@ -79638,6 +80186,7 @@ static PyMethodDef SwigMethods[] = {
 		"ScopedCopyableComponents()\n"
 		"new_ScopedCopyableComponents(ScopedCopyableComponents rhs) -> ScopedCopyableComponents\n"
 		""},
+	 { (char *)"ScopedCopyableComponents___nonzero__", _wrap_ScopedCopyableComponents___nonzero__, METH_VARARGS, (char *)"ScopedCopyableComponents___nonzero__(ScopedCopyableComponents self) -> bool"},
 	 { (char *)"ScopedCopyableComponents_get", _wrap_ScopedCopyableComponents_get, METH_VARARGS, (char *)"ScopedCopyableComponents_get(ScopedCopyableComponents self) -> Components"},
 	 { (char *)"ScopedCopyableComponents___ref__", _wrap_ScopedCopyableComponents___ref__, METH_VARARGS, (char *)"ScopedCopyableComponents___ref__(ScopedCopyableComponents self) -> Components"},
 	 { (char *)"ScopedCopyableComponents___deref__", _wrap_ScopedCopyableComponents___deref__, METH_VARARGS, (char *)"ScopedCopyableComponents___deref__(ScopedCopyableComponents self) -> Components"},
@@ -79947,6 +80496,7 @@ static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argume
 static swig_type_info _swigt__p_std__mapT_std__string_six__Parameter_t__const_iterator = {"_p_std__mapT_std__string_six__Parameter_t__const_iterator", "std::map< std::string,six::Parameter >::const_iterator *|six::Options::ParameterIter *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__ostream = {"_p_std__ostream", "std::ostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_std__string_std__allocatorT_std__string_t_t = {"_p_std__vectorT_std__string_std__allocatorT_std__string_t_t", "std::vector< std::string,std::allocator< std::string > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_types__RgAzT_double_t = {"_p_types__RgAzT_double_t", "types::RgAz< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_types__RowColT_double_t = {"_p_types__RowColT_double_t", "six::RowColDouble *|types::RowCol< double > *", 0, 0, (void*)0, 0};
@@ -80103,6 +80653,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__mapT_std__string_six__Parameter_t__const_iterator,
   &_swigt__p_std__ostream,
   &_swigt__p_std__string,
+  &_swigt__p_std__vectorT_std__string_std__allocatorT_std__string_t_t,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_types__RgAzT_double_t,
   &_swigt__p_types__RowColT_double_t,
@@ -80259,6 +80810,7 @@ static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__in
 static swig_cast_info _swigc__p_std__mapT_std__string_six__Parameter_t__const_iterator[] = {  {&_swigt__p_std__mapT_std__string_six__Parameter_t__const_iterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__ostream[] = {  {&_swigt__p_std__ostream, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_std__string_std__allocatorT_std__string_t_t[] = {  {&_swigt__p_std__vectorT_std__string_std__allocatorT_std__string_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_types__RgAzT_double_t[] = {  {&_swigt__p_types__RgAzT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_types__RowColT_double_t[] = {  {&_swigt__p_types__RowColT_double_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -80415,6 +80967,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__mapT_std__string_six__Parameter_t__const_iterator,
   _swigc__p_std__ostream,
   _swigc__p_std__string,
+  _swigc__p_std__vectorT_std__string_std__allocatorT_std__string_t_t,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_types__RgAzT_double_t,
   _swigc__p_types__RowColT_double_t,

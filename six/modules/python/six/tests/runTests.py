@@ -112,7 +112,7 @@ def run(sourceDir):
             return False
     else:
         print('Warning: skipping the bulk of the test suite, '
-                'since Python modules are by default disabled on Solaris')
+              'since Python modules are by default disabled on Solaris')
 
     sicdTestDir = os.path.join(utils.installPath(), 'tests', 'six.sicd')
     siddTestDir = os.path.join(utils.installPath(), 'tests', 'six.sidd')
@@ -144,7 +144,13 @@ def run(sourceDir):
                 siddTestRunner.run('test_sidd_byte_provider')):
             return False
 
-        if not sampleTestRunner.run('test_large_offset'):
+        # This test is too expensive for Windows to handle
+        if platform.system() != 'Windows':
+            if not sampleTestRunner.run('test_large_offset'):
+                return False
+
+        if not sampleTestRunner.run(
+                'test_create_sidd_with_compressed_byte_provider'):
             return False
 
     if runUnitTests.run() == False:

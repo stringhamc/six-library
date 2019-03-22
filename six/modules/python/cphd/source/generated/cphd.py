@@ -1993,6 +1993,9 @@ class CPHDWriter(_object):
         writeMetadata(CPHDWriter self, std::string const & pathname, VBM vbm, std::string const & classification, std::string const & releaseInfo)
         writeMetadata(CPHDWriter self, std::string const & pathname, VBM vbm, std::string const & classification)
         writeMetadata(CPHDWriter self, std::string const & pathname, VBM vbm)
+        writeMetadata(CPHDWriter self, mem::SharedPtr< io::OutputStream > outStream, VBM vbm, std::string const & classification, std::string const & releaseInfo)
+        writeMetadata(CPHDWriter self, mem::SharedPtr< io::OutputStream > outStream, VBM vbm, std::string const & classification)
+        writeMetadata(CPHDWriter self, mem::SharedPtr< io::OutputStream > outStream, VBM vbm)
         """
         return _cphd.CPHDWriter_writeMetadata(self, *args)
 
@@ -2002,6 +2005,9 @@ class CPHDWriter(_object):
         write(CPHDWriter self, std::string const & pathname, std::string const & classification, std::string const & releaseInfo)
         write(CPHDWriter self, std::string const & pathname, std::string const & classification)
         write(CPHDWriter self, std::string const & pathname)
+        write(CPHDWriter self, mem::SharedPtr< io::OutputStream > outStream, std::string const & classification, std::string const & releaseInfo)
+        write(CPHDWriter self, mem::SharedPtr< io::OutputStream > outStream, std::string const & classification)
+        write(CPHDWriter self, mem::SharedPtr< io::OutputStream > outStream)
         """
         return _cphd.CPHDWriter_write(self, *args)
 
@@ -2996,6 +3002,12 @@ class ScopedCopyableDwellTimeParameters(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _cphd.ScopedCopyableDwellTimeParameters___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableDwellTimeParameters self) -> DwellTimeParameters"""
         return _cphd.ScopedCopyableDwellTimeParameters_get(self)
@@ -3065,6 +3077,12 @@ class ScopedCopyableAreaPlane(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _cphd.ScopedCopyableAreaPlane___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableAreaPlane self) -> AreaPlane"""
@@ -3165,6 +3183,12 @@ class ScopedCopyableFxParameters(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _cphd.ScopedCopyableFxParameters___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableFxParameters self) -> FxParameters"""
         return _cphd.ScopedCopyableFxParameters_get(self)
@@ -3264,6 +3288,12 @@ class ScopedCopyableTOAParameters(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _cphd.ScopedCopyableTOAParameters___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableTOAParameters self) -> TOAParameters"""
         return _cphd.ScopedCopyableTOAParameters_get(self)
@@ -3354,6 +3384,12 @@ class ScopedCopyableCphdAntenna(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _cphd.ScopedCopyableCphdAntenna___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableCphdAntenna self) -> CphdAntenna"""

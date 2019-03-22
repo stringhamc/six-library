@@ -29,6 +29,7 @@
 #include <cli/ArgumentParser.h>
 #include <six/sicd/Utilities.h>
 #include <six/sicd/ComplexXMLControl.h>
+#include <six/NITFHeaderCreator.h>
 
 #include "utils.h"
 
@@ -83,8 +84,6 @@ int main(int argc, char** argv)
         mem::SharedPtr<six::Container> container(new six::Container(
                 six::DataType::COMPLEX));
         container->addData(data);
-        six::NITFWriteControl writer;
-        writer.setLogger(logger.get());
 
         /*
          *  Under normal circumstances, the library uses the
@@ -98,23 +97,26 @@ int main(int argc, char** argv)
          *
          */
 
+        six::Options writerOptions;
         if (options->hasValue("maxRows"))
         {
             std::cout << "Overriding NITF max ILOC" << std::endl;
-            writer.getOptions().setParameter(
-                    six::NITFWriteControl::OPT_MAX_ILOC_ROWS,
+            writerOptions.setParameter(
+                    six::NITFHeaderCreator::OPT_MAX_ILOC_ROWS,
                     options->get<size_t>("maxRows"));
         }
 
         if (options->hasValue("maxSize"))
         {
             std::cout << "Overriding NITF product size" << std::endl;
-            writer.getOptions().setParameter(
-                    six::NITFWriteControl::OPT_MAX_PRODUCT_SIZE,
+            writerOptions.setParameter(
+                    six::NITFHeaderCreator::OPT_MAX_PRODUCT_SIZE,
                     options->get<size_t>("maxSize"));
         }
 
-        writer.initialize(container);
+
+        six::NITFWriteControl writer(writerOptions, container);
+        writer.setLogger(logger.get());
 
         six::BufferList buffers;
         buffers.push_back(reinterpret_cast<six::UByte*>(&image[0]));

@@ -1,6 +1,7 @@
 NAME            = 'six.sicd'
 MAINTAINER      = 'adam.sylvester@mdaus.com'
 MODULE_DEPS     = 'scene nitf xml.lite six mem'
+TEST_DEPS       = 'cli'
 UNITTEST_DEPS   = 'cli sio.lite'
 
 import os
@@ -9,7 +10,7 @@ options = configure = distclean = lambda p: None
 
 def build(bld):
     modArgs = globals()
-    modArgs['SIX_VERSION'] = bld.env['SIX_VERSION']
+    modArgs['VERSION'] = bld.env['SIX_VERSION']
     bld.module(**modArgs)
 
     # install the schemas

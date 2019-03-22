@@ -95,7 +95,6 @@ except __builtin__.Exception:
         pass
     _newclass = 0
 
-NRT_LIB_VERSION = _nitropy.NRT_LIB_VERSION
 NRT_FILE = _nitropy.NRT_FILE
 NRT_LINE = _nitropy.NRT_LINE
 NRT_FUNC = _nitropy.NRT_FUNC
@@ -129,7 +128,6 @@ nrt_System_swap64 = _nitropy.nrt_System_swap64
 def nrt_System_swap64c(inl):
     return _nitropy.nrt_System_swap64c(inl)
 nrt_System_swap64c = _nitropy.nrt_System_swap64c
-NITF_LIB_VERSION = _nitropy.NITF_LIB_VERSION
 NITF_VER_20 = _nitropy.NITF_VER_20
 NITF_VER_21 = _nitropy.NITF_VER_21
 NITF_VER_UNKNOWN = _nitropy.NITF_VER_UNKNOWN
@@ -382,6 +380,10 @@ NITF_MAX_READ_ATTEMPTS = _nitropy.NITF_MAX_READ_ATTEMPTS
 NITF_DATE_FORMAT_20 = _nitropy.NITF_DATE_FORMAT_20
 NITF_DATE_FORMAT_21 = _nitropy.NITF_DATE_FORMAT_21
 NITF_TRE_HASH_SIZE = _nitropy.NITF_TRE_HASH_SIZE
+HAVE_CLOCK_GETTIME = _nitropy.HAVE_CLOCK_GETTIME
+HAVE_SYS_TIME_H = _nitropy.HAVE_SYS_TIME_H
+NRT_LIB_VERSION = _nitropy.NRT_LIB_VERSION
+NITF_LIB_VERSION = _nitropy.NITF_LIB_VERSION
 NITF_COMPRESSION_HASH_SIZE = _nitropy.NITF_COMPRESSION_HASH_SIZE
 NITF_DECOMPRESSION_HASH_SIZE = _nitropy.NITF_DECOMPRESSION_HASH_SIZE
 NITF_PLUGIN_PATH = _nitropy.NITF_PLUGIN_PATH
@@ -432,6 +434,14 @@ def nitf_PluginRegistry_registerTREHandler(init, handler, error):
     return _nitropy.nitf_PluginRegistry_registerTREHandler(init, handler, error)
 nitf_PluginRegistry_registerTREHandler = _nitropy.nitf_PluginRegistry_registerTREHandler
 
+def nitf_PluginRegistry_registerCompressionHandler(init, handler, error):
+    return _nitropy.nitf_PluginRegistry_registerCompressionHandler(init, handler, error)
+nitf_PluginRegistry_registerCompressionHandler = _nitropy.nitf_PluginRegistry_registerCompressionHandler
+
+def nitf_PluginRegistry_registerDecompressionHandler(init, handler, error):
+    return _nitropy.nitf_PluginRegistry_registerDecompressionHandler(init, handler, error)
+nitf_PluginRegistry_registerDecompressionHandler = _nitropy.nitf_PluginRegistry_registerDecompressionHandler
+
 def nitf_PluginRegistry_loadDir(dirName, error):
     return _nitropy.nitf_PluginRegistry_loadDir(dirName, error)
 nitf_PluginRegistry_loadDir = _nitropy.nitf_PluginRegistry_loadDir
@@ -443,6 +453,14 @@ nitf_PluginRegistry_loadPlugin = _nitropy.nitf_PluginRegistry_loadPlugin
 def nitf_PluginRegistry_TREHandlerExists(ident):
     return _nitropy.nitf_PluginRegistry_TREHandlerExists(ident)
 nitf_PluginRegistry_TREHandlerExists = _nitropy.nitf_PluginRegistry_TREHandlerExists
+
+def nitf_PluginRegistry_compressionHandlerExists(ident):
+    return _nitropy.nitf_PluginRegistry_compressionHandlerExists(ident)
+nitf_PluginRegistry_compressionHandlerExists = _nitropy.nitf_PluginRegistry_compressionHandlerExists
+
+def nitf_PluginRegistry_decompressionHandlerExists(ident):
+    return _nitropy.nitf_PluginRegistry_decompressionHandlerExists(ident)
+nitf_PluginRegistry_decompressionHandlerExists = _nitropy.nitf_PluginRegistry_decompressionHandlerExists
 
 def nitf_PluginRegistry_unload(reg, error):
     return _nitropy.nitf_PluginRegistry_unload(reg, error)

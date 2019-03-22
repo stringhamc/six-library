@@ -1516,6 +1516,148 @@ def ImageSubheader_getActualImageDim(dim, numDimsPerBlock):
 NITF_VER_20 = _six_sicd.NITF_VER_20
 NITF_VER_21 = _six_sicd.NITF_VER_21
 NITF_VER_UNKNOWN = _six_sicd.NITF_VER_UNKNOWN
+class SICDMeshes(_object):
+    """Proxy of C++ six::sicd::SICDMeshes class."""
+
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SICDMeshes, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, SICDMeshes, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        """__init__(six::sicd::SICDMeshes self) -> SICDMeshes"""
+        this = _six_sicd.new_SICDMeshes()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _six_sicd.delete_SICDMeshes
+    __del__ = lambda self: None
+SICDMeshes_swigregister = _six_sicd.SICDMeshes_swigregister
+SICDMeshes_swigregister(SICDMeshes)
+cvar = _six_sicd.cvar
+SICDMeshes.SLANT_PLANE_MESH_ID = _six_sicd.cvar.SICDMeshes_SLANT_PLANE_MESH_ID
+SICDMeshes.OUTPUT_PLANE_MESH_ID = _six_sicd.cvar.SICDMeshes_OUTPUT_PLANE_MESH_ID
+SICDMeshes.NOISE_MESH_ID = _six_sicd.cvar.SICDMeshes_NOISE_MESH_ID
+
+class PlanarCoordinateMesh(_object):
+    """Proxy of C++ six::sicd::PlanarCoordinateMesh class."""
+
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, PlanarCoordinateMesh, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, PlanarCoordinateMesh, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+        __init__(six::sicd::PlanarCoordinateMesh self, std::string const & name) -> PlanarCoordinateMesh
+        __init__(six::sicd::PlanarCoordinateMesh self, std::string const & name, RowColSizeT meshDims, std_vector_double x, std_vector_double y) -> PlanarCoordinateMesh
+        """
+        this = _six_sicd.new_PlanarCoordinateMesh(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def getName(self):
+        """getName(PlanarCoordinateMesh self) -> std::string"""
+        return _six_sicd.PlanarCoordinateMesh_getName(self)
+
+
+    def getMeshDims(self):
+        """getMeshDims(PlanarCoordinateMesh self) -> RowColSizeT"""
+        return _six_sicd.PlanarCoordinateMesh_getMeshDims(self)
+
+
+    def getX(self):
+        """getX(PlanarCoordinateMesh self) -> std_vector_double"""
+        return _six_sicd.PlanarCoordinateMesh_getX(self)
+
+
+    def getY(self):
+        """getY(PlanarCoordinateMesh self) -> std_vector_double"""
+        return _six_sicd.PlanarCoordinateMesh_getY(self)
+
+
+    def getFields(self):
+        """getFields(PlanarCoordinateMesh self) -> std::vector< Mesh::Field,std::allocator< Mesh::Field > >"""
+        return _six_sicd.PlanarCoordinateMesh_getFields(self)
+
+
+    def serialize(self, values):
+        """serialize(PlanarCoordinateMesh self, std::vector< sys::byte,std::allocator< sys::byte > > & values)"""
+        return _six_sicd.PlanarCoordinateMesh_serialize(self, values)
+
+
+    def deserialize(self, values):
+        """deserialize(PlanarCoordinateMesh self, sys::byte const *& values)"""
+        return _six_sicd.PlanarCoordinateMesh_deserialize(self, values)
+
+    __swig_destroy__ = _six_sicd.delete_PlanarCoordinateMesh
+    __del__ = lambda self: None
+PlanarCoordinateMesh_swigregister = _six_sicd.PlanarCoordinateMesh_swigregister
+PlanarCoordinateMesh_swigregister(PlanarCoordinateMesh)
+
+class NoiseMesh(PlanarCoordinateMesh):
+    """Proxy of C++ six::sicd::NoiseMesh class."""
+
+    __swig_setmethods__ = {}
+    for _s in [PlanarCoordinateMesh]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, NoiseMesh, name, value)
+    __swig_getmethods__ = {}
+    for _s in [PlanarCoordinateMesh]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, NoiseMesh, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+        __init__(six::sicd::NoiseMesh self, std::string const & name) -> NoiseMesh
+        __init__(six::sicd::NoiseMesh self, std::string const & name, RowColSizeT meshDims, std_vector_double x, std_vector_double y, std_vector_double mainBeamNoise, std_vector_double azimuthAmbiguityNoise, std_vector_double combinedNoise) -> NoiseMesh
+        """
+        this = _six_sicd.new_NoiseMesh(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def getMainBeamNoise(self):
+        """getMainBeamNoise(NoiseMesh self) -> std_vector_double"""
+        return _six_sicd.NoiseMesh_getMainBeamNoise(self)
+
+
+    def getAzimuthAmbiguityNoise(self):
+        """getAzimuthAmbiguityNoise(NoiseMesh self) -> std_vector_double"""
+        return _six_sicd.NoiseMesh_getAzimuthAmbiguityNoise(self)
+
+
+    def getCombinedNoise(self):
+        """getCombinedNoise(NoiseMesh self) -> std_vector_double"""
+        return _six_sicd.NoiseMesh_getCombinedNoise(self)
+
+
+    def getFields(self):
+        """getFields(NoiseMesh self) -> std::vector< Mesh::Field,std::allocator< Mesh::Field > >"""
+        return _six_sicd.NoiseMesh_getFields(self)
+
+
+    def serialize(self, values):
+        """serialize(NoiseMesh self, std::vector< sys::byte,std::allocator< sys::byte > > & values)"""
+        return _six_sicd.NoiseMesh_serialize(self, values)
+
+
+    def deserialize(self, values):
+        """deserialize(NoiseMesh self, sys::byte const *& values)"""
+        return _six_sicd.NoiseMesh_deserialize(self, values)
+
+    __swig_destroy__ = _six_sicd.delete_NoiseMesh
+    __del__ = lambda self: None
+NoiseMesh_swigregister = _six_sicd.NoiseMesh_swigregister
+NoiseMesh_swigregister(NoiseMesh)
+
 import coda.math_poly
 import coda.math_linear
 import coda.coda_except
@@ -1797,6 +1939,8 @@ class ProjectionPolynomialFitter(_object):
         """
         __init__(scene::ProjectionPolynomialFitter self, ProjectionModel projModel, GridECEFTransform gridTransform, RowColDouble outPixelStart, RowColSizeT outExtent, size_t numPoints1D) -> ProjectionPolynomialFitter
         __init__(scene::ProjectionPolynomialFitter self, ProjectionModel projModel, GridECEFTransform gridTransform, RowColDouble outPixelStart, RowColSizeT outExtent) -> ProjectionPolynomialFitter
+        __init__(scene::ProjectionPolynomialFitter self, ProjectionModel projModel, GridECEFTransform gridTransform, RowColSizeT fullExtent, RowColDouble outPixelStart, RowColSizeT outExtent, VectorRowColDouble polygon, size_t numPoints1D) -> ProjectionPolynomialFitter
+        __init__(scene::ProjectionPolynomialFitter self, ProjectionModel projModel, GridECEFTransform gridTransform, RowColSizeT fullExtent, RowColDouble outPixelStart, RowColSizeT outExtent, VectorRowColDouble polygon) -> ProjectionPolynomialFitter
         """
         this = _six_sicd.new_ProjectionPolynomialFitter(*args)
         try:
@@ -1874,7 +2018,6 @@ class ProjectionPolynomialFitter(_object):
     __del__ = lambda self: None
 ProjectionPolynomialFitter_swigregister = _six_sicd.ProjectionPolynomialFitter_swigregister
 ProjectionPolynomialFitter_swigregister(ProjectionPolynomialFitter)
-cvar = _six_sicd.cvar
 ProjectionPolynomialFitter.DEFAULTS_POINTS_1D = _six_sicd.cvar.ProjectionPolynomialFitter_DEFAULTS_POINTS_1D
 
 class ComplexClassification(pysix.six_base.Classification):
@@ -4806,9 +4949,19 @@ class SixSicdUtilities(_object):
 
     getProjectionModel = staticmethod(getProjectionModel)
 
-    def getPolynomialFitter(complexData):
-        """getPolynomialFitter(ComplexData complexData) -> std::auto_ptr< scene::ProjectionPolynomialFitter >"""
-        return _six_sicd.SixSicdUtilities_getPolynomialFitter(complexData)
+    def getModelComponents(complexData, geometry, projectionModel, areaPlane):
+        """getModelComponents(ComplexData complexData, std::auto_ptr< scene::SceneGeometry > & geometry, std::auto_ptr< scene::ProjectionModel > & projectionModel, AreaPlane areaPlane)"""
+        return _six_sicd.SixSicdUtilities_getModelComponents(complexData, geometry, projectionModel, areaPlane)
+
+    getModelComponents = staticmethod(getModelComponents)
+
+    def getPolynomialFitter(*args):
+        """
+        getPolynomialFitter(ComplexData complexData, size_t numPoints1D, bool sampleWithinValidDataPolygon=False) -> std::auto_ptr< scene::ProjectionPolynomialFitter >
+        getPolynomialFitter(ComplexData complexData, size_t numPoints1D) -> std::auto_ptr< scene::ProjectionPolynomialFitter >
+        getPolynomialFitter(ComplexData complexData) -> std::auto_ptr< scene::ProjectionPolynomialFitter >
+        """
+        return _six_sicd.SixSicdUtilities_getPolynomialFitter(*args)
 
     getPolynomialFitter = staticmethod(getPolynomialFitter)
 
@@ -4818,9 +4971,12 @@ class SixSicdUtilities(_object):
 
     getValidDataPolygon = staticmethod(getValidDataPolygon)
 
-    def readSicd(sicdPathname, schemaPaths, complexData, widebandData):
-        """readSicd(std::string const & sicdPathname, VectorString schemaPaths, std::auto_ptr< six::sicd::ComplexData > & complexData, std::vector< std::complex< float >,std::allocator< std::complex< float > > > & widebandData)"""
-        return _six_sicd.SixSicdUtilities_readSicd(sicdPathname, schemaPaths, complexData, widebandData)
+    def readSicd(*args):
+        """
+        readSicd(std::string const & sicdPathname, VectorString schemaPaths, std::auto_ptr< six::sicd::ComplexData > & complexData, std::vector< std::complex< float >,std::allocator< std::complex< float > > > & widebandData)
+        readSicd(std::string const & sicdPathname, VectorString schemaPaths, size_t orderX, size_t orderY, std::auto_ptr< six::sicd::ComplexData > & complexData, std::vector< std::complex< float >,std::allocator< std::complex< float > > > & widebandData, Poly2D outputRowColToSlantRow, Poly2D outputRowColToSlantCol, std::auto_ptr< six::sicd::NoiseMesh > & noiseMesh)
+        """
+        return _six_sicd.SixSicdUtilities_readSicd(*args)
 
     readSicd = staticmethod(readSicd)
 
@@ -4901,6 +5057,54 @@ class SixSicdUtilities(_object):
 
     createFakeComplexData = staticmethod(createFakeComplexData)
 
+    def getNoiseMesh(reader):
+        """getNoiseMesh(NITFReadControl & reader) -> std::auto_ptr< six::sicd::NoiseMesh >"""
+        return _six_sicd.SixSicdUtilities_getNoiseMesh(reader)
+
+    getNoiseMesh = staticmethod(getNoiseMesh)
+
+    def getProjectionPolys(reader, orderX, orderY, complexData, outputRowColToSlantRow, outputRowColToSlantCol):
+        """getProjectionPolys(NITFReadControl & reader, size_t orderX, size_t orderY, std::auto_ptr< six::sicd::ComplexData > & complexData, Poly2D outputRowColToSlantRow, Poly2D outputRowColToSlantCol)"""
+        return _six_sicd.SixSicdUtilities_getProjectionPolys(reader, orderX, orderY, complexData, outputRowColToSlantRow, outputRowColToSlantCol)
+
+    getProjectionPolys = staticmethod(getProjectionPolys)
+
+    def transformXYPolyToRowColPoly(polyXY, outSampleSpacing, outCenter, polyScaleFactor, polyShift):
+        """transformXYPolyToRowColPoly(Poly2D polyXY, RowColDouble outSampleSpacing, RowColDouble outCenter, double polyScaleFactor, double polyShift) -> Poly2D"""
+        return _six_sicd.SixSicdUtilities_transformXYPolyToRowColPoly(polyXY, outSampleSpacing, outCenter, polyScaleFactor, polyShift)
+
+    transformXYPolyToRowColPoly = staticmethod(transformXYPolyToRowColPoly)
+
+    def transformXYProjectionPolys(outputXYToSlantX, outputXYToSlantY, slantSampleSpacing, outputSampleSpacing, slantCenter, outputCenter, outputRowColToSlantRow, outputRowColToSlantCol):
+        """transformXYProjectionPolys(Poly2D outputXYToSlantX, Poly2D outputXYToSlantY, RowColDouble slantSampleSpacing, RowColDouble outputSampleSpacing, RowColDouble slantCenter, RowColDouble outputCenter, Poly2D outputRowColToSlantRow, Poly2D outputRowColToSlantCol)"""
+        return _six_sicd.SixSicdUtilities_transformXYProjectionPolys(outputXYToSlantX, outputXYToSlantY, slantSampleSpacing, outputSampleSpacing, slantCenter, outputCenter, outputRowColToSlantRow, outputRowColToSlantCol)
+
+    transformXYProjectionPolys = staticmethod(transformXYProjectionPolys)
+
+    def fitXYProjectionPolys(outputMesh, slantMesh, orderX, orderY, outputXYToSlantX, outputXYToSlantY, slantXYToOutputX, slantXYToOutputY):
+        """fitXYProjectionPolys(PlanarCoordinateMesh outputMesh, PlanarCoordinateMesh slantMesh, size_t orderX, size_t orderY, Poly2D outputXYToSlantX, Poly2D outputXYToSlantY, Poly2D slantXYToOutputX, Poly2D slantXYToOutputY)"""
+        return _six_sicd.SixSicdUtilities_fitXYProjectionPolys(outputMesh, slantMesh, orderX, orderY, outputXYToSlantX, outputXYToSlantY, slantXYToOutputX, slantXYToOutputY)
+
+    fitXYProjectionPolys = staticmethod(fitXYProjectionPolys)
+
+    def projectPixelsToOutputPlane(complexData, spPixels, opPixels):
+        """projectPixelsToOutputPlane(ComplexData complexData, VectorRowColDouble spPixels, VectorRowColDouble opPixels)"""
+        return _six_sicd.SixSicdUtilities_projectPixelsToOutputPlane(complexData, spPixels, opPixels)
+
+    projectPixelsToOutputPlane = staticmethod(projectPixelsToOutputPlane)
+
+    def projectValidDataPolygonToOutputPlane(complexData, opPixels):
+        """projectValidDataPolygonToOutputPlane(ComplexData complexData, VectorRowColDouble opPixels)"""
+        return _six_sicd.SixSicdUtilities_projectValidDataPolygonToOutputPlane(complexData, opPixels)
+
+    projectValidDataPolygonToOutputPlane = staticmethod(projectValidDataPolygonToOutputPlane)
+
+    def projectPixelsToSlantPlane(complexData, opPixels, spPixels):
+        """projectPixelsToSlantPlane(ComplexData complexData, VectorRowColDouble opPixels, VectorRowColDouble spPixels)"""
+        return _six_sicd.SixSicdUtilities_projectPixelsToSlantPlane(complexData, opPixels, spPixels)
+
+    projectPixelsToSlantPlane = staticmethod(projectPixelsToSlantPlane)
+
     def __init__(self):
         """__init__(six::sicd::Utilities self) -> SixSicdUtilities"""
         this = _six_sicd.new_SixSicdUtilities()
@@ -4921,17 +5125,28 @@ def SixSicdUtilities_getProjectionModel(data, geom):
     """SixSicdUtilities_getProjectionModel(ComplexData data, SceneGeometry geom) -> ProjectionModel"""
     return _six_sicd.SixSicdUtilities_getProjectionModel(data, geom)
 
-def SixSicdUtilities_getPolynomialFitter(complexData):
-    """SixSicdUtilities_getPolynomialFitter(ComplexData complexData) -> std::auto_ptr< scene::ProjectionPolynomialFitter >"""
-    return _six_sicd.SixSicdUtilities_getPolynomialFitter(complexData)
+def SixSicdUtilities_getModelComponents(complexData, geometry, projectionModel, areaPlane):
+    """SixSicdUtilities_getModelComponents(ComplexData complexData, std::auto_ptr< scene::SceneGeometry > & geometry, std::auto_ptr< scene::ProjectionModel > & projectionModel, AreaPlane areaPlane)"""
+    return _six_sicd.SixSicdUtilities_getModelComponents(complexData, geometry, projectionModel, areaPlane)
+
+def SixSicdUtilities_getPolynomialFitter(*args):
+    """
+    getPolynomialFitter(ComplexData complexData, size_t numPoints1D, bool sampleWithinValidDataPolygon=False) -> std::auto_ptr< scene::ProjectionPolynomialFitter >
+    getPolynomialFitter(ComplexData complexData, size_t numPoints1D) -> std::auto_ptr< scene::ProjectionPolynomialFitter >
+    SixSicdUtilities_getPolynomialFitter(ComplexData complexData) -> std::auto_ptr< scene::ProjectionPolynomialFitter >
+    """
+    return _six_sicd.SixSicdUtilities_getPolynomialFitter(*args)
 
 def SixSicdUtilities_getValidDataPolygon(sicdData, projection, validData):
     """SixSicdUtilities_getValidDataPolygon(ComplexData sicdData, ProjectionModel projection, VectorRowColDouble validData)"""
     return _six_sicd.SixSicdUtilities_getValidDataPolygon(sicdData, projection, validData)
 
-def SixSicdUtilities_readSicd(sicdPathname, schemaPaths, complexData, widebandData):
-    """SixSicdUtilities_readSicd(std::string const & sicdPathname, VectorString schemaPaths, std::auto_ptr< six::sicd::ComplexData > & complexData, std::vector< std::complex< float >,std::allocator< std::complex< float > > > & widebandData)"""
-    return _six_sicd.SixSicdUtilities_readSicd(sicdPathname, schemaPaths, complexData, widebandData)
+def SixSicdUtilities_readSicd(*args):
+    """
+    readSicd(std::string const & sicdPathname, VectorString schemaPaths, std::auto_ptr< six::sicd::ComplexData > & complexData, std::vector< std::complex< float >,std::allocator< std::complex< float > > > & widebandData)
+    SixSicdUtilities_readSicd(std::string const & sicdPathname, VectorString schemaPaths, size_t orderX, size_t orderY, std::auto_ptr< six::sicd::ComplexData > & complexData, std::vector< std::complex< float >,std::allocator< std::complex< float > > > & widebandData, Poly2D outputRowColToSlantRow, Poly2D outputRowColToSlantCol, std::auto_ptr< six::sicd::NoiseMesh > & noiseMesh)
+    """
+    return _six_sicd.SixSicdUtilities_readSicd(*args)
 
 def SixSicdUtilities_getComplexData(*args):
     """
@@ -4989,6 +5204,38 @@ def SixSicdUtilities_toXMLString(*args):
 def SixSicdUtilities_createFakeComplexData():
     """SixSicdUtilities_createFakeComplexData() -> std::auto_ptr< six::sicd::ComplexData >"""
     return _six_sicd.SixSicdUtilities_createFakeComplexData()
+
+def SixSicdUtilities_getNoiseMesh(reader):
+    """SixSicdUtilities_getNoiseMesh(NITFReadControl & reader) -> std::auto_ptr< six::sicd::NoiseMesh >"""
+    return _six_sicd.SixSicdUtilities_getNoiseMesh(reader)
+
+def SixSicdUtilities_getProjectionPolys(reader, orderX, orderY, complexData, outputRowColToSlantRow, outputRowColToSlantCol):
+    """SixSicdUtilities_getProjectionPolys(NITFReadControl & reader, size_t orderX, size_t orderY, std::auto_ptr< six::sicd::ComplexData > & complexData, Poly2D outputRowColToSlantRow, Poly2D outputRowColToSlantCol)"""
+    return _six_sicd.SixSicdUtilities_getProjectionPolys(reader, orderX, orderY, complexData, outputRowColToSlantRow, outputRowColToSlantCol)
+
+def SixSicdUtilities_transformXYPolyToRowColPoly(polyXY, outSampleSpacing, outCenter, polyScaleFactor, polyShift):
+    """SixSicdUtilities_transformXYPolyToRowColPoly(Poly2D polyXY, RowColDouble outSampleSpacing, RowColDouble outCenter, double polyScaleFactor, double polyShift) -> Poly2D"""
+    return _six_sicd.SixSicdUtilities_transformXYPolyToRowColPoly(polyXY, outSampleSpacing, outCenter, polyScaleFactor, polyShift)
+
+def SixSicdUtilities_transformXYProjectionPolys(outputXYToSlantX, outputXYToSlantY, slantSampleSpacing, outputSampleSpacing, slantCenter, outputCenter, outputRowColToSlantRow, outputRowColToSlantCol):
+    """SixSicdUtilities_transformXYProjectionPolys(Poly2D outputXYToSlantX, Poly2D outputXYToSlantY, RowColDouble slantSampleSpacing, RowColDouble outputSampleSpacing, RowColDouble slantCenter, RowColDouble outputCenter, Poly2D outputRowColToSlantRow, Poly2D outputRowColToSlantCol)"""
+    return _six_sicd.SixSicdUtilities_transformXYProjectionPolys(outputXYToSlantX, outputXYToSlantY, slantSampleSpacing, outputSampleSpacing, slantCenter, outputCenter, outputRowColToSlantRow, outputRowColToSlantCol)
+
+def SixSicdUtilities_fitXYProjectionPolys(outputMesh, slantMesh, orderX, orderY, outputXYToSlantX, outputXYToSlantY, slantXYToOutputX, slantXYToOutputY):
+    """SixSicdUtilities_fitXYProjectionPolys(PlanarCoordinateMesh outputMesh, PlanarCoordinateMesh slantMesh, size_t orderX, size_t orderY, Poly2D outputXYToSlantX, Poly2D outputXYToSlantY, Poly2D slantXYToOutputX, Poly2D slantXYToOutputY)"""
+    return _six_sicd.SixSicdUtilities_fitXYProjectionPolys(outputMesh, slantMesh, orderX, orderY, outputXYToSlantX, outputXYToSlantY, slantXYToOutputX, slantXYToOutputY)
+
+def SixSicdUtilities_projectPixelsToOutputPlane(complexData, spPixels, opPixels):
+    """SixSicdUtilities_projectPixelsToOutputPlane(ComplexData complexData, VectorRowColDouble spPixels, VectorRowColDouble opPixels)"""
+    return _six_sicd.SixSicdUtilities_projectPixelsToOutputPlane(complexData, spPixels, opPixels)
+
+def SixSicdUtilities_projectValidDataPolygonToOutputPlane(complexData, opPixels):
+    """SixSicdUtilities_projectValidDataPolygonToOutputPlane(ComplexData complexData, VectorRowColDouble opPixels)"""
+    return _six_sicd.SixSicdUtilities_projectValidDataPolygonToOutputPlane(complexData, opPixels)
+
+def SixSicdUtilities_projectPixelsToSlantPlane(complexData, opPixels, spPixels):
+    """SixSicdUtilities_projectPixelsToSlantPlane(ComplexData complexData, VectorRowColDouble opPixels, VectorRowColDouble spPixels)"""
+    return _six_sicd.SixSicdUtilities_projectPixelsToSlantPlane(complexData, opPixels, spPixels)
 
 class AreaPlaneUtility(_object):
     """Proxy of C++ six::sicd::AreaPlaneUtility class."""
@@ -5356,6 +5603,12 @@ class ScopedCopyableImageData(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableImageData___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableImageData self) -> ImageData"""
@@ -5734,6 +5987,12 @@ class ScopedCopyableTimeline(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableTimeline___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableTimeline self) -> Timeline"""
         return _six_sicd.ScopedCopyableTimeline_get(self)
@@ -5828,6 +6087,12 @@ class ScopedCopyablePosition(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyablePosition___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyablePosition self) -> Position"""
@@ -5937,6 +6202,12 @@ class ScopedCopyableRcvAPC(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableRcvAPC___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableRcvAPC self) -> RcvAPC"""
@@ -6163,6 +6434,12 @@ class ScopedCopyableImageFormation(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableImageFormation___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableImageFormation self) -> ImageFormation"""
         return _six_sicd.ScopedCopyableImageFormation_get(self)
@@ -6306,6 +6583,12 @@ class ScopedCopyableSCPCOA(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableSCPCOA___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableSCPCOA self) -> SCPCOA"""
@@ -6476,6 +6759,12 @@ class ScopedCopyableAntenna(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableAntenna___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableAntenna self) -> Antenna"""
         return _six_sicd.ScopedCopyableAntenna_get(self)
@@ -6571,6 +6860,12 @@ class ScopedCopyableMatchInformation(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableMatchInformation___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableMatchInformation self) -> MatchInformation"""
         return _six_sicd.ScopedCopyableMatchInformation_get(self)
@@ -6657,6 +6952,12 @@ class ScopedCopyableSlowTimeDeskew(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableSlowTimeDeskew___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableSlowTimeDeskew self) -> SlowTimeDeskew"""
@@ -6748,6 +7049,12 @@ class ScopedCopyablePFA(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyablePFA___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyablePFA self) -> PFA"""
@@ -6887,6 +7194,12 @@ class ScopedCopyableRMA(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableRMA___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableRMA self) -> RMA"""
         return _six_sicd.ScopedCopyableRMA_get(self)
@@ -7000,6 +7313,12 @@ class ScopedCopyableRgAzComp(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableRgAzComp___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableRgAzComp self) -> RgAzComp"""
@@ -7638,6 +7957,12 @@ class ScopedCopyableAntennaParameters(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableAntennaParameters___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableAntennaParameters self) -> AntennaParameters"""
         return _six_sicd.ScopedCopyableAntennaParameters_get(self)
@@ -7761,6 +8086,12 @@ class ScopedCopyableElectricalBoresight(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableElectricalBoresight___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableElectricalBoresight self) -> ElectricalBoresight"""
         return _six_sicd.ScopedCopyableElectricalBoresight_get(self)
@@ -7851,6 +8182,12 @@ class ScopedCopyableHalfPowerBeamwidths(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableHalfPowerBeamwidths___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableHalfPowerBeamwidths self) -> HalfPowerBeamwidths"""
@@ -7943,6 +8280,12 @@ class ScopedCopyableGainAndPhasePolys(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableGainAndPhasePolys___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableGainAndPhasePolys self) -> GainAndPhasePolys"""
         return _six_sicd.ScopedCopyableGainAndPhasePolys_get(self)
@@ -8033,6 +8376,12 @@ class ScopedCopyableMatchType(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableMatchType___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableMatchType self) -> MatchType"""
@@ -8140,6 +8489,12 @@ class ScopedCopyableWeightType(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableWeightType___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableWeightType self) -> WeightType"""
@@ -10464,6 +10819,12 @@ class ScopedCopyableRcvChannelProcessed(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableRcvChannelProcessed___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableRcvChannelProcessed self) -> RcvChannelProcessed"""
         return _six_sicd.ScopedCopyableRcvChannelProcessed_get(self)
@@ -10775,6 +11136,12 @@ class ScopedCopyablePolarizationCalibration(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyablePolarizationCalibration___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyablePolarizationCalibration self) -> PolarizationCalibration"""
         return _six_sicd.ScopedCopyablePolarizationCalibration_get(self)
@@ -10869,6 +11236,12 @@ class ScopedCopyableDistortion(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableDistortion___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableDistortion self) -> Distortion"""
@@ -11437,6 +11810,12 @@ class ScopedCopyableRMAT(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableRMAT___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableRMAT self) -> RMAT"""
         return _six_sicd.ScopedCopyableRMAT_get(self)
@@ -11600,6 +11979,12 @@ class ScopedCopyableRMCR(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableRMCR___nonzero__(self)
+    __bool__ = __nonzero__
+
+
+
     def get(self):
         """get(ScopedCopyableRMCR self) -> RMCR"""
         return _six_sicd.ScopedCopyableRMCR_get(self)
@@ -11729,6 +12114,12 @@ class ScopedCopyableINCA(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableINCA___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableINCA self) -> INCA"""
@@ -11886,6 +12277,12 @@ class ScopedCopyableInterPulsePeriod(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def __nonzero__(self):
+        return _six_sicd.ScopedCopyableInterPulsePeriod___nonzero__(self)
+    __bool__ = __nonzero__
+
+
 
     def get(self):
         """get(ScopedCopyableInterPulsePeriod self) -> InterPulsePeriod"""

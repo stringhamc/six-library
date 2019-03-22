@@ -138,6 +138,33 @@ public:
         block(input, startRow, numRows, sizeof(DataT), output);
     }
 
+    /*!
+     * \param input Input image of width 'numCols'
+     * \param numBytesPerPixel Number of bytes/pixel in 'input' and 'output'
+     * \param numCols Number of columns in 'input'
+     * \param numRowsPerBlock Number of rows per block
+     * \param numColsPerBlock Number of columns per block
+     * \param numValidRowsInBlock Number of valid rows in block (this is less
+     * than numRowsPerBlock for the bottom row of blocks if
+     * numRows % numRowsPerBlock != 0)
+     * \param numValidColsInBlock Number of valid columnss in block (this is
+     * less than numColsPerBlock for the rightmost column of blocks if
+     * numCols % numColsPerBlock != 0)
+     * \param[out] output Output image.  Will contain this single block of
+     * 'input'.  Must be at least numRowsPerBlock * numColsPerBlock pixels.
+     * If the number of valid rows/columns is less than the rows/columns in the
+     * block, these pixels will be zero-filled.
+     */
+    static
+    void block(const void* input,
+               size_t numBytesPerPixel,
+               size_t numCols,
+               size_t numRowsPerBlock,
+               size_t numColsPerBlock,
+               size_t numValidRowsInBlock,
+               size_t numValidColsInBlock,
+               void* output);
+
     //! \return The number of columns of blocks
     size_t getNumColsOfBlocks() const
     {
@@ -201,6 +228,24 @@ public:
         return mNumRowsPerBlock;
     }
 
+    /*!
+     * \return The number of columns per block (always the same value for all
+     * segments).  If the number of columns in the image are less than the
+     * constructed number of columns per block, this will be the number of
+     * columns in the image (i.e. no reason to bother to create blocks larger
+     * than the image).
+     */
+    size_t getNumColsPerBlock() const
+    {
+        return mNumColsPerBlock;
+    }
+
+    /*
+     * \return The segment the block-row index falls in
+     * \throws If blockRow exceeds the total block rows in the image
+     */
+    size_t getSegmentFromGlobalBlockRow(size_t blockRow) const;
+
 private:
     void findSegment(size_t row,
                      size_t& segIdx,
@@ -224,7 +269,12 @@ private:
                    size_t numValidRowsInBlock,
                    size_t numValidColsInBlock,
                    size_t numBytesPerPixel,
-                   sys::byte* output) const;
+                   sys::byte* output) const
+    {
+        block(input, numBytesPerPixel, mNumCols, mNumRowsPerBlock[seg],
+              mNumColsPerBlock, numValidRowsInBlock, numValidColsInBlock,
+              output);
+    }
 
     void blockAcrossRow(size_t seg,
                         const sys::byte*& input,
